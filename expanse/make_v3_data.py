@@ -27,6 +27,11 @@ Filters (a dropped row is counted, per reason, in ``fresh.report.json``)
                          can ask (every prompt it yields for each ``--heldout_seeds``
                          seed; it is prefix-stable in ``n``, so this covers any
                          ``--gen_limit``): the exact-answer metric must stay unseen
+    replay_problem       same task and same numbers as a replay row under another
+                         wording (natural phrasings reword, they do not change
+                         operands): its reply would be a replay dev row's reply
+    replay_reply         the reply is identical to a replay row's reply
+    eval_problem         same task and numbers as an ``heldout_problems`` item
     duplicate            ``user`` already kept (from this family or an earlier one;
                          order omni, code, math), so no prompt carries two replies
 Split
@@ -55,6 +60,7 @@ import argparse
 import hashlib
 import importlib
 import json
+import re
 import math
 import os
 import subprocess
@@ -85,7 +91,21 @@ BUILDER: Dict[str, Tuple[str, Optional[str], int, int]] = {
 #: the builders' default seeds and the replay corpus's build seed: a fresh seed may be none of them
 USED_SEEDS = frozenset({79, 87, 66, 2026})
 HELDOUT_FRAC = 0.03
-DROP_REASONS = ("replay_prompt", "eval_heldout_prompt", "duplicate")
+DROP_REASONS = ("replay_prompt", "eval_heldout_prompt", "replay_problem", "replay_reply", "eval_problem", "duplicate")
+
+#: A number in a prompt (integer or decimal). Two prompts pose the same problem when
+#: they share the task and the multiset of numbers: the builders' natural phrasings
+#: reword and may reorder operands, but cannot change them.
+NUMBER = re.compile(r"\d+(?:\.\d+)?")
+
+
+def problem_key(task: Any, user: str) -> Tuple[str, Tuple[str, ...]]:
+    """(task, sorted numbers): the same problem under any wording."""
+    return str(task or "?"), tuple(sorted(NUMBER.findall(user or "")))
+
+
+def norm_reply(text: str) -> str:
+    return " ".join(str(text or "").lower().split())
 
 
 def log(*a) -> None:
@@ -126,15 +146,23 @@ def heldout_split(user: str, frac: float = HELDOUT_FRAC) -> str:
 
 
 def filter_fresh(built: Mapping[str, Sequence[Dict[str, Any]]], blocked: Mapping[str, Set[str]],
-                 frac: float = HELDOUT_FRAC) -> Tuple[Dict[str, List[Dict[str, Any]]], Dict[str, Dict[str, int]]]:
+                 frac: float = HELDOUT_FRAC, *, blocked_keys: Optional[Mapping[str, Set[Tuple[str, Tuple[str, ...]]]]] = None,
+                 blocked_replies: Optional[Mapping[str, Set[str]]] = None,
+                 ) -> Tuple[Dict[str, List[Dict[str, Any]]], Dict[str, Dict[str, int]]]:
     """Drop blocked / duplicate prompts, tag the survivors.
 
     ``built``: family -> builder rows, visited in :data:`FAMILIES` order (then any
-    other family, sorted). ``blocked``: reason -> prompts, checked in
+    other family, sorted). ``blocked``: reason -> exact prompts; ``blocked_keys``:
+    reason -> :func:`problem_key` values (the same problem under another wording);
+    ``blocked_replies``: reason -> normalised replies. Reasons are checked in
     :data:`DROP_REASONS` order, so a row is counted under its first reason.
+    The held-out side is chosen by a hash of the *problem key*, so two wordings of
+    one problem can never land on opposite sides of the split.
     Returns (family -> kept rows with ``source``/``family``/``split``, family ->
     {reason: dropped}).
     """
+    blocked_keys = blocked_keys or {}
+    blocked_replies = blocked_replies or {}
     seen: Set[str] = set()
     kept: Dict[str, List[Dict[str, Any]]] = {}
     dropped: Dict[str, Dict[str, int]] = {}
@@ -144,29 +172,39 @@ def filter_fresh(built: Mapping[str, Sequence[Dict[str, Any]]], blocked: Mapping
         drop = {k: 0 for k in DROP_REASONS}
         for r in built[fam]:
             user = r["user"]
-            reason = next((k for k in DROP_REASONS[:-1] if user in blocked.get(k, ())), None)
+            key = problem_key(r.get("task"), user)
+            reply = norm_reply(r.get("assistant", ""))
+            reason = None
+            for k in DROP_REASONS[:-1]:
+                if user in blocked.get(k, ()) or key in blocked_keys.get(k, ()) or reply in blocked_replies.get(k, ()):
+                    reason = k
+                    break
             if reason is None and user in seen:
                 reason = "duplicate"
             if reason is not None:
                 drop[reason] += 1
                 continue
             seen.add(user)
-            out.append(dict(r, source="fresh", family=fam, split=heldout_split(user, frac)))
+            split_on = f"{key[0]}|{' '.join(key[1])}" if key[1] else user
+            out.append(dict(r, source="fresh", family=fam, split=heldout_split(split_on, frac)))
         kept[fam], dropped[fam] = out, drop
     return kept, dropped
 
 
-def eval_heldout_prompts(seeds: Sequence[int], n: int) -> Tuple[Set[str], Dict[str, int]]:
-    """Every prompt ``eval_expanse.heldout_problems(n, seed)`` yields, over ``seeds``."""
+def eval_heldout_prompts(seeds: Sequence[int], n: int) -> Tuple[Set[str], Dict[str, int], List[Tuple[str, str]]]:
+    """Every prompt ``eval_expanse.heldout_problems(n, seed)`` yields, over ``seeds``
+    (plus the (user, task) pairs, so the same problems can be blocked under other wordings)."""
     import eval_expanse as ee  # heavy (torch model code); only needed here
 
     prompts: Set[str] = set()
+    items: List[Tuple[str, str]] = []
     per: Dict[str, int] = {}
     for s in seeds:
         ps = ee.heldout_problems(n, int(s))
         per[str(s)] = len(ps)
         prompts |= {p["user"] for p in ps}
-    return prompts, per
+        items += [(p["user"], p.get("task", "?")) for p in ps]
+    return prompts, per, items
 
 
 # ---------------------------------------------------------------------------
@@ -303,7 +341,7 @@ def make_fresh(out_dir: Path, targets: Mapping[str, int], seeds: Mapping[str, in
         if int(s) in USED_SEEDS:
             raise ValueError(f"--seed_{fam} {s} is a seed the replay corpus / builder defaults already used ({sorted(USED_SEEDS)})")
     replay = {r["user"] for r in ec.load_replay(corpus_dir)}
-    eval_prompts, eval_per_seed = eval_heldout_prompts(heldout_seeds, heldout_n)
+    eval_prompts, eval_per_seed, eval_items = eval_heldout_prompts(heldout_seeds, heldout_n)
     log(f"blocked prompts: replay {len(replay)}, eval heldout_problems {len(eval_prompts)} {eval_per_seed}")
     built: Dict[str, List[Dict[str, Any]]] = {}
     info: Dict[str, Dict[str, Any]] = {}
@@ -313,7 +351,14 @@ def make_fresh(out_dir: Path, targets: Mapping[str, int], seeds: Mapping[str, in
                 continue
             built[fam], info[fam] = run_builder(fam, int(targets[fam]), int(seeds[fam]), Path(work), natural_phrasings)
             log(f"{fam}: built {len(built[fam])} rows ({info[fam]['seconds']}s)")
-    kept, dropped = filter_fresh(built, {"replay_prompt": replay, "eval_heldout_prompt": eval_prompts}, frac)
+    replay_rows = ec.load_replay(corpus_dir)
+    replay_keys = {problem_key(r.get("task"), r["user"]) for r in replay_rows}
+    replay_replies = {norm_reply(r["assistant"]) for r in replay_rows}
+    eval_keys = {problem_key(t, u) for u, t in eval_items}
+    log(f"blocked problem keys: replay {len(replay_keys)}, eval {len(eval_keys)}; replay replies {len(replay_replies)}")
+    kept, dropped = filter_fresh(built, {"replay_prompt": replay, "eval_heldout_prompt": eval_prompts}, frac,
+                                 blocked_keys={"replay_problem": replay_keys, "eval_problem": eval_keys},
+                                 blocked_replies={"replay_reply": replay_replies})
     families: Dict[str, Any] = {}
     for fam, rows in kept.items():
         path = out_dir / f"fresh_{fam}.jsonl"

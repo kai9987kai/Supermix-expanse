@@ -25,6 +25,7 @@ Run: ``python -m pytest -q expanse/tests/test_bpe_tokenizer.py``
 from __future__ import annotations
 
 import json
+import re
 import math
 import random
 import sys
@@ -132,9 +133,10 @@ def test_digits_split(tok):
         for i in tok.encode(text):
             t = tok.tokens[i]
             if any(c.isdigit() for c in t):
-                assert len(t) == 1, f"{t!r} fuses a digit with something else"
-    # the corpus is full of numbers, yet no learned token holds more than one character with a digit
-    assert all(len(t) == 1 for t in tok.tokens if any(c in "0123456789" for c in t))
+                assert re.fullmatch(r" ?\d", t), f"{t!r} fuses a digit with something else"
+    # a number's first digit keeps its leading space (" 2024" -> " 2", "0", "2", "4"); nothing else merges
+    assert [tok.tokens[i] for i in tok.encode("total 2024")][-4:] == [" 2", "0", "2", "4"]
+    assert all(re.fullmatch(r" ?\d", t) for t in tok.tokens if any(c in "0123456789" for c in t))
 
 
 def test_encode_turn_structure(tok):
@@ -165,8 +167,8 @@ def test_to_from_dict(tok, tmp_path):
     assert d["kind"] == "bpe" and d["digit_tokens"] is True and isinstance(d["json"], str)
     spec = json.loads(d["json"])
     assert spec["model"]["type"] == "BPE" and spec["decoder"]["type"] == "ByteLevel"
-    assert [p["type"] for p in spec["pre_tokenizer"]["pretokenizers"]] == ["Digits", "ByteLevel"]
-    assert spec["pre_tokenizer"]["pretokenizers"][0]["individual_digits"] is True
+    assert [p["type"] for p in spec["pre_tokenizer"]["pretokenizers"]] == ["Split", "ByteLevel"]
+    assert spec["pre_tokenizer"]["pretokenizers"][0]["behavior"] == "Isolated"
     assert spec["pre_tokenizer"]["pretokenizers"][1]["add_prefix_space"] is False
     back = bt.BPETokenizer.from_dict(json.loads(json.dumps(d)))  # JSON-safe as stored in a checkpoint
     assert back.tokens == tok.tokens and back.index == tok.index and back.vocab_size == tok.vocab_size

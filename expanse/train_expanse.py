@@ -523,6 +523,8 @@ def main() -> int:
     ap.add_argument("--v3_data", choices=("auto", "on", "off"), default="auto",
                     help="auto: data/v3 files where present; off: the v1 corpus exactly; on: require them")
     ap.add_argument("--v3_dir", default=str(PATHS["data"] / "v3"), help="where make_v3_data.py wrote its files")
+    ap.add_argument("--boost_all_embeddings", action="store_true",
+                    help="give every embedding row the graft lr (automatic right after retokenize_v3)")
     ap.add_argument("--freeze_trunk_steps", type=int, default=0,
                     help="first N steps: only the tied embedding/LM-head rows and graft/v2 params update")
     ap.add_argument("--v2_balance", type=float, default=0.01, help="v2 native router balance weight (v2 inputs only)")
@@ -578,7 +580,9 @@ def main() -> int:
     vocab_base = int(model.vocab_base or (receipt_in.get("vocab") or {}).get("base") or tok.vocab_size)
     args.seq = int(args.seq or model.config.max_position_embeddings)
     tok_kind = tokenizer_kind(tok)
-    retokenized = not is_word_tokenizer(tok) or "retokenize_v3" in receipt_in
+    # Boost every embedding row only on the first run after retokenize_v3 (all rows are then freshly
+    # re-initialised); a continuation of a trained v3 keeps the normal vocab_base rule.
+    retokenized = (str(receipt_in.get("stage", "")).startswith("v3-init") or args.boost_all_embeddings)
     log(f"loaded {args.inp} ({schema}): {sum(p.numel() for p in model.parameters()):,} params, {tok_kind} vocab "
         f"{tok.vocab_size} (base {vocab_base}), seq {args.seq}" + (", v2 native stack" if stack is not None else ""))
     fly_teacher = ec.FlyCore(int(model.config.hidden_size), config=model.fly_config)

@@ -233,12 +233,13 @@ def main() -> int:
     fly_teacher.load_state_dict(model.fly_core.state_dict())
     fly_teacher.requires_grad_(False).eval()
     corpus = te.load_corpus(fly_teacher, fly_rows=args.fly_rows, seed=args.seed, dev_frac=0.05,
-                            dev_cap=args.dev_cap, max_rows_per_source=args.max_rows_per_source)
+                            dev_cap=args.dev_cap, max_rows_per_source=args.max_rows_per_source,
+                            v3=False)  # v2 consolidates the v1 corpus; data/v3 must not leak in
     if args.smoke:
         train_rows, dev_rows = te.smoke_subset(corpus, 20, 2, args.seed)
     else:
-        train_rows = [r for s in te.SOURCES for r in corpus[s]["train"]]
-        dev_rows = [r for s in te.SOURCES for r in corpus[s]["dev"]]
+        train_rows = [r for s in te.V1_SOURCES for r in corpus[s]["train"]]
+        dev_rows = [r for s in te.V1_SOURCES for r in corpus[s]["dev"]]
     x_tr, y_tr, pl_tr, m_tr, drop_tr = te.encode_rows(train_rows, tok, args.seq)
     x_dv, y_dv, pl_dv, m_dv, drop_dv = te.encode_rows(dev_rows, tok, args.seq)
     if not len(m_tr):
@@ -257,7 +258,7 @@ def main() -> int:
     cfg = cv2.V2Config(
         hidden_size=int(model.config.hidden_size), shared_dim=args.shared_dim, layers=tuple(args.layers),
         latent_experts=args.latent_experts, latent_rank=args.latent_rank, latent_top_k=args.latent_top_k,
-        memory_slots=args.memory_slots, source_dims=source_dims, domains=tuple(te.SOURCES),
+        memory_slots=args.memory_slots, source_dims=source_dims, domains=tuple(te.V1_SOURCES),  # fixed 5 domains: v2 checkpoints/partials keep their shape
     ).validate()
     stack = cv2.attach_consolidation_v2(model, cfg)
     bank = cv2.TeacherFusionBank(cfg)

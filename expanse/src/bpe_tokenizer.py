@@ -16,9 +16,10 @@ needs to, because every byte string has an encoding.
 
 * **byte-level BPE**, full 256-byte initial alphabet, so any UTF-8 text encodes
   without ``<unk>`` and ``decode(encode(t)) == t`` (tests/test_bpe_tokenizer.py);
-* pre-tokenizer ``Sequence([Digits(individual_digits=True),
-  ByteLevel(add_prefix_space=False)])``: every digit is its own pre-token, so
-  no merge can ever fuse digits -- the same property ``WordTokenizer``'s
+* pre-tokenizer ``Sequence([Split(Regex(" ?\\d"), "isolated"),
+  ByteLevel(add_prefix_space=False)])``: every digit is its own pre-token (the
+  first digit of a number keeps the preceding space, " 123" -> " 1", "2", "3",
+  so numbers do not cost an extra space token), so no merge can ever fuse digits -- the same property ``WordTokenizer``'s
   ``digit_tokens=True`` gives (``mimomix_text.DIGIT_TOKEN_PATTERN`` explains
   why whole-number tokens put arithmetic out of reach);
 * ByteLevel decoder; the six ``SPECIAL_TOKENS`` at ids 0-5 with exactly the
@@ -55,7 +56,7 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
-from tokenizers import Tokenizer, decoders, models, pre_tokenizers, trainers
+from tokenizers import Regex, Tokenizer, decoders, models, pre_tokenizers, trainers
 
 _ARCH_SRC = Path(__file__).resolve().parents[2] / "supermix-archimedes" / "archimedes" / "src"
 if str(_ARCH_SRC) not in sys.path:
@@ -64,7 +65,7 @@ if str(_ARCH_SRC) not in sys.path:
 from mimomix_text import ASSISTANT, BOS, EOS, PAD, SPECIAL_TOKENS, UNK, USER  # noqa: E402
 
 KIND = "bpe"
-PRE_TOKENIZER_SPEC = "Sequence([Digits(individual_digits=True), ByteLevel(add_prefix_space=False)])"
+PRE_TOKENIZER_SPEC = "Sequence([Split(Regex(r' ?\d'), isolated), ByteLevel(add_prefix_space=False)])"
 
 __all__ = ["BPETokenizer", "train_bpe", "new_bpe_model", "KIND", "PRE_TOKENIZER_SPEC", "SPECIAL_TOKENS",
            "PAD", "BOS", "EOS", "UNK", "USER", "ASSISTANT"]
@@ -74,7 +75,9 @@ def new_bpe_model() -> Tokenizer:
     """An untrained ``Tokenizer`` with the v3 pipeline (model, pre-tokenizer, decoder)."""
     tk = Tokenizer(models.BPE())
     tk.pre_tokenizer = pre_tokenizers.Sequence([
-        pre_tokenizers.Digits(individual_digits=True),
+        # one digit per pre-token, the first keeping its leading space (" 1", "2", "3");
+        # Digits(individual_digits=True) would split the space off as a token of its own
+        pre_tokenizers.Split(Regex(r" ?\d"), behavior="isolated"),
         pre_tokenizers.ByteLevel(add_prefix_space=False),
     ])
     tk.decoder = decoders.ByteLevel()

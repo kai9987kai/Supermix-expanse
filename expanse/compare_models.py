@@ -158,7 +158,9 @@ def main() -> int:
     cargs = dict(training.get("corpus_args") or {})
     seed = int(cargs.get("seed", training.get("seed", 2026)))
     # the ref run's corpus: v1 files unless it trained on data/v3 (then the same v3 dir)
-    v3 = bool(cargs.get("v3_data", False))
+    # auto (None) over the recorded v3 dir, not strict True: a ref that used only some v3 files
+    # (e.g. connectome_rows_v3 with --skip_fresh) must still rebuild
+    v3 = None if cargs.get("v3_data") else False
     A, _, _ = ec.load_archimedes(args.arch)
     corpus = te.load_corpus(A.fly_core, fly_rows=int(cargs.get("fly_rows", 4000)), seed=seed,
                             dev_frac=float(cargs.get("dev_frac", 0.05)), dev_cap=int(cargs.get("dev_cap", 200)),
@@ -191,7 +193,15 @@ def main() -> int:
         specs.append((name, path))
     # rows every model covers without <unk> (needs each tokenizer once)
     toks = {name: te.tokenizer_from_dict(te.peek_checkpoint(path, "tokenizer")["tokenizer"]) for name, path in specs}
-    common = {s: [all(c) for c in zip(*[ee.covered(t, rows) for t in toks.values()])] for s, rows in dev.items() if rows}
+    seqs = {name: max(int(args.seq), int(te.peek_checkpoint(path, "config")["config"]["max_position_embeddings"]))
+            for name, path in specs}
+
+    def fits(name, rows):  # no <unk> AND short enough for that model's scoring length
+        return [c and len(toks[name].encode_turn(r["user"], r["assistant"])[0]) <= seqs[name]
+                for c, r in zip(ee.covered(toks[name], rows), rows)]
+
+    # the rows EVERY model scores: the *_all_covered numbers are then over one identical row set
+    common = {s: [all(c) for c in zip(*[fits(n, rows) for n in toks])] for s, rows in dev.items() if rows}
 
     rep: Dict[str, Any] = {"args": vars(args), "seed": seed, "items": {k: len(v) for k, v in items.items()},
                            "dev_rows": {s: len(v) for s, v in dev.items()}, "corpus_v3": v3, "models": {}}

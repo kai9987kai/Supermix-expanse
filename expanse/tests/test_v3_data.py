@@ -74,9 +74,9 @@ def test_filter_fresh_reasons_order_and_tags():
     assert [r["user"] for r in kept["omni"]] == ["o1", "shared"]
     assert [r["user"] for r in kept["code"]] == ["c1"]
     assert [r["user"] for r in kept["math"]] == ["m1"]
-    assert dropped["omni"] == {"replay_prompt": 1, "eval_heldout_prompt": 1, "duplicate": 0}  # r1 counted once
-    assert dropped["code"] == {"replay_prompt": 0, "eval_heldout_prompt": 0, "duplicate": 2}
-    assert dropped["math"] == {"replay_prompt": 0, "eval_heldout_prompt": 0, "duplicate": 1}
+    assert dropped["omni"] == {**{k: 0 for k in mv.DROP_REASONS}, "replay_prompt": 1, "eval_heldout_prompt": 1}  # r1 counted once
+    assert dropped["code"] == {**{k: 0 for k in mv.DROP_REASONS}, "duplicate": 2}
+    assert dropped["math"] == {**{k: 0 for k in mv.DROP_REASONS}, "duplicate": 1}
     for fam, rows in kept.items():
         for r in rows:
             assert r["source"] == "fresh" and r["family"] == fam and r["split"] in ("train", "heldout")
@@ -233,3 +233,24 @@ def test_load_corpus_v3_off_is_the_v1_corpus(v3_dir, tmp_path_factory):
 
 if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__, "-q", "-s"]))
+
+
+def test_rephrased_problems_are_blocked_and_split_together():
+    """Regression: natural phrasings reword a problem without changing its numbers."""
+    replay_key = mv.problem_key("impulse", "26 newtons for 7 seconds, what is the impulse")
+    eval_key = mv.problem_key("work", "work done by 40 N over 5 m?")
+    built = {"omni": [
+        {"user": "impulse of a 26 N force acting 7 s", "assistant": "a", "task": "impulse"},     # replay problem, new words
+        {"user": "find work: 5 m moved under 40 N", "assistant": "b", "task": "work"},           # eval problem, reordered
+        {"user": "fresh one 11 and 12", "assistant": "impulse = force x time, 26 x 7 = 182", "task": "impulse"},
+        {"user": "what is the impulse, 9 N for 4 s", "assistant": "c", "task": "impulse"},
+        {"user": "9 N pushes for 4 s: impulse?", "assistant": "d", "task": "impulse"},           # same problem as above
+    ]}
+    kept, dropped = mv.filter_fresh(built, {}, blocked_keys={"replay_problem": {replay_key}, "eval_problem": {eval_key}},
+                                    blocked_replies={"replay_reply": {mv.norm_reply("Impulse = force x time,  26 x 7 = 182")}})
+    assert dropped["omni"]["replay_problem"] == 1 and dropped["omni"]["eval_problem"] == 1
+    assert dropped["omni"]["replay_reply"] == 1
+    rows = kept["omni"]
+    assert [r["user"] for r in rows] == ["what is the impulse, 9 N for 4 s", "9 N pushes for 4 s: impulse?"]
+    assert rows[0]["split"] == rows[1]["split"]            # two wordings of one problem never straddle the split
+    assert mv.problem_key("t", "a 3.5 b 2") == mv.problem_key("t", "2 then 3.5")
