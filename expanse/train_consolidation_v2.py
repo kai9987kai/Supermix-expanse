@@ -105,20 +105,7 @@ def dynamic_source_dims(model, omni_features: torch.Tensor, o7: Optional[torch.T
 
 
 def phase_weights(progress: float, bake_start: float, teacher_free_start: float) -> Dict[str, float]:
-    """Weights for the representation losses; LM loss always stays at 1."""
-    p = min(max(float(progress), 0.0), 1.0)
-    warm_end = min(0.15, bake_start * 0.5)
-    if p < warm_end:
-        q = p / max(warm_end, 1e-8)
-        return {"distill": 0.25 + 0.75 * q, "align": 1.0, "teacher": 1.0}
-    if p < bake_start:
-        return {"distill": 1.0, "align": 0.35, "teacher": 1.0}
-    if p < teacher_free_start:
-        # Bank is frozen in this interval.  Decay its influence before the
-        # hard teacher-free boundary rather than leaking it into the final phase.
-        q = (p - bake_start) / max(1e-8, teacher_free_start - bake_start)
-        return {"distill": 1.0 - 0.65 * q, "align": 0.0, "teacher": 1.0}
-    return {"distill": 0.0, "align": 0.0, "teacher": 0.0}
+    return cv2.consolidation_phase_weights(progress, bake_start, teacher_free_start)
 
 
 def set_bank_trainable(bank: cv2.TeacherFusionBank, trainable: bool) -> None:
