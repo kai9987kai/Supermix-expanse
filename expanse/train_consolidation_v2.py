@@ -114,9 +114,11 @@ def phase_weights(progress: float, bake_start: float, teacher_free_start: float)
     if p < bake_start:
         return {"distill": 1.0, "align": 0.35, "teacher": 1.0}
     if p < teacher_free_start:
-        return {"distill": 1.0, "align": 0.0, "teacher": 1.0}
-    q = (p - teacher_free_start) / max(1e-8, 1.0 - teacher_free_start)
-    return {"distill": max(0.0, 0.35 * (1.0 - q)), "align": 0.0, "teacher": 0.0 if q > 0.35 else 1.0}
+        # Bank is frozen in this interval.  Decay its influence before the
+        # hard teacher-free boundary rather than leaking it into the final phase.
+        q = (p - bake_start) / max(1e-8, teacher_free_start - bake_start)
+        return {"distill": 1.0 - 0.65 * q, "align": 0.0, "teacher": 1.0}
+    return {"distill": 0.0, "align": 0.0, "teacher": 0.0}
 
 
 def set_bank_trainable(bank: cv2.TeacherFusionBank, trainable: bool) -> None:
