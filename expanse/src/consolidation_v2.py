@@ -80,6 +80,23 @@ def masked_last(hidden: torch.Tensor, lengths: Optional[torch.Tensor] = None) ->
     return hidden[torch.arange(hidden.shape[0], device=hidden.device), idx]
 
 
+def consolidation_phase_weights(progress: float, bake_start: float, teacher_free_start: float) -> Dict[str, float]:
+    """Representation-loss schedule with a genuinely teacher-free final phase."""
+    p = min(max(float(progress), 0.0), 1.0)
+    if not (0.0 < bake_start < teacher_free_start < 1.0):
+        raise ValueError("need 0 < bake_start < teacher_free_start < 1")
+    warm_end = min(0.15, bake_start * 0.5)
+    if p < warm_end:
+        q = p / max(warm_end, 1e-8)
+        return {"distill": 0.25 + 0.75 * q, "align": 1.0, "teacher": 1.0}
+    if p < bake_start:
+        return {"distill": 1.0, "align": 0.35, "teacher": 1.0}
+    if p < teacher_free_start:
+        q = (p - bake_start) / max(1e-8, teacher_free_start - bake_start)
+        return {"distill": 1.0 - 0.65 * q, "align": 0.0, "teacher": 1.0}
+    return {"distill": 0.0, "align": 0.0, "teacher": 0.0}
+
+
 @dataclass
 class V2Config:
     """Runtime architecture for the native consolidation stack."""
@@ -600,5 +617,6 @@ def load_v2(path: str | Path, map_location: str = "cpu") -> Tuple[nn.Module, Any
 __all__ = [
     "V2_SCHEMA", "DEFAULT_SOURCE_DIMS", "DEFAULT_DOMAINS", "V2Config", "NativeLatentBlock",
     "NativeConsolidationStack", "TeacherFusionBank", "InternalSourceExtractor", "masked_last",
+    "consolidation_phase_weights",
     "attach_consolidation_v2", "save_v2", "load_v2",
 ]
