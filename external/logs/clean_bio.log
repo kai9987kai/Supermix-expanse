@@ -1,0 +1,35 @@
+{
+ "input_rows": 2051,
+ "kept_rows": 1651,
+ "dropped": {
+  "definition:fragment_or_absent": 4,
+  "pubmedqa:yes_over_cap": 396
+ },
+ "yes_cap": 40,
+ "raw_by_split_task": {
+  "heldout:bio_definition": 144,
+  "heldout:bio_pubmedqa": 47,
+  "train:bio_definition": 1418,
+  "train:bio_pubmedqa": 442
+ },
+ "clean_by_split_task": {
+  "heldout:bio_definition": 142,
+  "heldout:bio_pubmedqa": 47,
+  "train:bio_definition": 1416,
+  "train:bio_pubmedqa": 46
+ },
+ "clean_pubmedqa_train_decisions": {
+  "no": 6,
+  "yes": 40
+ },
+ "pubmedqa_eval": {
+  "items": 81,
+  "gold": {
+   "yes": 49,
+   "no": 27,
+   "maybe": 5
+  },
+  "majority_baseline": 0.6049382716049383,
+  "teacher_biomedlm_accuracy": 0.5925925925925926
+ }
+}

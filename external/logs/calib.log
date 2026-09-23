@@ -1,0 +1,36 @@
+[train] loaded C:\Users\kai99\Desktop\supermix-expanse\expanse\checkpoints\supermix_expanse_grafted.pt: 132,607,036 params, vocab 10951 (base 9451)
+[train] rows replay: train 3554 dev 100 fly: train 1438 dev 62 code: train 1421 dev 79 bio: train 1386 dev 76 connectome: train 6000 dev 100
+[train] packed train (13799, 128) dev (417, 128) dropped 0+0 over-length; unk rate 0.0068
+[train] omni7 states: encoding 14186 prompts (0 cached)
+[train]    1280/14186 (68s)
+[train]    2560/14186 (136s)
+[train]    3840/14186 (204s)
+[train]    5120/14186 (269s)
+[train]    6400/14186 (334s)
+[train]    7680/14186 (398s)
+[train]    8960/14186 (463s)
+[train]    10240/14186 (526s)
+[train]    11520/14186 (590s)
+[train]    12800/14186 (654s)
+[train]    14080/14186 (719s)
+[train] kd_arch: caching top-32 Archimedes logits for 3654 replay rows
+[train]    kd_arch cache 320/3654 rows (29s)
+[train]    kd_arch cache 640/3654 rows (58s)
+[train]    kd_arch cache 960/3654 rows (87s)
+[train]    kd_arch cache 1280/3654 rows (115s)
+[train]    kd_arch cache 1600/3654 rows (144s)
+[train]    kd_arch cache 1920/3654 rows (175s)
+[train]    kd_arch cache 2240/3654 rows (203s)
+[train]    kd_arch cache 2560/3654 rows (231s)
+[train]    kd_arch cache 2880/3654 rows (262s)
+[train]    kd_arch cache 3200/3654 rows (289s)
+[train]    kd_arch cache 3520/3654 rows (315s)
+[train] kd_arch cache: 3624 rows
+[train] trainable: trunk 40,055,365 graft 4,185,308; frozen 460 tensors (88,366,363 params)
+[train] row boost x6.67 on 1532 rows (new embeddings + donor router rows)
+[train] [eval start] dev_loss=5.2512 dev_replay=0.7874 dev_fly=4.6157 dev_code=9.8590 dev_bio=8.2495 dev_connectome=5.1269 fly_port_agree=1.0000 sense_mae=0.5295 omni7_intent_agree=0.0360 omni7_domain_agree=0.0959 fly_gate_abs_mean=0.0117 omni_gate_abs_mean=0.0132 cns_gate_abs_mean=0.0440 cns_alive=826 omni7_gate_abs_mean=0.0000 cns_full_gate_abs_mean=0.0000 moe1_alive=72 moe2_alive=72 moe3_alive=72 moe4_alive=72 donor_qwen_alive=0 donor_qwen_slots=16 donor_qwen_bias_mean=19.8274 donor_qwen_weight_rms=0.1300 donor_biomedlm_alive=0 donor_biomedlm_slots=16 donor_biomedlm_bias_mean=19.8274 donor_biomedlm_weight_rms=0.1121
+[train] [step 1/1000] loss 6.5586 model 5.8490 lm 4.5886 kd_arch 0.3067 omni7_kd 2.7812 lr 6.00e-07 wake 0.00 4.51s/step eta 75.0m
+[train] [step 10/1000] loss 3.7879 model 2.4167 lm 1.8947 kd_arch 0.8105 omni7_kd 2.9028 fly_port 0.0000 fly_sense 0.3854 lr 6.00e-06 wake 0.00 4.48s/step eta 73.9m
+[train] [step 20/1000] loss 4.7946 model 3.5575 lm 2.7340 kd_arch 0.7827 omni7_kd 2.3891 fly_port 0.0000 fly_sense 0.3679 lr 1.20e-05 wake 0.00 4.47s/step eta 73.0m
+[train] partial checkpoint (stop_after) step 20 -> checkpoints\calib\supermix_expanse_calib.partial.pt in 1.2s
+[train] stopped at step 20/1000 (stop_after); rerun the same command to resume

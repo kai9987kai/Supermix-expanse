@@ -1,0 +1,19 @@
+{
+ "rounds": [
+  {
+   "round": 1,
+   "bio_rows": {
+    "heldout": 191,
+    "train": 1860
+   },
+   "code_rows": {
+    "heldout": 150,
+    "train": 1500
+   },
+   "accept_rate": 0.941
+  }
+ ],
+ "minutes": 244.7,
+ "target": 1500,
+ "heldout": 150
+}

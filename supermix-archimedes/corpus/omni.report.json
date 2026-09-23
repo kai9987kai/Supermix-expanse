@@ -1,0 +1,49 @@
+{
+  "schema": "supermix-v79-omni-corpus-v1",
+  "seed": 2026,
+  "rows": 1943,
+  "per_task": {
+    "impulse": 120,
+    "ohms_current": 120,
+    "spring_energy": 120,
+    "permutations": 23,
+    "final_velocity": 120,
+    "force": 120,
+    "acceleration": 120,
+    "momentum": 120,
+    "kinetic_energy": 120,
+    "work": 120,
+    "power": 120,
+    "voltage": 120,
+    "electrical_power": 120,
+    "wave_speed": 120,
+    "molarity": 120,
+    "combination": 120,
+    "arithmetic_series": 120
+  },
+  "dropped_failing_verification": {},
+  "tasks": 17,
+  "short_of_requested": {
+    "permutations": {
+      "asked": 120,
+      "produced": 23,
+      "reason": "parameter space exhausted"
+    }
+  },
+  "distinct_prompts": {},
+  "repetition": {},
+  "verified_by": "nexus_solver.solve_problem",
+  "tolerance": 1e-06,
+  "options": {
+    "repeat": false,
+    "retry_rate": 0.0,
+    "balanced_operands": false,
+    "priming_fraction": 0.0,
+    "keep_canonical": false,
+    "combination_in_envelope": false,
+    "natural_phrasings": true,
+    "decompose_quotient": false,
+    "long_division": false
+  },
+  "output": "..\\..\\..\\corpus\\omni.jsonl"
+}

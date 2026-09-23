@@ -1,0 +1,231 @@
+{
+  "what": "donor_graft demo: Qwen2.5-Coder-7B-Instruct layer 0 MLP -> Archimedes MoE layer 1, 2 experts, installed only into an in-memory copy (checkpoint on disk untouched)",
+  "teacher": {
+    "name": "qwen2.5-coder-7b-instruct",
+    "arch": "qwen2",
+    "d_model": 3584,
+    "d_ff": 18944,
+    "vocab": 152064,
+    "layers": 2,
+    "eps": 1e-06,
+    "source": "C:\\Users\\kai99\\Desktop\\supermix-expanse\\external\\teachers\\qwen2.5-coder-7b-instruct\\graft_slices.safetensors"
+  },
+  "load_seconds": 0.48,
+  "wall_seconds_total": 22.19,
+  "threads": 2,
+  "domain_ids": 215,
+  "fit": {
+    "teacher": "qwen2.5-coder-7b-instruct",
+    "arch": "qwen2",
+    "src_layer": 0,
+    "dst_layer": 1,
+    "matched_tokens": 6282,
+    "tokens_used": 6282,
+    "fit_tokens": 5654,
+    "heldout_tokens": 628,
+    "domain_tokens": 200,
+    "domain_fallback_to_all": false,
+    "ridge_r2": {
+      "P_resid_to_resid": -0.18916989191276157,
+      "Q_in_to_mlp_in": -0.029096810547799112
+    },
+    "ridge_lam_rel": 0.001,
+    "d_model": 3584,
+    "d_ff": 18944,
+    "selected_neurons": 192,
+    "score_mass_selected": 0.07003898173570633,
+    "target_rms": 0.36868518590927124,
+    "router_norm": 2.442392587661743,
+    "fit_steps": 100,
+    "lr": 0.003,
+    "seed": 0,
+    "seconds": {
+      "rows_and_states": 2.17,
+      "maps_and_scores": 11.53,
+      "total": 21.68
+    }
+  },
+  "experts": [
+    {
+      "teacher": "qwen2.5-coder-7b-instruct",
+      "arch": "qwen2",
+      "src_layer": 0,
+      "dst_layer": 1,
+      "group": 0,
+      "score_share": 0.5354582071304321,
+      "target_scale": 0.024015073526876738,
+      "r2_before": -0.08710096259854194,
+      "r2_fold_train": -0.07796683404348981,
+      "r2_after": 0.06865088668324548,
+      "fit_mse_first": 0.10907615721225739,
+      "fit_mse_last": 0.0728946104645729,
+      "router_top_tokens": [
+        "public",
+        "class",
+        "[",
+        "import",
+        "What",
+        "int",
+        "const",
+        " (",
+        "function",
+        "-",
+        "static",
+        "/"
+      ],
+      "n_neurons": 96,
+      "neurons_head": [
+        4378,
+        6020,
+        10469,
+        1881,
+        17109,
+        16660,
+        10926,
+        16438,
+        11059,
+        6179,
+        13992,
+        17358,
+        18723,
+        9358,
+        16049,
+        12590
+      ],
+      "weight_norms": {
+        "gate_proj": 36.58821105957031,
+        "up_proj": 24.056230545043945,
+        "down_proj": 23.345808029174805,
+        "router": 2.442392587661743
+      }
+    },
+    {
+      "teacher": "qwen2.5-coder-7b-instruct",
+      "arch": "qwen2",
+      "src_layer": 0,
+      "dst_layer": 1,
+      "group": 1,
+      "score_share": 0.4645417332649231,
+      "target_scale": 0.022524544736626836,
+      "r2_before": -0.18378038797058704,
+      "r2_fold_train": -0.13314871772859305,
+      "r2_after": 0.04711727873240523,
+      "fit_mse_first": 0.09203281253576279,
+      "fit_mse_last": 0.06111461669206619,
+      "router_top_tokens": [
+        "!",
+        "}",
+        ")",
+        "{",
+        " [",
+        " `",
+        "%",
+        "n",
+        "In",
+        ".",
+        "(",
+        " '"
+      ],
+      "n_neurons": 96,
+      "neurons_head": [
+        14691,
+        48,
+        5975,
+        378,
+        9413,
+        10907,
+        15731,
+        13903,
+        17917,
+        8140,
+        4523,
+        3423,
+        13629,
+        8874,
+        17804,
+        4448
+      ],
+      "weight_norms": {
+        "gate_proj": 39.20549392700195,
+        "up_proj": 24.367692947387695,
+        "down_proj": 21.292686462402344,
+        "router": 2.442392587661743
+      }
+    }
+  ],
+  "ram_mb": {
+    "rss_before": 739.5,
+    "peak_wset_before": 739.5,
+    "rss_after": 1467.6,
+    "peak_wset_after": 1709.0
+  },
+  "lifted_rows_probe": {
+    "n": 300,
+    "map_r2_heldout": -1.15611368819467,
+    "cos_to_true_row_mean": 0.9219030737876892,
+    "cos_to_random_row_mean": 0.6272318363189697
+  },
+  "install": {
+    "receipt": {
+      "layers": {
+        "1": {
+          "slots": [
+            72,
+            73
+          ],
+          "dormant_bias": 19.975826263427734,
+          "target_bias": 22.465282440185547,
+          "placed": [
+            {
+              "slot": 72,
+              "teacher": "qwen2.5-coder-7b-instruct",
+              "src_layer": 0,
+              "group": 0,
+              "n_neurons": 96,
+              "r2_before": -0.08710096259854194,
+              "r2_after": 0.06865088668324548,
+              "router_top_tokens": [
+                "public",
+                "class",
+                "[",
+                "import",
+                "What",
+                "int",
+                "const",
+                " ("
+              ]
+            },
+            {
+              "slot": 73,
+              "teacher": "qwen2.5-coder-7b-instruct",
+              "src_layer": 0,
+              "group": 1,
+              "n_neurons": 96,
+              "r2_before": -0.18378038797058704,
+              "r2_after": 0.04711727873240523,
+              "router_top_tokens": [
+                "!",
+                "}",
+                ")",
+                "{",
+                " [",
+                " `",
+                "%",
+                "n"
+              ]
+            }
+          ],
+          "dormant": 2,
+          "alive_after": 72,
+          "dormant_margin": 1.5
+        }
+      }
+    },
+    "dormant_bit_identical": true,
+    "grow_max_abs_dlogit": 0.0,
+    "awake_routed_tokens": {
+      "hits": 59,
+      "tokens": 59
+    }
+  }
+}

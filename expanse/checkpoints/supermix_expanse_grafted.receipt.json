@@ -1,0 +1,3582 @@
+{
+ "stage": "grafted",
+ "schema": "supermix-expanse-v1",
+ "smoke": false,
+ "args": {
+  "arch": "C:\\Users\\kai99\\Desktop\\supermix-expanse\\external\\base\\supermix_archimedes.pt",
+  "out": null,
+  "n_new": 16,
+  "code_experts": 8,
+  "bio_experts": 8,
+  "fit_steps": 400,
+  "donor_max_tokens": null,
+  "npz": "C:\\Users\\kai99\\Desktop\\supermix-expanse\\expanse\\data\\malecns_types.npz",
+  "cns_min_input_fraction": 0.0,
+  "cns_radius": 0.9,
+  "cns_steps": 4,
+  "vocab_max_new": 1500,
+  "vocab_min_count": 3,
+  "rows": 32,
+  "skip_donors": false,
+  "skip_vocab": false,
+  "skip_omni7": false,
+  "skip_cns": false,
+  "smoke": false,
+  "allow_mismatch": false,
+  "threads": 8,
+  "seed": 0
+ },
+ "teacher_substitution": "Qwen3-Coder has no 7B/8B release; Qwen2.5-Coder-7B-Instruct, the official Qwen coder at that size, is the code teacher (substitution disclosed).",
+ "sources": {
+  "archimedes": {
+   "path": "C:\\Users\\kai99\\Desktop\\supermix-expanse\\external\\base\\supermix_archimedes.pt",
+   "sha256": "4d65bf77f5d0bd1402d82706dccd1e49a1eb64ccd9b669b27b2d53f761b9abe5",
+   "schema": "supermix-archimedes-v1",
+   "params": 47636397
+  },
+  "connectome_npz": {
+   "path": "C:\\Users\\kai99\\Desktop\\supermix-expanse\\expanse\\data\\malecns_types.npz",
+   "sha256": "a582ac7da0c86221c654c0793aef78f3049d5fc4fa4f8c264e9a1f3eda2b0271"
+  },
+  "omni_v7": {
+   "path": "C:\\Users\\kai99\\Desktop\\supermix-expanse\\external\\omni_v7\\omni_collective_v7_frontier.pth",
+   "sha256": "095ba9f55a649213c534d24a1f19a405f58d3743edeb90e2c047152349fb5c7f"
+  },
+  "qwen_slices": {
+   "path": "C:\\Users\\kai99\\Desktop\\supermix-expanse\\external\\teachers\\qwen2.5-coder-7b-instruct\\graft_slices.safetensors",
+   "sha256": "5646b1fbd234369ead5a05b181bccda3ffb6b2ad6862ac4d999b6e22815ab78d"
+  },
+  "biomedlm": {
+   "path": "C:\\Users\\kai99\\Desktop\\supermix-expanse\\external\\teachers\\biomedlm"
+  }
+ },
+ "grafts": {
+  "moe_growth": {
+   "moe_layers": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "slots_before": 72,
+   "slots_after": 88,
+   "n_new": 16,
+   "new_graft_tensors": 270,
+   "note": "moe_spare_experts is shared by every MoE layer: all grow; donors fill layers 1-2, layers 3-4 keep dead spares"
+  },
+  "cns_full": {
+   "meta": {
+    "n": 11751,
+    "nnz": 3830931,
+    "n_in": 1277,
+    "n_out": 713,
+    "steps": 4,
+    "rewired": false,
+    "receipt": {
+     "schema": "supermix-expanse-full-cns-graph-v1",
+     "npz": "C:/Users/kai99/Desktop/supermix-expanse/expanse/data/malecns_types.npz",
+     "npz_sha256": "a582ac7da0c86221c654c0793aef78f3049d5fc4fa4f8c264e9a1f3eda2b0271",
+     "n_types": 11751,
+     "n_edges": 3830931,
+     "n_edges_source": 3830931,
+     "self_loops": 7881,
+     "synapses_total": 122318556,
+     "synapses_kept": 122318556,
+     "synapse_mass_kept": 1.0,
+     "threshold": 0.0,
+     "radius": 0.9,
+     "n_in": 1277,
+     "n_out": 713,
+     "superclass_in": [
+      "ascending_neuron",
+      "cb_sensory",
+      "ol_sensory",
+      "sensory_ascending",
+      "sensory_descending",
+      "visual_projection",
+      "vnc_sensory"
+     ],
+     "superclass_out": [
+      "cb_efferent",
+      "cb_endocrine",
+      "cb_motor",
+      "descending_neuron",
+      "efferent_ascending",
+      "efferent_descending",
+      "vnc_efferent",
+      "vnc_endocrine",
+      "vnc_motor"
+     ],
+     "types_without_input": 1,
+     "sign_counts": {
+      "excitatory_types": 6346,
+      "inhibitory_types": 5223,
+      "modulatory_types": 182,
+      "unclear_nt_types_signed_plus": 363
+     },
+     "edge_sign_counts": {
+      "excitatory": 2268432,
+      "inhibitory": 1562499
+     },
+     "abs_row_sum_max": 0.9000000432133675,
+     "abs_spectral_radius": 0.8999998331156277,
+     "abs_spectral_radius_upper_bound": 0.8999999977670935,
+     "abs_power_iterations": 20,
+     "signed_spectral_radius_est": 0.7323191074513814,
+     "signed_spectral_method": "arpack_eigs_LM",
+     "signed_dominant_eigenvalue": [
+      0.7323191074513814,
+      0.0
+     ],
+     "weights": "value = input_fraction(post, pre) * sign[pre] * radius; input fraction over all edges",
+     "seconds": 14.33
+    }
+   },
+   "params": 684444
+  },
+  "omni7": {
+   "path": "C:\\Users\\kai99\\Desktop\\supermix-expanse\\external\\omni_v7\\omni_collective_v7_frontier.pth",
+   "sha256": "095ba9f55a649213c534d24a1f19a405f58d3743edeb90e2c047152349fb5c7f",
+   "tensors": 253,
+   "params": 77562911,
+   "num_responses": 22456,
+   "state_dim": 988,
+   "labels": {
+    "intent": [
+     "general",
+     "coding",
+     "creative",
+     "comparison",
+     "planning",
+     "current_info",
+     "model_selection",
+     "math",
+     "vision",
+     "command",
+     "image_prompt",
+     "language",
+     "spatial_3d",
+     "video",
+     "knowledge"
+    ],
+    "domain": [
+     "general",
+     "coding",
+     "creative",
+     "planning",
+     "knowledge",
+     "language",
+     "math",
+     "vision",
+     "image_prompt",
+     "spatial_3d",
+     "video",
+     "tool",
+     "model_selection"
+    ]
+   }
+  },
+  "donor_experts": {
+   "qwen": {
+    "summary": {
+     "1": {
+      "src_layer": 0,
+      "experts": [
+       {
+        "teacher": "qwen2.5-coder-7b-instruct",
+        "arch": "qwen2",
+        "src_layer": 0,
+        "dst_layer": 1,
+        "group": 0,
+        "score_share": 0.1630292683839798,
+        "target_scale": 1.7521360094751992,
+        "r2_before": 0.2146958109178374,
+        "r2_after": 0.2110262420960809,
+        "r2_train_after": 0.484125316952002,
+        "fit_mse_first": 0.0957280844449997,
+        "fit_mse_last": 0.059500787407159805,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.9458598494529724
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.9682539701461792
+        },
+        "wake_bias": 21.468287467949267,
+        "wake_share_heldout": 0.009554140269756317,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 1.0,
+        "router_top_tokens": [
+         "complete",
+         "migration",
+         "validate",
+         "matter",
+         "think",
+         "device",
+         "create",
+         "constraint",
+         "grade",
+         "resolve",
+         "matches",
+         "sleep"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         4378,
+         137,
+         3473,
+         12350,
+         14423,
+         11109,
+         10094,
+         17109,
+         4905,
+         8212,
+         7760,
+         10926,
+         13992,
+         5476,
+         17484,
+         17585
+        ],
+        "weight_norms": {
+         "gate_proj": 12.926374435424805,
+         "up_proj": 9.893948554992676,
+         "down_proj": 25.684354782104492,
+         "router": 2.4423928260803223
+        }
+       },
+       {
+        "teacher": "qwen2.5-coder-7b-instruct",
+        "arch": "qwen2",
+        "src_layer": 0,
+        "dst_layer": 1,
+        "group": 1,
+        "score_share": 0.16232480108737946,
+        "target_scale": 1.3353607119032662,
+        "r2_before": -0.08221782727452043,
+        "r2_after": -0.31975764527008077,
+        "r2_train_after": 0.5702656758555346,
+        "fit_mse_first": 0.08070467412471771,
+        "fit_mse_last": 0.03760598227381706,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.23248407244682312
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.3492063581943512
+        },
+        "wake_bias": 21.526942253105517,
+        "wake_share_heldout": 0.03184713423252106,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         " perception",
+         " season",
+         " citizenship",
+         " garden",
+         " puzzle",
+         " discomfort",
+         " consciousness",
+         " ecosystem",
+         " amendment",
+         " ceasefire",
+         " evolution",
+         " driver"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         48,
+         8059,
+         4504,
+         14691,
+         5781,
+         1013,
+         11690,
+         15902,
+         12655,
+         13762,
+         1941,
+         13102,
+         6012,
+         17804,
+         41,
+         16543
+        ],
+        "weight_norms": {
+         "gate_proj": 15.763920783996582,
+         "up_proj": 11.626792907714844,
+         "down_proj": 2.0211756229400635,
+         "router": 2.442392587661743
+        }
+       },
+       {
+        "teacher": "qwen2.5-coder-7b-instruct",
+        "arch": "qwen2",
+        "src_layer": 0,
+        "dst_layer": 1,
+        "group": 2,
+        "score_share": 0.1208827793598175,
+        "target_scale": 3.2535527892998255,
+        "r2_before": -0.02691759899870272,
+        "r2_after": -0.023542210988628964,
+        "r2_train_after": 0.2893285846150483,
+        "fit_mse_first": 0.1134173646569252,
+        "fit_mse_last": 0.07785242795944214,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.9490445852279663
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.9523809552192688
+        },
+        "wake_bias": 21.46828556060791,
+        "wake_share_heldout": 0.0,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         "import",
+         "com",
+         "by",
+         "self",
+         " self",
+         " Invalidate",
+         "for",
+         "{",
+         "lists",
+         "package",
+         "window",
+         "Medical"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         378,
+         3544,
+         1451,
+         3423,
+         12828,
+         3912,
+         12309,
+         18877,
+         10665,
+         15082,
+         4041,
+         10998,
+         3621,
+         8041,
+         15802,
+         681
+        ],
+        "weight_norms": {
+         "gate_proj": 13.110604286193848,
+         "up_proj": 9.173413276672363,
+         "down_proj": 3.9660227298736572,
+         "router": 2.442392587661743
+        }
+       },
+       {
+        "teacher": "qwen2.5-coder-7b-instruct",
+        "arch": "qwen2",
+        "src_layer": 0,
+        "dst_layer": 1,
+        "group": 3,
+        "score_share": 0.11986348032951355,
+        "target_scale": 3.328725075808343,
+        "r2_before": -0.3003565085468809,
+        "r2_after": -0.2477062660847038,
+        "r2_train_after": 0.2552464367673216,
+        "fit_mse_first": 0.07785393297672272,
+        "fit_mse_last": 0.04498634114861488,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.941082775592804
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.9841269850730896
+        },
+        "wake_bias": 21.468289375305176,
+        "wake_share_heldout": 0.0031847134232521057,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         " however",
+         "The",
+         " the",
+         " addition",
+         "import",
+         " inference",
+         ".",
+         " robotics",
+         "the",
+         "Using",
+         "]",
+         " humility"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         3793,
+         9358,
+         16770,
+         1929,
+         258,
+         7626,
+         3863,
+         11059,
+         18796,
+         1413,
+         2592,
+         2751,
+         7858,
+         13936,
+         13705,
+         15373
+        ],
+        "weight_norms": {
+         "gate_proj": 13.003846168518066,
+         "up_proj": 8.359591484069824,
+         "down_proj": 3.3500444889068604,
+         "router": 2.4423928260803223
+        }
+       },
+       {
+        "teacher": "qwen2.5-coder-7b-instruct",
+        "arch": "qwen2",
+        "src_layer": 0,
+        "dst_layer": 1,
+        "group": 4,
+        "score_share": 0.11516299843788147,
+        "target_scale": 3.290742399448627,
+        "r2_before": 0.04915595726587574,
+        "r2_after": -0.020692364274868424,
+        "r2_train_after": 0.4019862208131484,
+        "fit_mse_first": 0.12027636170387268,
+        "fit_mse_last": 0.0725819543004036,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.17675159871578217
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.1746031790971756
+        },
+        "wake_bias": 21.7043790817188,
+        "wake_share_heldout": 0.01751592382788658,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         ",",
+         " We",
+         " tail",
+         "What",
+         "They",
+         "n",
+         "M",
+         "Hey",
+         " Hey",
+         "It",
+         "She",
+         " ["
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         4448,
+         17229,
+         2188,
+         8712,
+         3321,
+         3123,
+         5975,
+         3603,
+         6277,
+         120,
+         11021,
+         11676,
+         17168,
+         10457,
+         9071,
+         15176
+        ],
+        "weight_norms": {
+         "gate_proj": 12.907001495361328,
+         "up_proj": 9.226180076599121,
+         "down_proj": 4.07869291305542,
+         "router": 2.4423928260803223
+        }
+       },
+       {
+        "teacher": "qwen2.5-coder-7b-instruct",
+        "arch": "qwen2",
+        "src_layer": 0,
+        "dst_layer": 1,
+        "group": 5,
+        "score_share": 0.1142551526427269,
+        "target_scale": 3.747529470354553,
+        "r2_before": -0.5531946085070465,
+        "r2_after": -0.5569355678511427,
+        "r2_train_after": 0.3898181690524478,
+        "fit_mse_first": 0.10698098689317703,
+        "fit_mse_last": 0.04354771971702576,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.202229306101799
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.3333333432674408
+        },
+        "wake_bias": 21.515013694755908,
+        "wake_share_heldout": 0.0270700640976429,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         " mainly",
+         " number",
+         " are",
+         " they",
+         "We",
+         " can",
+         " were",
+         "People",
+         " was",
+         " we",
+         " two",
+         " remainder"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         3529,
+         16427,
+         13278,
+         14297,
+         670,
+         15889,
+         18813,
+         16716,
+         6116,
+         4318,
+         1114,
+         5019,
+         3093,
+         1854,
+         9685,
+         18723
+        ],
+        "weight_norms": {
+         "gate_proj": 14.160038948059082,
+         "up_proj": 10.801081657409668,
+         "down_proj": 4.091782093048096,
+         "router": 2.442392587661743
+        }
+       },
+       {
+        "teacher": "qwen2.5-coder-7b-instruct",
+        "arch": "qwen2",
+        "src_layer": 0,
+        "dst_layer": 1,
+        "group": 6,
+        "score_share": 0.10386618971824646,
+        "target_scale": 4.422562967383969,
+        "r2_before": -0.5004870147451659,
+        "r2_after": -0.30761122284112785,
+        "r2_train_after": 0.3299567660279926,
+        "fit_mse_first": 0.14186233282089233,
+        "fit_mse_last": 0.06327210366725922,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.20541401207447052
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.3650793731212616
+        },
+        "wake_bias": 21.500657081604004,
+        "wake_share_heldout": 0.02866242080926895,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         "Three",
+         " pressing",
+         " while",
+         " s",
+         " challenge",
+         "diff",
+         " last",
+         "practice",
+         " smallest",
+         " about",
+         " despite",
+         " on"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         9413,
+         7341,
+         18265,
+         16238,
+         12122,
+         13629,
+         1242,
+         15771,
+         1962,
+         967,
+         5711,
+         8874,
+         17217,
+         13327,
+         2366,
+         13856
+        ],
+        "weight_norms": {
+         "gate_proj": 12.317357063293457,
+         "up_proj": 9.562865257263184,
+         "down_proj": 4.371035099029541,
+         "router": 2.442392587661743
+        }
+       },
+       {
+        "teacher": "qwen2.5-coder-7b-instruct",
+        "arch": "qwen2",
+        "src_layer": 0,
+        "dst_layer": 1,
+        "group": 7,
+        "score_share": 0.10061530023813248,
+        "target_scale": 5.038984547236577,
+        "r2_before": -0.16669686107712223,
+        "r2_after": -0.23609856308468857,
+        "r2_train_after": 0.3181666061515336,
+        "fit_mse_first": 0.13332991302013397,
+        "fit_mse_last": 0.07882773131132126,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.18152865767478943
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.190476194024086
+        },
+        "wake_bias": 21.555298805236816,
+        "wake_share_heldout": 0.0270700640976429,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         "use",
+         "-",
+         "analy",
+         "An",
+         "=",
+         "Where",
+         " All",
+         "Describe",
+         "string",
+         "All",
+         " C",
+         "\u2014"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         10469,
+         7244,
+         6020,
+         14811,
+         13661,
+         6555,
+         17052,
+         3747,
+         498,
+         9800,
+         13512,
+         6827,
+         18389,
+         11906,
+         12443,
+         15874
+        ],
+        "weight_norms": {
+         "gate_proj": 12.822795867919922,
+         "up_proj": 9.445364952087402,
+         "down_proj": 5.28322172164917,
+         "router": 2.442392587661743
+        }
+       }
+      ],
+      "fit": {
+       "teacher": "qwen2.5-coder-7b-instruct",
+       "arch": "qwen2",
+       "src_layer": 0,
+       "dst_layer": 1,
+       "matched_tokens": 6282,
+       "tokens_used": 6282,
+       "fit_tokens": 5654,
+       "heldout_tokens": 628,
+       "domain_tokens": 480,
+       "domain_fallback_to_all": false,
+       "ridge_r2": {
+        "P_resid_to_resid": 0.09038217904950596,
+        "Q_in_to_mlp_in": 0.009671636102555836
+       },
+       "maps": {
+        "P": {
+         "r2_heldout": 0.09038217904950596,
+         "lam_rel": 10.0,
+         "centered": true,
+         "r2_val_by_lam": {
+          "0.001": -0.25136153365625913,
+          "0.01": -0.03369812852071963,
+          "0.1": 0.013032995475614761,
+          "1": 0.044992913169179194,
+          "10": 0.07604359002404693,
+          "100": 0.0493609511842803
+         }
+        },
+        "Q": {
+         "r2_heldout": 0.009671636102555836,
+         "lam_rel": 10.0,
+         "centered": true,
+         "r2_val_by_lam": {
+          "0.001": -0.05050643933497856,
+          "0.01": -0.024369910769199254,
+          "0.1": -0.004359915389010149,
+          "1": 0.006097162145036417,
+          "10": 0.007881961972632912,
+          "100": 0.003994725952198297
+         }
+        },
+        "ones_read_rmse_heldout": 0.04303108900785446
+       },
+       "options": {
+        "lam": "auto",
+        "center": true,
+        "router": "centered"
+       },
+       "d_model": 3584,
+       "d_ff": 18944,
+       "selected_neurons": 768,
+       "score_mass_selected": 0.2040410041809082,
+       "target_rms": 0.36868518590927124,
+       "router_norm": 2.442392587661743,
+       "fit_steps": 400,
+       "lr": 0.003,
+       "seed": 0,
+       "seconds": {
+        "rows_and_states": 1.86,
+        "maps_and_scores": 31.94,
+        "total": 230.56
+       }
+      }
+     },
+     "2": {
+      "src_layer": 1,
+      "experts": [
+       {
+        "teacher": "qwen2.5-coder-7b-instruct",
+        "arch": "qwen2",
+        "src_layer": 1,
+        "dst_layer": 2,
+        "group": 0,
+        "score_share": 0.1705823540687561,
+        "target_scale": 2.5989930569834168,
+        "r2_before": 0.012924973216105196,
+        "r2_after": -0.8722857213783388,
+        "r2_train_after": 0.5107586914296143,
+        "fit_mse_first": 0.41032782196998596,
+        "fit_mse_last": 0.20425724983215332,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.17356687784194946
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.3174603283405304
+        },
+        "wake_bias": 21.301566123955126,
+        "wake_share_heldout": 0.025477707386016846,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         "const",
+         "class",
+         "D",
+         "0",
+         "import",
+         ":",
+         "A",
+         "%",
+         "@",
+         "/",
+         "X",
+         "This"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         5563,
+         424,
+         11679,
+         4624,
+         3258,
+         11640,
+         1360,
+         8319,
+         12866,
+         220,
+         11192,
+         16620,
+         15320,
+         16843,
+         11834,
+         9017
+        ],
+        "weight_norms": {
+         "gate_proj": 39.986778259277344,
+         "up_proj": 43.47511672973633,
+         "down_proj": 3.7696735858917236,
+         "router": 2.5009336471557617
+        }
+       },
+       {
+        "teacher": "qwen2.5-coder-7b-instruct",
+        "arch": "qwen2",
+        "src_layer": 1,
+        "dst_layer": 2,
+        "group": 1,
+        "score_share": 0.16647203266620636,
+        "target_scale": 3.8328304056827696,
+        "r2_before": 0.02434536979353541,
+        "r2_after": -0.2967174261444039,
+        "r2_train_after": 0.35417778726345395,
+        "fit_mse_first": 0.809299886226654,
+        "fit_mse_last": 0.5392447113990784,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.9426751732826233
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.9523809552192688
+        },
+        "wake_bias": 21.175440788261767,
+        "wake_share_heldout": 0.0,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         "sys",
+         "Start",
+         "Feature",
+         "all",
+         "Policy",
+         "Content",
+         "Natural",
+         "Attention",
+         "post",
+         "Control",
+         "dev",
+         "secret"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         18749,
+         6634,
+         4810,
+         4335,
+         3686,
+         18925,
+         2896,
+         2751,
+         12054,
+         17825,
+         5287,
+         17492,
+         13898,
+         8959,
+         11555,
+         16859
+        ],
+        "weight_norms": {
+         "gate_proj": 39.132755279541016,
+         "up_proj": 25.68750762939453,
+         "down_proj": 4.294317722320557,
+         "router": 2.5009336471557617
+        }
+       },
+       {
+        "teacher": "qwen2.5-coder-7b-instruct",
+        "arch": "qwen2",
+        "src_layer": 1,
+        "dst_layer": 2,
+        "group": 2,
+        "score_share": 0.15579771995544434,
+        "target_scale": 3.1957472794419153,
+        "r2_before": -0.04708522219251465,
+        "r2_after": -0.07650479917377195,
+        "r2_train_after": 0.5462145668935421,
+        "fit_mse_first": 0.7415525317192078,
+        "fit_mse_last": 0.3350592255592346,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.1926751583814621
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.2857142984867096
+        },
+        "wake_bias": 21.20845890045166,
+        "wake_share_heldout": 0.0270700640976429,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         "1",
+         "package",
+         "import",
+         " paid",
+         " opened",
+         " experiment",
+         " tapped",
+         " updating",
+         " hospitals",
+         " signing",
+         " prevent",
+         " communicate"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         7840,
+         15809,
+         6954,
+         316,
+         11578,
+         6804,
+         16899,
+         3980,
+         15565,
+         14084,
+         15242,
+         4380,
+         7984,
+         7930,
+         6474,
+         18332
+        ],
+        "weight_norms": {
+         "gate_proj": 36.37514114379883,
+         "up_proj": 25.70328140258789,
+         "down_proj": 3.172201156616211,
+         "router": 2.5009334087371826
+        }
+       },
+       {
+        "teacher": "qwen2.5-coder-7b-instruct",
+        "arch": "qwen2",
+        "src_layer": 1,
+        "dst_layer": 2,
+        "group": 3,
+        "score_share": 0.14040812849998474,
+        "target_scale": 4.014856563138118,
+        "r2_before": 0.07068837304817721,
+        "r2_after": -0.565984482912042,
+        "r2_train_after": 0.5847280563603039,
+        "fit_mse_first": 0.5173509120941162,
+        "fit_mse_last": 0.23017588257789612,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.16401274502277374
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.4285714328289032
+        },
+        "wake_bias": 21.229136466972705,
+        "wake_share_heldout": 0.020700637251138687,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         "If",
+         " '",
+         "Friday",
+         "You",
+         "S",
+         "Your",
+         " What",
+         "Consider",
+         "From",
+         " How",
+         "(",
+         "In"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         7215,
+         17267,
+         11888,
+         17998,
+         1087,
+         14635,
+         16281,
+         10477,
+         5442,
+         1447,
+         12739,
+         1077,
+         1758,
+         10685,
+         978,
+         13972
+        ],
+        "weight_norms": {
+         "gate_proj": 40.30091857910156,
+         "up_proj": 44.15545654296875,
+         "down_proj": 5.120493412017822,
+         "router": 2.500933885574341
+        }
+       },
+       {
+        "teacher": "qwen2.5-coder-7b-instruct",
+        "arch": "qwen2",
+        "src_layer": 1,
+        "dst_layer": 2,
+        "group": 4,
+        "score_share": 0.11893877387046814,
+        "target_scale": 4.513514379463424,
+        "r2_before": 0.07705342361679812,
+        "r2_after": -0.24839429211583108,
+        "r2_train_after": 0.5089347296256188,
+        "fit_mse_first": 0.91106116771698,
+        "fit_mse_last": 0.513076663017273,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.19108280539512634
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.2539682686328888
+        },
+        "wake_bias": 21.227566719055176,
+        "wake_share_heldout": 0.023885350674390793,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         " friends",
+         " administration",
+         " February",
+         " engineering",
+         " reliable",
+         " autonomy",
+         " available",
+         " Wednesday",
+         " biology",
+         " Board",
+         " happening",
+         " amendment"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         14758,
+         2902,
+         5360,
+         17533,
+         989,
+         17412,
+         6415,
+         15444,
+         4045,
+         744,
+         5520,
+         9911,
+         9935,
+         16454,
+         16552,
+         14755
+        ],
+        "weight_norms": {
+         "gate_proj": 40.85694122314453,
+         "up_proj": 28.08498764038086,
+         "down_proj": 5.147353172302246,
+         "router": 2.5009336471557617
+        }
+       },
+       {
+        "teacher": "qwen2.5-coder-7b-instruct",
+        "arch": "qwen2",
+        "src_layer": 1,
+        "dst_layer": 2,
+        "group": 5,
+        "score_share": 0.0858587697148323,
+        "target_scale": 12.415633375274899,
+        "r2_before": -0.07687707937033816,
+        "r2_after": -0.1248522811506596,
+        "r2_train_after": 0.21503627825498506,
+        "fit_mse_first": 0.4130213260650635,
+        "fit_mse_last": 0.30703818798065186,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.9538216590881348
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.9365079402923584
+        },
+        "wake_bias": 21.175440788261767,
+        "wake_share_heldout": 0.0,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         "package",
+         "0",
+         "system",
+         "import",
+         "analy",
+         "my",
+         "caught",
+         "full",
+         "source",
+         "self",
+         "final",
+         "raises"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         16787,
+         15701,
+         7776,
+         11245,
+         1462,
+         10363,
+         4031,
+         13156,
+         10961,
+         13902,
+         36,
+         1632,
+         10425,
+         16339,
+         10762,
+         15846
+        ],
+        "weight_norms": {
+         "gate_proj": 33.920501708984375,
+         "up_proj": 20.26485824584961,
+         "down_proj": 8.472129821777344,
+         "router": 2.5009336471557617
+        }
+       },
+       {
+        "teacher": "qwen2.5-coder-7b-instruct",
+        "arch": "qwen2",
+        "src_layer": 1,
+        "dst_layer": 2,
+        "group": 6,
+        "score_share": 0.08346075564622879,
+        "target_scale": 12.366324142129725,
+        "r2_before": -0.29803911278520334,
+        "r2_after": -0.44838091934831126,
+        "r2_train_after": 0.3733377422813553,
+        "fit_mse_first": 2.303299903869629,
+        "fit_mse_last": 1.1903702020645142,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.8901273608207703
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.9365079402923584
+        },
+        "wake_bias": 21.17619609832036,
+        "wake_share_heldout": 0.020700637251138687,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         "output",
+         "V",
+         "second",
+         "0",
+         " workshop",
+         "ne",
+         "9",
+         "v",
+         "'",
+         "bo",
+         "Y",
+         "ad"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         15051,
+         10332,
+         4349,
+         888,
+         5197,
+         829,
+         13733,
+         1689,
+         10208,
+         1564,
+         13283,
+         5038,
+         10849,
+         8976,
+         18818,
+         1427
+        ],
+        "weight_norms": {
+         "gate_proj": 44.099037170410156,
+         "up_proj": 23.886362075805664,
+         "down_proj": 12.790672302246094,
+         "router": 2.5009336471557617
+        }
+       },
+       {
+        "teacher": "qwen2.5-coder-7b-instruct",
+        "arch": "qwen2",
+        "src_layer": 1,
+        "dst_layer": 2,
+        "group": 7,
+        "score_share": 0.07848144322633743,
+        "target_scale": 18.823385751727425,
+        "r2_before": -0.08431090213504677,
+        "r2_after": -0.4279508711599551,
+        "r2_train_after": 0.4194616285310806,
+        "fit_mse_first": 1.818833589553833,
+        "fit_mse_last": 1.0211859941482544,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.18471337854862213
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.2857142984867096
+        },
+        "wake_bias": 21.25525569915044,
+        "wake_share_heldout": 0.02866242080926895,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         " en",
+         " make",
+         " ch",
+         " new",
+         " limited",
+         " Is",
+         "for",
+         " Y",
+         "subtract",
+         " l",
+         " J",
+         " Remove"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         4222,
+         10584,
+         13482,
+         5363,
+         17003,
+         3803,
+         17433,
+         16693,
+         11678,
+         4595,
+         18728,
+         11066,
+         5137,
+         11310,
+         16238,
+         18366
+        ],
+        "weight_norms": {
+         "gate_proj": 50.00211715698242,
+         "up_proj": 32.417259216308594,
+         "down_proj": 17.139755249023438,
+         "router": 2.5009336471557617
+        }
+       }
+      ],
+      "fit": {
+       "teacher": "qwen2.5-coder-7b-instruct",
+       "arch": "qwen2",
+       "src_layer": 1,
+       "dst_layer": 2,
+       "matched_tokens": 6282,
+       "tokens_used": 6282,
+       "fit_tokens": 5654,
+       "heldout_tokens": 628,
+       "domain_tokens": 480,
+       "domain_fallback_to_all": false,
+       "ridge_r2": {
+        "P_resid_to_resid": 0.10451373662798558,
+        "Q_in_to_mlp_in": 0.017501251156551212
+       },
+       "maps": {
+        "P": {
+         "r2_heldout": 0.10451373662798558,
+         "lam_rel": 10.0,
+         "centered": true,
+         "r2_val_by_lam": {
+          "0.001": -1.8263143044485792,
+          "0.01": -0.6634486318197939,
+          "0.1": -0.12955984326419245,
+          "1": 0.05631960345210485,
+          "10": 0.09089556840034196,
+          "100": 0.057342875736541954
+         }
+        },
+        "Q": {
+         "r2_heldout": 0.017501251156551212,
+         "lam_rel": 1.0,
+         "centered": true,
+         "r2_val_by_lam": {
+          "0.001": -0.036652342023152595,
+          "0.01": -0.010715707944915387,
+          "0.1": 0.00828321145819344,
+          "1": 0.016181488160263435,
+          "10": 0.015480753766700994,
+          "100": 0.008524205327572365
+         }
+        },
+        "ones_read_rmse_heldout": 0.0405735969543457
+       },
+       "options": {
+        "lam": "auto",
+        "center": true,
+        "router": "centered"
+       },
+       "d_model": 3584,
+       "d_ff": 18944,
+       "selected_neurons": 768,
+       "score_mass_selected": 0.5466548800468445,
+       "target_rms": 1.393825888633728,
+       "router_norm": 2.5009336471557617,
+       "fit_steps": 400,
+       "lr": 0.003,
+       "seed": 0,
+       "seconds": {
+        "rows_and_states": 32.26,
+        "maps_and_scores": 28.24,
+        "total": 252.33
+       }
+      }
+     }
+    },
+    "domain_tokens": 500
+   },
+   "biomedlm": {
+    "summary": {
+     "1": {
+      "src_layer": 0,
+      "experts": [
+       {
+        "teacher": "biomedlm",
+        "arch": "gpt2",
+        "src_layer": 0,
+        "dst_layer": 1,
+        "group": 0,
+        "score_share": 0.8794262409210205,
+        "target_scale": 0.0029703968681241044,
+        "r2_before": -2.6226642826852675,
+        "r2_after": -0.20470467059478037,
+        "r2_train_after": 0.1683745258980196,
+        "fit_mse_first": 0.0015762557741254568,
+        "fit_mse_last": 0.0005878704832866788,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.3342541456222534
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.3513513505458832
+        },
+        "wake_bias": 21.478222846984863,
+        "wake_share_heldout": 0.03038674034178257,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         " aggregate",
+         "Combined",
+         " speeds",
+         " AM",
+         " photosynthesis",
+         " rendering",
+         " regardless",
+         " matters",
+         "used",
+         " century",
+         " BG",
+         "Use"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         856,
+         5684,
+         2215,
+         1716,
+         8382,
+         1079,
+         8823,
+         5214,
+         6000,
+         3251,
+         7527,
+         1209,
+         9725,
+         1760,
+         4262,
+         2629
+        ],
+        "weight_norms": {
+         "gate_proj": 70.67432403564453,
+         "up_proj": 8.485993385314941,
+         "down_proj": 0.3216020464897156,
+         "router": 2.442392587661743
+        }
+       },
+       {
+        "teacher": "biomedlm",
+        "arch": "gpt2",
+        "src_layer": 0,
+        "dst_layer": 1,
+        "group": 1,
+        "score_share": 0.02447132021188736,
+        "target_scale": 0.4041674535243067,
+        "r2_before": -0.04926156068438048,
+        "r2_after": -0.48636654808933133,
+        "r2_train_after": 0.3210503027249412,
+        "fit_mse_first": 0.06767289340496063,
+        "fit_mse_last": 0.04459155350923538,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.939226508140564
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.9729729890823364
+        },
+        "wake_bias": 21.46828556060791,
+        "wake_share_heldout": 0.0,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         " earli",
+         "endocrine",
+         " efferent",
+         " teac",
+         "talk",
+         "His",
+         "presenting",
+         " cholinergic",
+         " sensory",
+         "motor",
+         "factory",
+         "through"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         7264,
+         684,
+         3969,
+         8695,
+         9358,
+         6288,
+         4112,
+         5037,
+         3397,
+         1757,
+         1739,
+         3985,
+         7969,
+         3367,
+         3470,
+         1892
+        ],
+        "weight_norms": {
+         "gate_proj": 15.264906883239746,
+         "up_proj": 17.1682186126709,
+         "down_proj": 1.1692153215408325,
+         "router": 2.442392587661743
+        }
+       },
+       {
+        "teacher": "biomedlm",
+        "arch": "gpt2",
+        "src_layer": 0,
+        "dst_layer": 1,
+        "group": 2,
+        "score_share": 0.021213816478848457,
+        "target_scale": 0.5130419212153247,
+        "r2_before": -0.05506893367357302,
+        "r2_after": -0.48142446630701285,
+        "r2_train_after": 0.38065136674638933,
+        "fit_mse_first": 0.1006852388381958,
+        "fit_mse_last": 0.0663503035902977,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.9779005646705627
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 1.0
+        },
+        "wake_bias": 21.4682950973438,
+        "wake_share_heldout": 0.024861877784132957,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         " dealing",
+         " spe",
+         " wor",
+         " diff",
+         " beh",
+         " dec",
+         "diff",
+         " str",
+         "spe",
+         " sp",
+         " perf",
+         " coun"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         3020,
+         6566,
+         5646,
+         7974,
+         4370,
+         3905,
+         337,
+         6297,
+         8752,
+         8150,
+         4861,
+         6417,
+         4495,
+         2625,
+         3906,
+         2556
+        ],
+        "weight_norms": {
+         "gate_proj": 15.732595443725586,
+         "up_proj": 18.264524459838867,
+         "down_proj": 1.6681797504425049,
+         "router": 2.4423928260803223
+        }
+       },
+       {
+        "teacher": "biomedlm",
+        "arch": "gpt2",
+        "src_layer": 0,
+        "dst_layer": 1,
+        "group": 3,
+        "score_share": 0.019621707499027252,
+        "target_scale": 0.44768543617581347,
+        "r2_before": -0.2701215465031144,
+        "r2_after": -0.9944652824239879,
+        "r2_train_after": 0.5573576074675002,
+        "fit_mse_first": 0.11423309892416,
+        "fit_mse_last": 0.04021940752863884,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.9060773253440857
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.9729729890823364
+        },
+        "wake_bias": 21.468777656555176,
+        "wake_share_heldout": 0.027624309062957764,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         " injuries",
+         " assembly",
+         " scans",
+         " development",
+         " heads",
+         " tasks",
+         " progression",
+         " conditions",
+         " complexity",
+         " communities",
+         " anomalies",
+         " surfaces"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         9138,
+         2196,
+         6363,
+         9142,
+         8275,
+         8054,
+         2692,
+         1707,
+         1651,
+         8587,
+         2481,
+         3751,
+         206,
+         1230,
+         8506,
+         8351
+        ],
+        "weight_norms": {
+         "gate_proj": 17.635189056396484,
+         "up_proj": 16.58428955078125,
+         "down_proj": 1.964646816253662,
+         "router": 2.442392587661743
+        }
+       },
+       {
+        "teacher": "biomedlm",
+        "arch": "gpt2",
+        "src_layer": 0,
+        "dst_layer": 1,
+        "group": 4,
+        "score_share": 0.01459435559809208,
+        "target_scale": 0.695784577762577,
+        "r2_before": -0.09683305627457162,
+        "r2_after": -0.35529267313572777,
+        "r2_train_after": 0.3919258332680675,
+        "fit_mse_first": 0.14811252057552338,
+        "fit_mse_last": 0.08126003295183182,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.8701657652854919
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.9189189076423645
+        },
+        "wake_bias": 21.468350410461426,
+        "wake_share_heldout": 0.024861877784132957,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         "AI",
+         " micro",
+         " earli",
+         "IN",
+         "TH",
+         "LB",
+         "comp",
+         "LH",
+         " c",
+         "micro",
+         "AM",
+         "{"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         2135,
+         276,
+         8600,
+         7363,
+         8203,
+         3830,
+         9360,
+         3475,
+         2530,
+         8033,
+         9352,
+         3024,
+         10089,
+         4309,
+         9538,
+         6329
+        ],
+        "weight_norms": {
+         "gate_proj": 17.41690444946289,
+         "up_proj": 15.473292350769043,
+         "down_proj": 2.312267303466797,
+         "router": 2.442392587661743
+        }
+       },
+       {
+        "teacher": "biomedlm",
+        "arch": "gpt2",
+        "src_layer": 0,
+        "dst_layer": 1,
+        "group": 5,
+        "score_share": 0.013878639787435532,
+        "target_scale": 1.4856651285370666,
+        "r2_before": -0.1294630257279341,
+        "r2_after": -0.13960230873903856,
+        "r2_train_after": 0.22627609659068748,
+        "fit_mse_first": 0.01039459090679884,
+        "fit_mse_last": 0.0072176712565124035,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.3397790193557739
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.37837839126586914
+        },
+        "wake_bias": 21.47640323638916,
+        "wake_share_heldout": 0.019337017089128494,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         " I",
+         ":",
+         " the",
+         " In",
+         " :",
+         " in",
+         " We",
+         "We",
+         "I",
+         "AI",
+         "end",
+         " end"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         4146,
+         5413,
+         9781,
+         376,
+         3935,
+         7398,
+         5904,
+         5877,
+         9530,
+         3800,
+         7252,
+         5633,
+         4465,
+         7713,
+         2400,
+         1937
+        ],
+        "weight_norms": {
+         "gate_proj": 21.669527053833008,
+         "up_proj": 6.654648303985596,
+         "down_proj": 4.237043857574463,
+         "router": 2.4423928260803223
+        }
+       },
+       {
+        "teacher": "biomedlm",
+        "arch": "gpt2",
+        "src_layer": 0,
+        "dst_layer": 1,
+        "group": 6,
+        "score_share": 0.013399268500506878,
+        "target_scale": 1.835892767534801,
+        "r2_before": -0.03528303911613162,
+        "r2_after": -0.4039778234392435,
+        "r2_train_after": 0.4233788396183462,
+        "fit_mse_first": 0.08153411746025085,
+        "fit_mse_last": 0.044620078057050705,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.22928176820278168
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.21621622145175934
+        },
+        "wake_bias": 21.585433006279345,
+        "wake_share_heldout": 0.03591160103678703,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         " teac",
+         " whole",
+         " earli",
+         " Work",
+         " entire",
+         ".",
+         "ad",
+         ")",
+         "/",
+         " ME",
+         "S",
+         " large"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         7311,
+         6207,
+         4697,
+         1848,
+         6644,
+         6116,
+         8061,
+         1070,
+         8544,
+         9963,
+         8510,
+         7238,
+         7052,
+         2260,
+         2411,
+         8117
+        ],
+        "weight_norms": {
+         "gate_proj": 25.082075119018555,
+         "up_proj": 7.978329181671143,
+         "down_proj": 5.738894939422607,
+         "router": 2.442392587661743
+        }
+       },
+       {
+        "teacher": "biomedlm",
+        "arch": "gpt2",
+        "src_layer": 0,
+        "dst_layer": 1,
+        "group": 7,
+        "score_share": 0.013394737616181374,
+        "target_scale": 1.0686737657090843,
+        "r2_before": -0.0875445667759025,
+        "r2_after": -0.3160189970663543,
+        "r2_train_after": 0.37154971159026995,
+        "fit_mse_first": 0.12284473329782486,
+        "fit_mse_last": 0.06927039474248886,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.9861878156661987
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 1.0
+        },
+        "wake_bias": 21.46829319000244,
+        "wake_share_heldout": 0.0220994483679533,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         " unex",
+         " teac",
+         "str",
+         "comp",
+         " res",
+         " un",
+         "prac",
+         " acr",
+         "pres",
+         " thi",
+         " pres",
+         "emph"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         4492,
+         2768,
+         5044,
+         7851,
+         6421,
+         3929,
+         8758,
+         3376,
+         7048,
+         6426,
+         7518,
+         5041,
+         1936,
+         791,
+         428,
+         2578
+        ],
+        "weight_norms": {
+         "gate_proj": 24.389863967895508,
+         "up_proj": 11.272144317626953,
+         "down_proj": 2.8140201568603516,
+         "router": 2.442392349243164
+        }
+       }
+      ],
+      "fit": {
+       "teacher": "biomedlm",
+       "arch": "gpt2",
+       "src_layer": 0,
+       "dst_layer": 1,
+       "matched_tokens": 3615,
+       "tokens_used": 3615,
+       "fit_tokens": 3253,
+       "heldout_tokens": 362,
+       "domain_tokens": 984,
+       "domain_fallback_to_all": false,
+       "ridge_r2": {
+        "P_resid_to_resid": 0.08545397668131927,
+        "Q_in_to_mlp_in": 0.0030879616573254998
+       },
+       "maps": {
+        "P": {
+         "r2_heldout": 0.08545397668131927,
+         "lam_rel": 10.0,
+         "centered": true,
+         "r2_val_by_lam": {
+          "0.001": -1.5333548803891066,
+          "0.01": -0.5827349677171845,
+          "0.1": -0.17533563862339907,
+          "1": 0.01925311569128052,
+          "10": 0.06818390822813636,
+          "100": 0.02862090663727368
+         }
+        },
+        "Q": {
+         "r2_heldout": 0.0030879616573254998,
+         "lam_rel": 10.0,
+         "centered": true,
+         "r2_val_by_lam": {
+          "0.001": -0.11314495594988849,
+          "0.01": -0.05928033008303424,
+          "0.1": -0.021025676532047788,
+          "1": -0.003393660378479879,
+          "10": 0.0007871988544126962,
+          "100": -0.0006814563353025882
+         }
+        },
+        "ones_read_rmse_heldout": 0.06321153044700623
+       },
+       "options": {
+        "lam": "auto",
+        "center": true,
+        "router": "centered"
+       },
+       "d_model": 2560,
+       "d_ff": 10240,
+       "selected_neurons": 768,
+       "score_mass_selected": 0.7304668426513672,
+       "target_rms": 0.36777201294898987,
+       "router_norm": 2.442392587661743,
+       "fit_steps": 400,
+       "lr": 0.003,
+       "seed": 0,
+       "seconds": {
+        "rows_and_states": 1.66,
+        "maps_and_scores": 10.65,
+        "total": 118.83
+       }
+      }
+     },
+     "2": {
+      "src_layer": 1,
+      "experts": [
+       {
+        "teacher": "biomedlm",
+        "arch": "gpt2",
+        "src_layer": 1,
+        "dst_layer": 2,
+        "group": 0,
+        "score_share": 0.6352169513702393,
+        "target_scale": 0.4216417374369453,
+        "r2_before": -52.107104899489755,
+        "r2_after": -18.44623470383507,
+        "r2_train_after": -0.19812924452994074,
+        "fit_mse_first": 0.009488307870924473,
+        "fit_mse_last": 0.0009376840316690505,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.21270717680454254
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.2432432472705841
+        },
+        "wake_bias": 21.246582984924316,
+        "wake_share_heldout": 0.03038674034178257,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         ")",
+         ",",
+         " conditions",
+         " and",
+         " settings",
+         " contents",
+         " tests",
+         " numbers",
+         " use",
+         " failure",
+         " environment",
+         " surfaces"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         9647,
+         427,
+         4068,
+         251,
+         8399,
+         640,
+         8082,
+         1589,
+         8786,
+         6156,
+         8632,
+         1142,
+         6002,
+         911,
+         715,
+         8976
+        ],
+        "weight_norms": {
+         "gate_proj": 54.90071487426758,
+         "up_proj": 7.97667932510376,
+         "down_proj": 0.5772488117218018,
+         "router": 2.5009336471557617
+        }
+       },
+       {
+        "teacher": "biomedlm",
+        "arch": "gpt2",
+        "src_layer": 1,
+        "dst_layer": 2,
+        "group": 1,
+        "score_share": 0.062338121235370636,
+        "target_scale": 16.916266351005202,
+        "r2_before": -63.94069181489462,
+        "r2_after": -4.511417499028754,
+        "r2_train_after": -0.8143629174790656,
+        "fit_mse_first": 0.00412868894636631,
+        "fit_mse_last": 0.00022476875165011734,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.30110496282577515
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.3243243098258972
+        },
+        "wake_bias": 21.179629325859423,
+        "wake_share_heldout": 0.0220994483679533,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         " take",
+         " t",
+         "signal",
+         " let",
+         "gone",
+         " takes",
+         " lost",
+         "ways",
+         " remains",
+         " possible",
+         "ref",
+         "t"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         4234,
+         4680,
+         1596,
+         6451,
+         5592,
+         1025,
+         3870,
+         7637,
+         5900,
+         43,
+         8326,
+         2138,
+         8991,
+         1336,
+         5668,
+         5041
+        ],
+        "weight_norms": {
+         "gate_proj": 14.983830451965332,
+         "up_proj": 4.896528244018555,
+         "down_proj": 14.519105911254883,
+         "router": 2.5009336471557617
+        }
+       },
+       {
+        "teacher": "biomedlm",
+        "arch": "gpt2",
+        "src_layer": 1,
+        "dst_layer": 2,
+        "group": 2,
+        "score_share": 0.056840866804122925,
+        "target_scale": 20.32503341692529,
+        "r2_before": -32.39681544227965,
+        "r2_after": -0.5306101198991611,
+        "r2_train_after": 0.045549559898605874,
+        "fit_mse_first": 0.042610544711351395,
+        "fit_mse_last": 0.001999934669584036,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.9033148884773254
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 1.0
+        },
+        "wake_bias": 21.175440788261767,
+        "wake_share_heldout": 0.0,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         "No",
+         "Data",
+         "We",
+         "At",
+         "This",
+         "Re",
+         "What",
+         "Body",
+         "Are",
+         "Le",
+         "Time",
+         "An"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         7339,
+         6252,
+         1419,
+         765,
+         6016,
+         6557,
+         8785,
+         3827,
+         9088,
+         3495,
+         182,
+         7740,
+         1630,
+         738,
+         3936,
+         8084
+        ],
+        "weight_norms": {
+         "gate_proj": 16.255590438842773,
+         "up_proj": 4.885411739349365,
+         "down_proj": 23.58089256286621,
+         "router": 2.5009336471557617
+        }
+       },
+       {
+        "teacher": "biomedlm",
+        "arch": "gpt2",
+        "src_layer": 1,
+        "dst_layer": 2,
+        "group": 3,
+        "score_share": 0.04984631761908531,
+        "target_scale": 23.54667904425077,
+        "r2_before": -3.885162111043928,
+        "r2_after": -0.3533451569471082,
+        "r2_train_after": 0.18075048047060727,
+        "fit_mse_first": 0.020489118993282318,
+        "fit_mse_last": 0.005638234782963991,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.265193372964859
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.37837839126586914
+        },
+        "wake_bias": 21.22024631500244,
+        "wake_share_heldout": 0.0220994483679533,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         "Body",
+         " w",
+         "look",
+         " body",
+         " per",
+         "body",
+         " boot",
+         "our",
+         " g",
+         "row",
+         " every",
+         "way"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         3231,
+         716,
+         5395,
+         6346,
+         918,
+         2501,
+         9484,
+         2111,
+         9525,
+         1502,
+         2942,
+         5223,
+         7733,
+         10076,
+         9646,
+         5044
+        ],
+        "weight_norms": {
+         "gate_proj": 6.554669380187988,
+         "up_proj": 5.021555423736572,
+         "down_proj": 23.900676727294922,
+         "router": 2.5009336471557617
+        }
+       },
+       {
+        "teacher": "biomedlm",
+        "arch": "gpt2",
+        "src_layer": 1,
+        "dst_layer": 2,
+        "group": 4,
+        "score_share": 0.04932020604610443,
+        "target_scale": 21.383984891011714,
+        "r2_before": -25.47217688635513,
+        "r2_after": -0.6147056896667478,
+        "r2_train_after": -0.02768097644844225,
+        "fit_mse_first": 0.02220543846487999,
+        "fit_mse_last": 0.0016657309606671333,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.9834254384040833
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 1.0
+        },
+        "wake_bias": 21.175477027893066,
+        "wake_share_heldout": 0.019337017089128494,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         " pip",
+         " thi",
+         " pet",
+         " bot",
+         " mec",
+         " bac",
+         " fa",
+         " tr",
+         " sm",
+         " bus",
+         " ta",
+         " hab"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         3978,
+         9489,
+         7948,
+         1072,
+         4153,
+         1814,
+         524,
+         2574,
+         8095,
+         1912,
+         7705,
+         2396,
+         3063,
+         8260,
+         4938,
+         9909
+        ],
+        "weight_norms": {
+         "gate_proj": 21.892423629760742,
+         "up_proj": 4.8616533279418945,
+         "down_proj": 23.593751907348633,
+         "router": 2.5009334087371826
+        }
+       },
+       {
+        "teacher": "biomedlm",
+        "arch": "gpt2",
+        "src_layer": 1,
+        "dst_layer": 2,
+        "group": 5,
+        "score_share": 0.0489303357899189,
+        "target_scale": 25.813276325196256,
+        "r2_before": -4.782110915544909,
+        "r2_after": -0.36366682045395016,
+        "r2_train_after": 0.1071645290652834,
+        "fit_mse_first": 0.017541663721203804,
+        "fit_mse_last": 0.0045241545885801315,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.9033148884773254
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.837837815284729
+        },
+        "wake_bias": 21.175444602959033,
+        "wake_share_heldout": 0.005524862091988325,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         " Principal",
+         " Immune",
+         "infor",
+         " efferent",
+         " Major",
+         "Immune",
+         " Final",
+         "optic",
+         " Critical",
+         "electrical",
+         " My",
+         "dependent"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         2453,
+         1377,
+         4463,
+         8170,
+         1528,
+         5074,
+         1059,
+         7298,
+         7669,
+         2651,
+         8808,
+         1577,
+         6109,
+         2861,
+         2604,
+         7313
+        ],
+        "weight_norms": {
+         "gate_proj": 11.180907249450684,
+         "up_proj": 4.94252347946167,
+         "down_proj": 26.13301658630371,
+         "router": 2.5009336471557617
+        }
+       },
+       {
+        "teacher": "biomedlm",
+        "arch": "gpt2",
+        "src_layer": 1,
+        "dst_layer": 2,
+        "group": 6,
+        "score_share": 0.04891471192240715,
+        "target_scale": 22.555670898169076,
+        "r2_before": -2.516247861755833,
+        "r2_after": -0.36285490622911043,
+        "r2_train_after": 0.1467829707082775,
+        "fit_mse_first": 0.01292241457849741,
+        "fit_mse_last": 0.005748077295720577,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.22375690937042236
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.2432432472705841
+        },
+        "wake_bias": 21.32146167755127,
+        "wake_share_heldout": 0.03038674034178257,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         " those",
+         " earli",
+         " representative",
+         "exposed",
+         " priority",
+         " healthy",
+         " each",
+         " older",
+         " ones",
+         "When",
+         " chosen",
+         "Some"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         2795,
+         803,
+         9271,
+         2936,
+         295,
+         3499,
+         6398,
+         1607,
+         431,
+         9395,
+         1518,
+         6390,
+         5991,
+         1793,
+         905,
+         2237
+        ],
+        "weight_norms": {
+         "gate_proj": 5.5480217933654785,
+         "up_proj": 5.023685932159424,
+         "down_proj": 21.7208251953125,
+         "router": 2.5009336471557617
+        }
+       },
+       {
+        "teacher": "biomedlm",
+        "arch": "gpt2",
+        "src_layer": 1,
+        "dst_layer": 2,
+        "group": 7,
+        "score_share": 0.04859241470694542,
+        "target_scale": 34.087032652459655,
+        "r2_before": -165.98285453376616,
+        "r2_after": -0.5286127691938314,
+        "r2_train_after": 0.005442004550710866,
+        "fit_mse_first": 0.41980209946632385,
+        "fit_mse_last": 0.002873227931559086,
+        "router_mode": "centered",
+        "awake_route_share": {
+         "mean": 1.0,
+         "centered": 0.3342541456222534
+        },
+        "awake_route_share_top_tokens": {
+         "mean": 1.0,
+         "centered": 0.45945945382118225
+        },
+        "wake_bias": 21.18297290802002,
+        "wake_share_heldout": 0.0220994483679533,
+        "wake_share_target": 0.027777777777777776,
+        "write_scale": 0.1,
+        "router_top_tokens": [
+         " unex",
+         " mentally",
+         " sup",
+         " re",
+         " di",
+         " tri",
+         " qual",
+         " radio",
+         " coun",
+         " too",
+         " tran",
+         " bottlen"
+        ],
+        "n_neurons": 96,
+        "neurons_head": [
+         2853,
+         960,
+         4229,
+         4503,
+         463,
+         5676,
+         5705,
+         7657,
+         4485,
+         1508,
+         3009,
+         6820,
+         6375,
+         7124,
+         4238,
+         1599
+        ],
+        "weight_norms": {
+         "gate_proj": 21.92099952697754,
+         "up_proj": 4.850148677825928,
+         "down_proj": 35.761600494384766,
+         "router": 2.5009336471557617
+        }
+       }
+      ],
+      "fit": {
+       "teacher": "biomedlm",
+       "arch": "gpt2",
+       "src_layer": 1,
+       "dst_layer": 2,
+       "matched_tokens": 3615,
+       "tokens_used": 3615,
+       "fit_tokens": 3253,
+       "heldout_tokens": 362,
+       "domain_tokens": 984,
+       "domain_fallback_to_all": false,
+       "ridge_r2": {
+        "P_resid_to_resid": 0.08774706937166987,
+        "Q_in_to_mlp_in": 0.010357518569504842
+       },
+       "maps": {
+        "P": {
+         "r2_heldout": 0.08774706937166987,
+         "lam_rel": 1.0,
+         "centered": true,
+         "r2_val_by_lam": {
+          "0.001": -1.1980874318131005,
+          "0.01": -0.2386412133129876,
+          "0.1": 0.033614507671705374,
+          "1": 0.07603770116822284,
+          "10": 0.05376457920973943,
+          "100": 0.017542477878987217
+         }
+        },
+        "Q": {
+         "r2_heldout": 0.010357518569504842,
+         "lam_rel": 10.0,
+         "centered": true,
+         "r2_val_by_lam": {
+          "0.001": -0.097152075630488,
+          "0.01": -0.0450658701754294,
+          "0.1": -0.007185113223808104,
+          "1": 0.0076765464776773484,
+          "10": 0.008548706671056894,
+          "100": 0.0028087375257667135
+         }
+        },
+        "ones_read_rmse_heldout": 0.05501318722963333
+       },
+       "options": {
+        "lam": "auto",
+        "center": true,
+        "router": "centered"
+       },
+       "d_model": 2560,
+       "d_ff": 10240,
+       "selected_neurons": 768,
+       "score_mass_selected": 0.36193057894706726,
+       "target_rms": 1.3854340314865112,
+       "router_norm": 2.5009336471557617,
+       "fit_steps": 400,
+       "lr": 0.003,
+       "seed": 0,
+       "seconds": {
+        "rows_and_states": 7.36,
+        "maps_and_scores": 10.64,
+        "total": 126.98
+       }
+      }
+     }
+    },
+    "domain_tokens": 1027
+   }
+  }
+ },
+ "vocab": {
+  "base": 9451,
+  "added": 1500,
+  "size": 10951,
+  "corpus_rows": {
+   "code": 1650,
+   "bio": 1651,
+   "connectome": 6667
+  },
+  "max_new": 1500,
+  "min_count": 3,
+  "lifted": 1498,
+  "fallback_mean_noise": 2,
+  "lift": {
+   "teachers": {
+    "qwen2.5-coder-7b-instruct": {
+     "matched_tokens": 6282,
+     "map_r2_heldout": 0.14684470606467914,
+     "map_lam_rel": 10.0,
+     "covered": 1493
+    },
+    "biomedlm": {
+     "matched_tokens": 3615,
+     "map_r2_heldout": 0.10819683270194969,
+     "map_lam_rel": 10.0,
+     "covered": 1494
+    }
+   },
+   "n_new": 1500,
+   "max_pieces": 4,
+   "covered": 1498,
+   "target_norm": 2.1028549671173096,
+   "teachers_per_row_mean": 1.9913333654403687
+  },
+  "sample_new_tokens": [
+   " def",
+   "def",
+   " release",
+   "release",
+   " sends",
+   "sends",
+   " belongs",
+   "belongs",
+   " excitatory",
+   "excitatory",
+   " inhibitory",
+   "inhibitory",
+   " stays",
+   "stays",
+   " role",
+   "role",
+   " presynaptic",
+   "presynaptic",
+   " integer",
+   "integer",
+   " carries",
+   "carries",
+   "Implement",
+   " transmitter",
+   "transmitter",
+   "*",
+   "xs",
+   " Calculate",
+   " biomedicine",
+   "biomedicine",
+   " muscles",
+   "muscles",
+   " medicine",
+   "medicine",
+   " blood",
+   "blood",
+   " GABA",
+   "GABA",
+   " *",
+   " connects"
+  ]
+ },
+ "function_preservation": {
+  "rows": 32,
+  "compared_vocab": 9451,
+  "max_abs_logit_diff_fly_causal": 0.7835450172424316,
+  "max_abs_logit_diff_fly_off": 0.0,
+  "max_abs_logit_diff_legacy_fly": 0.0,
+  "note": "fly_causal differs by design (per-position sense); fly_off and legacy_fly must be ~0",
+  "passed": true
+ },
+ "params": {
+  "total": 132607036,
+  "frozen_omni7_net": 77560031,
+  "fly_core": 59116,
+  "omni_core": 10971516,
+  "omni7_bridge": 327444,
+  "cns_full": 684444
+ },
+ "gate_report": {
+  "fly_gate_abs_mean": 0.011712542735040188,
+  "omni_gate_abs_mean": 0.013173704035580158,
+  "cns_gate_abs_mean": 0.044023290276527405,
+  "cns_alive": 826,
+  "omni7_gate_abs_mean": 0.0,
+  "cns_full_gate_abs_mean": 0.0,
+  "moe1_alive": 72,
+  "moe2_alive": 72,
+  "moe3_alive": 72,
+  "moe4_alive": 72,
+  "donor_qwen_alive": 0,
+  "donor_qwen_slots": 16,
+  "donor_qwen_bias_mean": 19.827407836914062,
+  "donor_qwen_weight_rms": 0.13002252300857076,
+  "donor_biomedlm_alive": 0,
+  "donor_biomedlm_slots": 16,
+  "donor_biomedlm_bias_mean": 19.827407836914062,
+  "donor_biomedlm_weight_rms": 0.11209729811728728
+ },
+ "built_seconds": 815.9,
+ "fly_causal": true,
+ "fly_config": {
+  "compass": "attractor",
+  "mbInhibition": "apl",
+  "plasticity": "dan-ltd",
+  "consensus": "gated",
+  "kcTargetSparsity": 0.1,
+  "aplFeedbackGain": 3.4,
+  "aplDivisiveGain": 2.6,
+  "aplSubtractiveGain": 0.55,
+  "ringExcitation": 1.6,
+  "ringInhibition": 0.55,
+  "ringSigma": 0.62,
+  "ringRate": 0.9,
+  "ringShiftGain": 1.1,
+  "ltdRate": 0.055,
+  "ltdRecovery": 0.004,
+  "kcMbonBaseline": 0.25,
+  "couplingStrength": 0.8
+ },
+ "with_omni": true,
+ "cns": {
+  "n": 11751,
+  "nnz": 3830931,
+  "n_in": 1277,
+  "n_out": 713,
+  "steps": 4,
+  "rewired": false,
+  "receipt": {
+   "schema": "supermix-expanse-full-cns-graph-v1",
+   "npz": "C:/Users/kai99/Desktop/supermix-expanse/expanse/data/malecns_types.npz",
+   "npz_sha256": "a582ac7da0c86221c654c0793aef78f3049d5fc4fa4f8c264e9a1f3eda2b0271",
+   "n_types": 11751,
+   "n_edges": 3830931,
+   "n_edges_source": 3830931,
+   "self_loops": 7881,
+   "synapses_total": 122318556,
+   "synapses_kept": 122318556,
+   "synapse_mass_kept": 1.0,
+   "threshold": 0.0,
+   "radius": 0.9,
+   "n_in": 1277,
+   "n_out": 713,
+   "superclass_in": [
+    "ascending_neuron",
+    "cb_sensory",
+    "ol_sensory",
+    "sensory_ascending",
+    "sensory_descending",
+    "visual_projection",
+    "vnc_sensory"
+   ],
+   "superclass_out": [
+    "cb_efferent",
+    "cb_endocrine",
+    "cb_motor",
+    "descending_neuron",
+    "efferent_ascending",
+    "efferent_descending",
+    "vnc_efferent",
+    "vnc_endocrine",
+    "vnc_motor"
+   ],
+   "types_without_input": 1,
+   "sign_counts": {
+    "excitatory_types": 6346,
+    "inhibitory_types": 5223,
+    "modulatory_types": 182,
+    "unclear_nt_types_signed_plus": 363
+   },
+   "edge_sign_counts": {
+    "excitatory": 2268432,
+    "inhibitory": 1562499
+   },
+   "abs_row_sum_max": 0.9000000432133675,
+   "abs_spectral_radius": 0.8999998331156277,
+   "abs_spectral_radius_upper_bound": 0.8999999977670935,
+   "abs_power_iterations": 20,
+   "signed_spectral_radius_est": 0.7323191074513814,
+   "signed_spectral_method": "arpack_eigs_LM",
+   "signed_dominant_eigenvalue": [
+    0.7323191074513814,
+    0.0
+   ],
+   "weights": "value = input_fraction(post, pre) * sign[pre] * radius; input fraction over all edges",
+   "seconds": 14.33
+  }
+ },
+ "donor_experts": {
+  "qwen": {
+   "layers": {
+    "1": {
+     "slots": [
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79
+     ],
+     "dormant_bias": 19.975826263427734,
+     "target_bias": 22.465282440185547,
+     "target_bias_by_slot": {
+      "72": 21.468287467949267,
+      "73": 21.526942253105517,
+      "74": 21.46828556060791,
+      "75": 21.468289375305176,
+      "76": 21.7043790817188,
+      "77": 21.515013694755908,
+      "78": 21.500657081604004,
+      "79": 21.555298805236816
+     },
+     "placed": [
+      {
+       "slot": 72,
+       "teacher": "qwen2.5-coder-7b-instruct",
+       "src_layer": 0,
+       "group": 0,
+       "n_neurons": 96,
+       "r2_before": 0.2146958109178374,
+       "r2_after": 0.2110262420960809,
+       "wake_bias": 21.468287467949267,
+       "write_scale": 1.0,
+       "router_top_tokens": [
+        "complete",
+        "migration",
+        "validate",
+        "matter",
+        "think",
+        "device",
+        "create",
+        "constraint"
+       ]
+      },
+      {
+       "slot": 73,
+       "teacher": "qwen2.5-coder-7b-instruct",
+       "src_layer": 0,
+       "group": 1,
+       "n_neurons": 96,
+       "r2_before": -0.08221782727452043,
+       "r2_after": -0.31975764527008077,
+       "wake_bias": 21.526942253105517,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        " perception",
+        " season",
+        " citizenship",
+        " garden",
+        " puzzle",
+        " discomfort",
+        " consciousness",
+        " ecosystem"
+       ]
+      },
+      {
+       "slot": 74,
+       "teacher": "qwen2.5-coder-7b-instruct",
+       "src_layer": 0,
+       "group": 2,
+       "n_neurons": 96,
+       "r2_before": -0.02691759899870272,
+       "r2_after": -0.023542210988628964,
+       "wake_bias": 21.46828556060791,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        "import",
+        "com",
+        "by",
+        "self",
+        " self",
+        " Invalidate",
+        "for",
+        "{"
+       ]
+      },
+      {
+       "slot": 75,
+       "teacher": "qwen2.5-coder-7b-instruct",
+       "src_layer": 0,
+       "group": 3,
+       "n_neurons": 96,
+       "r2_before": -0.3003565085468809,
+       "r2_after": -0.2477062660847038,
+       "wake_bias": 21.468289375305176,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        " however",
+        "The",
+        " the",
+        " addition",
+        "import",
+        " inference",
+        ".",
+        " robotics"
+       ]
+      },
+      {
+       "slot": 76,
+       "teacher": "qwen2.5-coder-7b-instruct",
+       "src_layer": 0,
+       "group": 4,
+       "n_neurons": 96,
+       "r2_before": 0.04915595726587574,
+       "r2_after": -0.020692364274868424,
+       "wake_bias": 21.7043790817188,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        ",",
+        " We",
+        " tail",
+        "What",
+        "They",
+        "n",
+        "M",
+        "Hey"
+       ]
+      },
+      {
+       "slot": 77,
+       "teacher": "qwen2.5-coder-7b-instruct",
+       "src_layer": 0,
+       "group": 5,
+       "n_neurons": 96,
+       "r2_before": -0.5531946085070465,
+       "r2_after": -0.5569355678511427,
+       "wake_bias": 21.515013694755908,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        " mainly",
+        " number",
+        " are",
+        " they",
+        "We",
+        " can",
+        " were",
+        "People"
+       ]
+      },
+      {
+       "slot": 78,
+       "teacher": "qwen2.5-coder-7b-instruct",
+       "src_layer": 0,
+       "group": 6,
+       "n_neurons": 96,
+       "r2_before": -0.5004870147451659,
+       "r2_after": -0.30761122284112785,
+       "wake_bias": 21.500657081604004,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        "Three",
+        " pressing",
+        " while",
+        " s",
+        " challenge",
+        "diff",
+        " last",
+        "practice"
+       ]
+      },
+      {
+       "slot": 79,
+       "teacher": "qwen2.5-coder-7b-instruct",
+       "src_layer": 0,
+       "group": 7,
+       "n_neurons": 96,
+       "r2_before": -0.16669686107712223,
+       "r2_after": -0.23609856308468857,
+       "wake_bias": 21.555298805236816,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        "use",
+        "-",
+        "analy",
+        "An",
+        "=",
+        "Where",
+        " All",
+        "Describe"
+       ]
+      }
+     ],
+     "dormant": 8,
+     "alive_after": 72,
+     "dormant_margin": 1.5
+    },
+    "2": {
+     "slots": [
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79
+     ],
+     "dormant_bias": 19.67898941040039,
+     "target_bias": 22.173442840576172,
+     "target_bias_by_slot": {
+      "72": 21.301566123955126,
+      "73": 21.175440788261767,
+      "74": 21.20845890045166,
+      "75": 21.229136466972705,
+      "76": 21.227566719055176,
+      "77": 21.175440788261767,
+      "78": 21.17619609832036,
+      "79": 21.25525569915044
+     },
+     "placed": [
+      {
+       "slot": 72,
+       "teacher": "qwen2.5-coder-7b-instruct",
+       "src_layer": 1,
+       "group": 0,
+       "n_neurons": 96,
+       "r2_before": 0.012924973216105196,
+       "r2_after": -0.8722857213783388,
+       "wake_bias": 21.301566123955126,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        "const",
+        "class",
+        "D",
+        "0",
+        "import",
+        ":",
+        "A",
+        "%"
+       ]
+      },
+      {
+       "slot": 73,
+       "teacher": "qwen2.5-coder-7b-instruct",
+       "src_layer": 1,
+       "group": 1,
+       "n_neurons": 96,
+       "r2_before": 0.02434536979353541,
+       "r2_after": -0.2967174261444039,
+       "wake_bias": 21.175440788261767,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        "sys",
+        "Start",
+        "Feature",
+        "all",
+        "Policy",
+        "Content",
+        "Natural",
+        "Attention"
+       ]
+      },
+      {
+       "slot": 74,
+       "teacher": "qwen2.5-coder-7b-instruct",
+       "src_layer": 1,
+       "group": 2,
+       "n_neurons": 96,
+       "r2_before": -0.04708522219251465,
+       "r2_after": -0.07650479917377195,
+       "wake_bias": 21.20845890045166,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        "1",
+        "package",
+        "import",
+        " paid",
+        " opened",
+        " experiment",
+        " tapped",
+        " updating"
+       ]
+      },
+      {
+       "slot": 75,
+       "teacher": "qwen2.5-coder-7b-instruct",
+       "src_layer": 1,
+       "group": 3,
+       "n_neurons": 96,
+       "r2_before": 0.07068837304817721,
+       "r2_after": -0.565984482912042,
+       "wake_bias": 21.229136466972705,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        "If",
+        " '",
+        "Friday",
+        "You",
+        "S",
+        "Your",
+        " What",
+        "Consider"
+       ]
+      },
+      {
+       "slot": 76,
+       "teacher": "qwen2.5-coder-7b-instruct",
+       "src_layer": 1,
+       "group": 4,
+       "n_neurons": 96,
+       "r2_before": 0.07705342361679812,
+       "r2_after": -0.24839429211583108,
+       "wake_bias": 21.227566719055176,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        " friends",
+        " administration",
+        " February",
+        " engineering",
+        " reliable",
+        " autonomy",
+        " available",
+        " Wednesday"
+       ]
+      },
+      {
+       "slot": 77,
+       "teacher": "qwen2.5-coder-7b-instruct",
+       "src_layer": 1,
+       "group": 5,
+       "n_neurons": 96,
+       "r2_before": -0.07687707937033816,
+       "r2_after": -0.1248522811506596,
+       "wake_bias": 21.175440788261767,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        "package",
+        "0",
+        "system",
+        "import",
+        "analy",
+        "my",
+        "caught",
+        "full"
+       ]
+      },
+      {
+       "slot": 78,
+       "teacher": "qwen2.5-coder-7b-instruct",
+       "src_layer": 1,
+       "group": 6,
+       "n_neurons": 96,
+       "r2_before": -0.29803911278520334,
+       "r2_after": -0.44838091934831126,
+       "wake_bias": 21.17619609832036,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        "output",
+        "V",
+        "second",
+        "0",
+        " workshop",
+        "ne",
+        "9",
+        "v"
+       ]
+      },
+      {
+       "slot": 79,
+       "teacher": "qwen2.5-coder-7b-instruct",
+       "src_layer": 1,
+       "group": 7,
+       "n_neurons": 96,
+       "r2_before": -0.08431090213504677,
+       "r2_after": -0.4279508711599551,
+       "wake_bias": 21.25525569915044,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        " en",
+        " make",
+        " ch",
+        " new",
+        " limited",
+        " Is",
+        "for",
+        " Y"
+       ]
+      }
+     ],
+     "dormant": 8,
+     "alive_after": 72,
+     "dormant_margin": 1.5
+    }
+   }
+  },
+  "biomedlm": {
+   "layers": {
+    "1": {
+     "slots": [
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87
+     ],
+     "dormant_bias": 19.975826263427734,
+     "target_bias": 22.465282440185547,
+     "target_bias_by_slot": {
+      "80": 21.478222846984863,
+      "81": 21.46828556060791,
+      "82": 21.4682950973438,
+      "83": 21.468777656555176,
+      "84": 21.468350410461426,
+      "85": 21.47640323638916,
+      "86": 21.585433006279345,
+      "87": 21.46829319000244
+     },
+     "placed": [
+      {
+       "slot": 80,
+       "teacher": "biomedlm",
+       "src_layer": 0,
+       "group": 0,
+       "n_neurons": 96,
+       "r2_before": -2.6226642826852675,
+       "r2_after": -0.20470467059478037,
+       "wake_bias": 21.478222846984863,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        " aggregate",
+        "Combined",
+        " speeds",
+        " AM",
+        " photosynthesis",
+        " rendering",
+        " regardless",
+        " matters"
+       ]
+      },
+      {
+       "slot": 81,
+       "teacher": "biomedlm",
+       "src_layer": 0,
+       "group": 1,
+       "n_neurons": 96,
+       "r2_before": -0.04926156068438048,
+       "r2_after": -0.48636654808933133,
+       "wake_bias": 21.46828556060791,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        " earli",
+        "endocrine",
+        " efferent",
+        " teac",
+        "talk",
+        "His",
+        "presenting",
+        " cholinergic"
+       ]
+      },
+      {
+       "slot": 82,
+       "teacher": "biomedlm",
+       "src_layer": 0,
+       "group": 2,
+       "n_neurons": 96,
+       "r2_before": -0.05506893367357302,
+       "r2_after": -0.48142446630701285,
+       "wake_bias": 21.4682950973438,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        " dealing",
+        " spe",
+        " wor",
+        " diff",
+        " beh",
+        " dec",
+        "diff",
+        " str"
+       ]
+      },
+      {
+       "slot": 83,
+       "teacher": "biomedlm",
+       "src_layer": 0,
+       "group": 3,
+       "n_neurons": 96,
+       "r2_before": -0.2701215465031144,
+       "r2_after": -0.9944652824239879,
+       "wake_bias": 21.468777656555176,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        " injuries",
+        " assembly",
+        " scans",
+        " development",
+        " heads",
+        " tasks",
+        " progression",
+        " conditions"
+       ]
+      },
+      {
+       "slot": 84,
+       "teacher": "biomedlm",
+       "src_layer": 0,
+       "group": 4,
+       "n_neurons": 96,
+       "r2_before": -0.09683305627457162,
+       "r2_after": -0.35529267313572777,
+       "wake_bias": 21.468350410461426,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        "AI",
+        " micro",
+        " earli",
+        "IN",
+        "TH",
+        "LB",
+        "comp",
+        "LH"
+       ]
+      },
+      {
+       "slot": 85,
+       "teacher": "biomedlm",
+       "src_layer": 0,
+       "group": 5,
+       "n_neurons": 96,
+       "r2_before": -0.1294630257279341,
+       "r2_after": -0.13960230873903856,
+       "wake_bias": 21.47640323638916,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        " I",
+        ":",
+        " the",
+        " In",
+        " :",
+        " in",
+        " We",
+        "We"
+       ]
+      },
+      {
+       "slot": 86,
+       "teacher": "biomedlm",
+       "src_layer": 0,
+       "group": 6,
+       "n_neurons": 96,
+       "r2_before": -0.03528303911613162,
+       "r2_after": -0.4039778234392435,
+       "wake_bias": 21.585433006279345,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        " teac",
+        " whole",
+        " earli",
+        " Work",
+        " entire",
+        ".",
+        "ad",
+        ")"
+       ]
+      },
+      {
+       "slot": 87,
+       "teacher": "biomedlm",
+       "src_layer": 0,
+       "group": 7,
+       "n_neurons": 96,
+       "r2_before": -0.0875445667759025,
+       "r2_after": -0.3160189970663543,
+       "wake_bias": 21.46829319000244,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        " unex",
+        " teac",
+        "str",
+        "comp",
+        " res",
+        " un",
+        "prac",
+        " acr"
+       ]
+      }
+     ],
+     "dormant": 8,
+     "alive_after": 72,
+     "dormant_margin": 1.5
+    },
+    "2": {
+     "slots": [
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87
+     ],
+     "dormant_bias": 19.67898941040039,
+     "target_bias": 22.173442840576172,
+     "target_bias_by_slot": {
+      "80": 21.246582984924316,
+      "81": 21.179629325859423,
+      "82": 21.175440788261767,
+      "83": 21.22024631500244,
+      "84": 21.175477027893066,
+      "85": 21.175444602959033,
+      "86": 21.32146167755127,
+      "87": 21.18297290802002
+     },
+     "placed": [
+      {
+       "slot": 80,
+       "teacher": "biomedlm",
+       "src_layer": 1,
+       "group": 0,
+       "n_neurons": 96,
+       "r2_before": -52.107104899489755,
+       "r2_after": -18.44623470383507,
+       "wake_bias": 21.246582984924316,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        ")",
+        ",",
+        " conditions",
+        " and",
+        " settings",
+        " contents",
+        " tests",
+        " numbers"
+       ]
+      },
+      {
+       "slot": 81,
+       "teacher": "biomedlm",
+       "src_layer": 1,
+       "group": 1,
+       "n_neurons": 96,
+       "r2_before": -63.94069181489462,
+       "r2_after": -4.511417499028754,
+       "wake_bias": 21.179629325859423,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        " take",
+        " t",
+        "signal",
+        " let",
+        "gone",
+        " takes",
+        " lost",
+        "ways"
+       ]
+      },
+      {
+       "slot": 82,
+       "teacher": "biomedlm",
+       "src_layer": 1,
+       "group": 2,
+       "n_neurons": 96,
+       "r2_before": -32.39681544227965,
+       "r2_after": -0.5306101198991611,
+       "wake_bias": 21.175440788261767,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        "No",
+        "Data",
+        "We",
+        "At",
+        "This",
+        "Re",
+        "What",
+        "Body"
+       ]
+      },
+      {
+       "slot": 83,
+       "teacher": "biomedlm",
+       "src_layer": 1,
+       "group": 3,
+       "n_neurons": 96,
+       "r2_before": -3.885162111043928,
+       "r2_after": -0.3533451569471082,
+       "wake_bias": 21.22024631500244,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        "Body",
+        " w",
+        "look",
+        " body",
+        " per",
+        "body",
+        " boot",
+        "our"
+       ]
+      },
+      {
+       "slot": 84,
+       "teacher": "biomedlm",
+       "src_layer": 1,
+       "group": 4,
+       "n_neurons": 96,
+       "r2_before": -25.47217688635513,
+       "r2_after": -0.6147056896667478,
+       "wake_bias": 21.175477027893066,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        " pip",
+        " thi",
+        " pet",
+        " bot",
+        " mec",
+        " bac",
+        " fa",
+        " tr"
+       ]
+      },
+      {
+       "slot": 85,
+       "teacher": "biomedlm",
+       "src_layer": 1,
+       "group": 5,
+       "n_neurons": 96,
+       "r2_before": -4.782110915544909,
+       "r2_after": -0.36366682045395016,
+       "wake_bias": 21.175444602959033,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        " Principal",
+        " Immune",
+        "infor",
+        " efferent",
+        " Major",
+        "Immune",
+        " Final",
+        "optic"
+       ]
+      },
+      {
+       "slot": 86,
+       "teacher": "biomedlm",
+       "src_layer": 1,
+       "group": 6,
+       "n_neurons": 96,
+       "r2_before": -2.516247861755833,
+       "r2_after": -0.36285490622911043,
+       "wake_bias": 21.32146167755127,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        " those",
+        " earli",
+        " representative",
+        "exposed",
+        " priority",
+        " healthy",
+        " each",
+        " older"
+       ]
+      },
+      {
+       "slot": 87,
+       "teacher": "biomedlm",
+       "src_layer": 1,
+       "group": 7,
+       "n_neurons": 96,
+       "r2_before": -165.98285453376616,
+       "r2_after": -0.5286127691938314,
+       "wake_bias": 21.18297290802002,
+       "write_scale": 0.1,
+       "router_top_tokens": [
+        " unex",
+        " mentally",
+        " sup",
+        " re",
+        " di",
+        " tri",
+        " qual",
+        " radio"
+       ]
+      }
+     ],
+     "dormant": 8,
+     "alive_after": 72,
+     "dormant_margin": 1.5
+    }
+   }
+  }
+ },
+ "vocab_base": 9451
+}

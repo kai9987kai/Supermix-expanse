@@ -1,0 +1,25 @@
+# model checkpoints live on Hugging Face (Kai9987kai/supermix-expanse)
+*.pt
+*.pth
+*.gguf
+*.safetensors
+*.partial
+*.tmp
+# downloaded sources / teachers / tools
+external/base/
+external/teachers/
+external/llama.cpp/
+external/llama.cpp-src/
+external/omni_v7/*.json
+external/logs/llama-server-*.log
+# regenerable caches
+expanse/data/kd_arch_top32.pt
+expanse/data/omni7_states.pt
+expanse/checkpoints/calib/
+expanse/checkpoints/smoke/
+# python / tooling
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+.claude/

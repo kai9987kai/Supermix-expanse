@@ -1,0 +1,61 @@
+{
+  "threads": 8,
+  "steps": 4,
+  "nnz": 3830931,
+  "n": 11751,
+  "hidden_size": 320,
+  "repeats": 2,
+  "columns": {
+    "512": {
+      "forward_s": 0.161,
+      "backward_s": 0.1685,
+      "forward_s_all": [
+        0.161,
+        0.1627
+      ],
+      "backward_s_all": [
+        0.1685,
+        0.1887
+      ],
+      "spmm_gflop_forward": 11.769,
+      "spmm_gflops_forward_effective": 73.1,
+      "fraction_active": 0.8433429598808289
+    },
+    "1024": {
+      "forward_s": 0.3304,
+      "backward_s": 0.3511,
+      "forward_s_all": [
+        0.4118,
+        0.3304
+      ],
+      "backward_s_all": [
+        0.3511,
+        0.4192
+      ],
+      "spmm_gflop_forward": 23.537,
+      "spmm_gflops_forward_effective": 71.24,
+      "fraction_active": 0.8441296219825745
+    }
+  },
+  "graph": {
+    "n_types": 11751,
+    "n_edges": 3830931,
+    "npz_sha256": "a582ac7da0c86221c654c0793aef78f3049d5fc4fa4f8c264e9a1f3eda2b0271",
+    "radius": 0.9,
+    "threshold": 0.0
+  },
+  "torch": "2.11.0+cpu",
+  "dtype": "float32",
+  "spmm_chunk_columns": 128,
+  "note": "measured once (warm-up + 2 repeats, min reported) with torch.set_num_threads(8) while other agents and a download were running (CPU load ~100%); an uncontended run should be faster",
+  "previous_run_unslabbed_spmm": {
+    "512": {
+      "forward_s": 0.7564,
+      "backward_s": 0.8722
+    },
+    "1024": {
+      "forward_s": 2.1525,
+      "backward_s": 2.237
+    }
+  }
+}

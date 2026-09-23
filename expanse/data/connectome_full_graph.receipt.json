@@ -1,0 +1,161 @@
+{
+  "real": {
+    "schema": "supermix-expanse-full-cns-graph-v1",
+    "npz": "C:/Users/kai99/Desktop/supermix-expanse/expanse/data/malecns_types.npz",
+    "npz_sha256": "a582ac7da0c86221c654c0793aef78f3049d5fc4fa4f8c264e9a1f3eda2b0271",
+    "n_types": 11751,
+    "n_edges": 3830931,
+    "n_edges_source": 3830931,
+    "self_loops": 7881,
+    "synapses_total": 122318556,
+    "synapses_kept": 122318556,
+    "synapse_mass_kept": 1.0,
+    "threshold": 0.0,
+    "radius": 0.9,
+    "n_in": 1277,
+    "n_out": 713,
+    "superclass_in": [
+      "ascending_neuron",
+      "cb_sensory",
+      "ol_sensory",
+      "sensory_ascending",
+      "sensory_descending",
+      "visual_projection",
+      "vnc_sensory"
+    ],
+    "superclass_out": [
+      "cb_efferent",
+      "cb_endocrine",
+      "cb_motor",
+      "descending_neuron",
+      "efferent_ascending",
+      "efferent_descending",
+      "vnc_efferent",
+      "vnc_endocrine",
+      "vnc_motor"
+    ],
+    "types_without_input": 1,
+    "sign_counts": {
+      "excitatory_types": 6346,
+      "inhibitory_types": 5223,
+      "modulatory_types": 182,
+      "unclear_nt_types_signed_plus": 363
+    },
+    "edge_sign_counts": {
+      "excitatory": 2268432,
+      "inhibitory": 1562499
+    },
+    "abs_row_sum_max": 0.9000000432133675,
+    "abs_spectral_radius": 0.8999998331156277,
+    "abs_spectral_radius_upper_bound": 0.8999999977670935,
+    "abs_power_iterations": 20,
+    "signed_spectral_radius_est": 0.7323191074513814,
+    "signed_spectral_method": "arpack_eigs_LM",
+    "signed_dominant_eigenvalue": [
+      0.7323191074513814,
+      0.0
+    ],
+    "weights": "value = input_fraction(post, pre) * sign[pre] * radius; input fraction over all edges",
+    "seconds": 7.05
+  },
+  "rewired": {
+    "schema": "supermix-expanse-full-cns-graph-v1",
+    "npz": "C:/Users/kai99/Desktop/supermix-expanse/expanse/data/malecns_types.npz",
+    "npz_sha256": "a582ac7da0c86221c654c0793aef78f3049d5fc4fa4f8c264e9a1f3eda2b0271",
+    "n_types": 11751,
+    "n_edges": 3830931,
+    "n_edges_source": 3830931,
+    "self_loops": 7881,
+    "synapses_total": 122318556,
+    "synapses_kept": 122318556,
+    "synapse_mass_kept": 1.0,
+    "threshold": 0.0,
+    "radius": 0.9,
+    "n_in": 1277,
+    "n_out": 713,
+    "superclass_in": [
+      "ascending_neuron",
+      "cb_sensory",
+      "ol_sensory",
+      "sensory_ascending",
+      "sensory_descending",
+      "visual_projection",
+      "vnc_sensory"
+    ],
+    "superclass_out": [
+      "cb_efferent",
+      "cb_endocrine",
+      "cb_motor",
+      "descending_neuron",
+      "efferent_ascending",
+      "efferent_descending",
+      "vnc_efferent",
+      "vnc_endocrine",
+      "vnc_motor"
+    ],
+    "types_without_input": 1,
+    "sign_counts": {
+      "excitatory_types": 6346,
+      "inhibitory_types": 5223,
+      "modulatory_types": 182,
+      "unclear_nt_types_signed_plus": 363
+    },
+    "edge_sign_counts": {
+      "excitatory": 2268432,
+      "inhibitory": 1562499
+    },
+    "abs_row_sum_max": 0.9000000432133675,
+    "abs_spectral_radius": 0.8999986716681064,
+    "abs_spectral_radius_upper_bound": 0.899998731121125,
+    "abs_power_iterations": 20,
+    "signed_spectral_radius_est": 0.7053044107203061,
+    "signed_spectral_method": "arpack_eigs_LM",
+    "signed_dominant_eigenvalue": [
+      0.7053044107203061,
+      0.0
+    ],
+    "weights": "value = input_fraction(post, pre) * sign[pre] * radius; input fraction over all edges",
+    "seconds": 7.05,
+    "null": "stratified_by_source_sign_and_role_value_carried_with_target",
+    "null_seed": 0,
+    "rewire": {
+      "swaps_accepted": 29621128,
+      "swap_attempts": 38230480,
+      "rounds": 20,
+      "accepted_per_round": [
+        1490403,
+        1480178,
+        1479847,
+        1480189,
+        1480159,
+        1480719,
+        1480425,
+        1480686,
+        1480693,
+        1481139,
+        1481609,
+        1480349,
+        1481526,
+        1480138,
+        1481099,
+        1479613,
+        1481117,
+        1480830,
+        1479884,
+        1480525
+      ],
+      "swaps_per_movable_edge": 7.748,
+      "edges_rewired": 3823050,
+      "self_loops_held": 7881
+    },
+    "strata": 6,
+    "edge_overlap_with_real": 0.071816,
+    "in_degree_changed_types": 0,
+    "out_degree_changed_types": 0,
+    "abs_row_sum_max_abs_diff": 0.0,
+    "inhibitory_input_count_changed_types": 0,
+    "value_sign_matches_source": true,
+    "duplicate_edges": 0,
+    "rewire_seconds": 73.46
+  }
+}

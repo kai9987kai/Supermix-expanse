@@ -1,0 +1,97 @@
+{
+  "schema": "supermix-v87-code-corpus-v1",
+  "seed": 2026,
+  "rows": 300,
+  "tasks": 3,
+  "per_task": {
+    "code_range_sum": 100,
+    "code_list_count": 100,
+    "code_neg_index": 100
+  },
+  "distinct_prompts": {
+    "code_range_sum": 100,
+    "code_list_count": 100,
+    "code_neg_index": 100
+  },
+  "repetition": {
+    "code_range_sum": 1.0,
+    "code_list_count": 1.0,
+    "code_neg_index": 1.0
+  },
+  "distinct_capacity": {
+    "code_range_sum": 71,
+    "code_list_count": 4020,
+    "code_neg_index": 3960
+  },
+  "attempts": {
+    "code_range_sum": 120,
+    "code_list_count": 101,
+    "code_neg_index": 100
+  },
+  "dropped_failing_execution": {},
+  "drop_reasons": {},
+  "drop_rate": 0.0,
+  "short_of_requested": {},
+  "verified_by": "cpython exec in a restricted namespace",
+  "verification": {
+    "builtins": [
+      "abs",
+      "len",
+      "max",
+      "min",
+      "range",
+      "sum"
+    ],
+    "methods": [
+      "count"
+    ],
+    "timeout_seconds": 2.0,
+    "allowed_syntax": [
+      "Add",
+      "Assign",
+      "Attribute",
+      "AugAssign",
+      "BinOp",
+      "Break",
+      "Call",
+      "Compare",
+      "Constant",
+      "Continue",
+      "Eq",
+      "Expr",
+      "FloorDiv",
+      "For",
+      "Gt",
+      "GtE",
+      "If",
+      "IfExp",
+      "Index",
+      "List",
+      "Load",
+      "Lt",
+      "LtE",
+      "Mod",
+      "Module",
+      "Mult",
+      "Name",
+      "NotEq",
+      "Pass",
+      "Store",
+      "Sub",
+      "Subscript",
+      "UAdd",
+      "USub",
+      "UnaryOp",
+      "While"
+    ],
+    "note": "the checker executes the snippet the PROMPT shows, not the expression the generator used, so a template that renders something other than what it computes is dropped"
+  },
+  "line_initial_forms": {
+    "r": 200
+  },
+  "options": {
+    "repeat": false,
+    "keep_canonical": false
+  },
+  "output": "..\\..\\..\\corpus\\code.jsonl"
+}

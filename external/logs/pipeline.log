@@ -1,0 +1,17 @@
+10:06:23 [pipeline] waiting for teacher data
+11:20:22 [pipeline] waiting for teacher data
+11:43:32 [pipeline] teacher data finished with exit 0; rows: code 1650 bio 2051
+11:43:33 [pipeline] bio cleaned: kept 1651 of 2051 dropped {'definition:fragment_or_absent': 4, 'pubmedqa:yes_over_cap': 396} pubmedqa eval {'items': 81, 'gold': {'yes': 49, 'no': 27, 'maybe': 5}, 'majority_baseline': 0.6049382716049383, 'teacher_biomedlm_accuracy': 0.5925925925925926}
+11:43:34 [pipeline] stage 1 build
+11:44:07 [pipeline] teacher data finished with exit 0; rows: code 1650 bio 2051
+11:44:08 [pipeline] bio cleaned: kept 1651 of 2051 dropped {'definition:fragment_or_absent': 4, 'pubmedqa:yes_over_cap': 396} pubmedqa eval {'items': 81, 'gold': {'yes': 49, 'no': 27, 'maybe': 5}, 'majority_baseline': 0.6049382716049383, 'teacher_biomedlm_accuracy': 0.5925925925925926}
+11:44:09 [pipeline] stage 1 build
+11:57:23 [pipeline] build done: [build] function preservation: fly causal 7.835e-01  fly off 0.000e+00  legacy fly 0.000e+00 [build] saved C:\Users\kai99\Desktop\supermix-expanse\expanse\checkpoints\supermix_expanse_grafted.pt (598.9 MB), params 132,607,036 (77,560,031 frozen v7) in 817.4s 
+11:57:23 [pipeline] calibrating step time
+12:20:46 [pipeline] calibration: 4.47s/step, train rows 13799 (epoch = 1724 steps) -> 3221 steps
+12:20:46 [pipeline] stage 2 training: 3221 steps
+12:23:09 [pipeline] teacher data finished with exit 0; rows: code 1650 bio 2051
+12:23:11 [pipeline] bio cleaned: kept 1651 of 2051 dropped {'definition:fragment_or_absent': 4, 'pubmedqa:yes_over_cap': 396} pubmedqa eval {'items': 81, 'gold': {'yes': 49, 'no': 27, 'maybe': 5}, 'majority_baseline': 0.6049382716049383, 'teacher_biomedlm_accuracy': 0.5925925925925926}
+12:23:11 [pipeline] stage 2 training: 3221 steps
+16:23:39 [pipeline] training done: [train] [eval final] dev_loss=1.9766 dev_replay=0.4182 dev_fly=1.1983 dev_code=4.0362 dev_bio=4.9488 dev_connectome=0.6135 fly_port_agree=1.0000 sense_mae=0.4108 omni7_intent_agree=0.7266 omni7_domain_agree=0.7314 fly_gate_abs_mean=0.0250 omni_gate_abs_mean=0.0316 cns_gate_abs_mean=0.0447 cns_alive=826 omni7_gate_abs_mean=0.0761 cns_full_gate_abs_mean=0.0864 moe1_alive=88 moe2_alive=88 moe3_alive=72 moe4_alive=72 donor_qwen_alive=16 donor_qwen_slots=16 donor_qwen_bias_mean=21.3723 donor_qwen_weight_rms=0.1300 donor_biomedlm_alive=16 donor_biomedlm_slots=16 donor_biomedlm_bias_mean=21.3475 donor_biomedlm_weight_rms=0.1121
+16:23:39 [pipeline] evaluation
