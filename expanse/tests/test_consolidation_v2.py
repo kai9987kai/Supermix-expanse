@@ -137,3 +137,12 @@ def test_internal_source_extractor_donors():
     assert src["arch"].shape == (3, 16)
     assert src["qwen"].shape == (3, 16)
     assert src["biomedlm"].shape == (3, 16)
+
+
+def test_phase_schedule_has_strict_teacher_free_tail():
+    early = cv2.consolidation_phase_weights(0.0, 0.72, 0.90)
+    bake = cv2.consolidation_phase_weights(0.80, 0.72, 0.90)
+    final = cv2.consolidation_phase_weights(0.90, 0.72, 0.90)
+    assert early["teacher"] == 1.0 and early["align"] == 1.0
+    assert 0.35 < bake["distill"] < 1.0 and bake["teacher"] == 1.0
+    assert final == {"distill": 0.0, "align": 0.0, "teacher": 0.0}
