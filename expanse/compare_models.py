@@ -15,6 +15,14 @@ A v2 checkpoint (schema ``supermix-expanse-v2``) is also scored with its native
 consolidation gates zeroed (``<name>_gates0``): the gain that disappears there is
 the part attributable to the new blocks rather than to the extra training.
 Writes ``--out`` (json) and the same path with ``.md``.
+
+v3: tokenizers come from ``tokenizer_from_dict`` (word or BPE) and each model is
+scored at ``seq = max(--seq, its max_position_embeddings)``, so a longer-context
+v3 is not cut to 128 tokens (the rows are the same for everyone; a row too long
+for one model is left out of that model's numbers only). The corpus is rebuilt
+the way the ``--ref`` run built it: the v1 files unless its receipt says it
+trained on ``data/v3`` (``corpus_args.v3_data``). Checkpoint headers (schema,
+tokenizer, receipt) are read with ``mmap``, not by loading every tensor.
 """
 
 from __future__ import annotations
@@ -37,7 +45,7 @@ sys.path.insert(0, str(ROOT))
 import expanse_core as ec  # noqa: E402
 import eval_expanse as ee  # noqa: E402
 import train_expanse as te  # noqa: E402
-from expanse_core import PATHS, text_utils  # noqa: E402
+from expanse_core import PATHS  # noqa: E402
 
 
 def log(*a) -> None:
@@ -45,18 +53,16 @@ def log(*a) -> None:
 
 
 def load_any(path: str):
-    """(model, tokenizer, payload) for a v1 or v2 Expanse checkpoint."""
-    head = torch.load(path, map_location="cpu", weights_only=False)
-    schema = head.get("schema")
-    del head
-    if schema == "supermix-expanse-v2":
-        import consolidation_v2 as cv2
-        model, tok, payload = cv2.load_v2(path)
-    else:
-        model, tok, payload = ec.load_expanse(path)
+    """(model, tokenizer, payload, schema) for a v1 or v2 Expanse checkpoint (word or BPE tokenizer)."""
+    model, tok, payload, schema = te.load_checkpoint(path)
     payload["state_dict"] = None
     model.eval()
     return model, tok, payload, schema
+
+
+def model_seq(model, floor: int) -> int:
+    """Scoring length: at least ``floor`` (128), and the model's whole context when it is longer."""
+    return max(int(floor), int(model.config.max_position_embeddings))
 
 
 @contextlib.contextmanager
@@ -126,7 +132,9 @@ def markdown(rep: Dict[str, Any]) -> str:
             v = ((rep["models"][n].get("gen") or {}).get(blk) or {}).get(key)
             vals.append("-" if v is None else f"{v:.4f}")
         lines.append(f"| {label} | " + " | ".join(vals) + " |")
-    lines += ["", f"Generation items per metric: {json.dumps(rep['items'])}; greedy, max {rep['args']['max_new_tokens']} new tokens."]
+    lines += ["", f"Generation items per metric: {json.dumps(rep['items'])}; greedy, max {rep['args']['max_new_tokens']} new tokens.",
+              "Scoring length / tokenizer per model: " + ", ".join(f"{n} {m.get('seq', '?')} ({m.get('tokenizer', '?')})"
+                                                             for n, m in rep["models"].items()) + "."]
     return "\n".join(lines) + "\n"
 
 
@@ -137,7 +145,7 @@ def main() -> int:
     ap.add_argument("--arch", default=str(PATHS["arch_final"]), help="Archimedes (its original fly core re-derives fly rows)")
     ap.add_argument("--gen_limit", type=int, default=50)
     ap.add_argument("--max_new_tokens", type=int, default=96)
-    ap.add_argument("--seq", type=int, default=128)
+    ap.add_argument("--seq", type=int, default=128, help="minimum scoring length (each model: max(this, its context))")
     ap.add_argument("--batch", type=int, default=8)
     ap.add_argument("--no_gen", action="store_true")
     ap.add_argument("--out", default=str(PATHS["checkpoints"] / "compare_models.json"))
@@ -146,15 +154,16 @@ def main() -> int:
     torch.set_num_threads(args.threads)
     t0 = time.time()
 
-    ref = torch.load(args.ref, map_location="cpu", weights_only=False)
-    training = (ref.get("expanse") or {}).get("training") or {}
-    del ref
+    training = (te.peek_checkpoint(args.ref, "expanse")["expanse"] or {}).get("training") or {}
     cargs = dict(training.get("corpus_args") or {})
     seed = int(cargs.get("seed", training.get("seed", 2026)))
+    # the ref run's corpus: v1 files unless it trained on data/v3 (then the same v3 dir)
+    v3 = bool(cargs.get("v3_data", False))
     A, _, _ = ec.load_archimedes(args.arch)
     corpus = te.load_corpus(A.fly_core, fly_rows=int(cargs.get("fly_rows", 4000)), seed=seed,
                             dev_frac=float(cargs.get("dev_frac", 0.05)), dev_cap=int(cargs.get("dev_cap", 200)),
-                            max_rows_per_source=int(cargs.get("max_rows_per_source", 6000)))
+                            max_rows_per_source=int(cargs.get("max_rows_per_source", 6000)),
+                            data={"v3": Path(cargs["v3_dir"])} if cargs.get("v3_dir") else None, v3=v3)
     del A
     dev_keys = training.get("dev_keys") or {}
     dev: Dict[str, List[Dict[str, Any]]] = {}
@@ -181,26 +190,24 @@ def main() -> int:
         name, path = m.split("=", 1)
         specs.append((name, path))
     # rows every model covers without <unk> (needs each tokenizer once)
-    toks = {}
-    for name, path in specs:
-        p = torch.load(path, map_location="cpu", weights_only=False)
-        toks[name] = ec.tokenizer_from_dict(p["tokenizer"]) if hasattr(ec, "tokenizer_from_dict") else text_utils.WordTokenizer.from_dict(p["tokenizer"])
-        del p
+    toks = {name: te.tokenizer_from_dict(te.peek_checkpoint(path, "tokenizer")["tokenizer"]) for name, path in specs}
     common = {s: [all(c) for c in zip(*[ee.covered(t, rows) for t in toks.values()])] for s, rows in dev.items() if rows}
 
     rep: Dict[str, Any] = {"args": vars(args), "seed": seed, "items": {k: len(v) for k, v in items.items()},
-                           "dev_rows": {s: len(v) for s, v in dev.items()}, "models": {}}
+                           "dev_rows": {s: len(v) for s, v in dev.items()}, "corpus_v3": v3, "models": {}}
     for name, path in specs:
         model, tok, payload, schema = load_any(path)
         runner = ee.Runner(name, model, tok, True)
+        seq = model_seq(model, args.seq)
         variants = [(name, contextlib.nullcontext())]
-        if schema == "supermix-expanse-v2":
+        if schema == te.V2_SCHEMA:
             variants.append((name + "_gates0", v2_gates_closed(model)))
         for vname, ctx in variants:
             t1 = time.time()
             with ctx:
-                entry: Dict[str, Any] = {"path": path, "schema": schema, "vocab": tok.vocab_size,
-                                         "dev": dev_block(runner, dev, common, args.seq, args.batch)}
+                entry: Dict[str, Any] = {"path": path, "schema": schema, "vocab": tok.vocab_size, "seq": seq,
+                                         "tokenizer": te.tokenizer_kind(tok),
+                                         "dev": dev_block(runner, dev, common, seq, args.batch)}
                 log(f"{vname} dev nats/char " + json.dumps({s: round(v['nats_per_char_all_covered'] or -1, 4) for s, v in entry['dev'].items()}))
                 if not args.no_gen:
                     entry["gen"] = ee.generation_block([runner], items, args.max_new_tokens, code_verify)[name]

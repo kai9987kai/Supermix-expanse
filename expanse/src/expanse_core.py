@@ -784,6 +784,17 @@ def save_expanse(path, model: ExpanseModel, tok: text_utils.WordTokenizer, extra
     os.replace(staging, path)
 
 
+def tokenizer_from_dict(d: Dict[str, Any]):
+    """The checkpoint's tokenizer: ``kind == "bpe"`` -> ``bpe_tokenizer.BPETokenizer``
+    (v3, byte-level BPE), anything else -> Archimedes' ``WordTokenizer`` (v1/v2
+    dicts carry no ``kind``). Both expose the same duck-typed API; the BPE module
+    is imported only when needed."""
+    if isinstance(d, dict) and d.get("kind") == "bpe":
+        from bpe_tokenizer import BPETokenizer  # noqa: WPS433
+        return BPETokenizer.from_dict(d)
+    return text_utils.WordTokenizer.from_dict(d)
+
+
 def load_expanse(path, map_location: str = "cpu") -> Tuple[ExpanseModel, text_utils.WordTokenizer, Dict[str, Any]]:
     """Rebuild module shapes from ``payload['expanse']`` and strict-load.
 
@@ -801,7 +812,7 @@ def load_expanse(path, map_location: str = "cpu") -> Tuple[ExpanseModel, text_ut
     model.load_state_dict(payload["state_dict"], strict=True)
     payload["state_dict"] = model.state_dict()
     model.eval()
-    tok = text_utils.WordTokenizer.from_dict(payload["tokenizer"])
+    tok = tokenizer_from_dict(payload["tokenizer"])
     return model, tok, payload
 
 
@@ -809,5 +820,5 @@ __all__ = [
     "EXP_SCHEMA", "ARCH_SCHEMA", "PATHS", "GRAFT_CLASSES", "ExpanseModel", "grow_moe_slots", "fly_forward_causal",
     "expanse_from_archimedes", "graph_metadata", "skeleton_graph", "greedy_decode", "save_expanse", "load_expanse",
     "load_archimedes", "row_key", "jsonable", "moe_layers_in_state_dict", "text_utils", "ExpanseSparseMoE",
-    "read_jsonl", "load_replay", "append_embedding_rows",
+    "read_jsonl", "load_replay", "append_embedding_rows", "tokenizer_from_dict",
 ]

@@ -621,7 +621,7 @@ def load_v2(path: str | Path, map_location: str = "cpu") -> Tuple[nn.Module, Any
     model.load_state_dict(payload["state_dict"], strict=True)
     payload["state_dict"] = model.state_dict()
     model.eval()
-    tok = ec.text_utils.WordTokenizer.from_dict(payload["tokenizer"])
+    tok = ec.tokenizer_from_dict(payload["tokenizer"])  # word (v1/v2) or BPE (v3)
     return model, tok, payload
 
 
