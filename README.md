@@ -57,6 +57,25 @@ Dev loss per source (nats/token on reply tokens; connectome dev = held-out *cell
 * Sample answers: arithmetic and code-tracing prompts are answered correctly in the house style; connectome questions are answered in the right format but sometimes to the wrong question; writing new functions and defining biomedical terms is not usable yet.
 * Full held-out generation evaluation and ablations (CNS core off / on a degree-preserving rewired graph, Omni v7 off, donor experts off, fly off): `expanse/checkpoints/eval_report.md` (added when the run completes).
 
+## Experimental v2: deeper cross-source consolidation
+
+The `expanse-v2-consolidation` work adds a teacher-free runtime path intended to mix the existing source systems more deeply than residual grafting alone. Three new causal consolidation blocks project the 320-d trunk into a shared 512-d space, use a top-2/8 latent MoE plus learned memory, and write back through zero-initialised gates. During training, a temporary fusion bank aligns Archimedes, Qwen-derived donor experts, BioMedLM-derived donor experts, Omni, FlyCore and male-CNS signals; that bank is **not** stored in the final v2 checkpoint.
+
+Default v2 runtime growth is about **7.33M parameters**. The final 10% of the default training schedule is strictly teacher-free, so a completed checkpoint must continue working without the training-only representation projectors.
+
+```bash
+# after the normal v1 build + training pipeline
+python expanse/train_consolidation_v2.py --steps 800 --batch 4 --threads 8
+
+# fast structural/training check
+python expanse/train_consolidation_v2.py --smoke --threads 2
+
+# synthetic mechanics tests
+python -m pytest expanse/tests/test_consolidation_v2.py -q
+```
+
+See [`expanse/V2_DESIGN.md`](expanse/V2_DESIGN.md) for the architecture, loss schedule and the benchmark/ablation requirements. The v2 code is an experimental architecture implementation; it should not be described as better than v1 until a trained v2 checkpoint wins the held-out comparisons documented there.
+
 ## Set it up yourself
 
 ### Requirements
