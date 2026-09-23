@@ -228,9 +228,15 @@ class NativeLatentBlock(nn.Module):
         z, memory_attn = self._memory(z)
         latent = self.out_norm(z)
 
-        # Preserve the exact v1 function at birth.  ''hidden + 0 * write'' can
-        # perturb NaN/Inf behaviour and needlessly performs the projection.
-        if not torch.jit.is_scripting() and bool((self.out_gate.detach() == 0).all()):
+        # Preserve the exact v1 function at birth.  At inference a closed gate
+        # skips the projection entirely.  In training the write MUST be computed
+        # even while the gate is exactly zero: otherwise ''out_gate'' is not in
+        # the graph, receives no gradient and can never open, and the native
+        # block never affects the model.  ''hidden + 0 * write'' equals ''hidden''
+        # exactly for finite ''write'', so birth is still function-preserving.
+        gate_closed = not torch.jit.is_scripting() and bool((self.out_gate.detach() == 0).all())
+        needs_grad = self.training and torch.is_grad_enabled() and self.out_gate.requires_grad
+        if gate_closed and not needs_grad:
             out = hidden
         else:
             write = self.to_hidden(latent)
@@ -466,11 +472,16 @@ class TeacherFusionBank(nn.Module):
                      lengths: Optional[torch.Tensor] = None) -> Dict[str, torch.Tensor]:
         student = _rms(masked_last(student_latent, lengths).float())
         target = _rms(fused_target.detach().float())
-        cosine = 1.0 - (student * target).sum(-1).mean()
+        # RMS-normalised vectors have norm sqrt(dim) (~22.6 at 512-d), so the
+        # cosine and batch-geometry terms must use unit vectors: on RMS vectors
+        # "1 - dot" ranges over +-dim and the Gram MSE over ~dim^2, which made the
+        # distill term ~300x the language loss.
+        s_unit, t_unit = F.normalize(student, dim=-1), F.normalize(target, dim=-1)
+        cosine = 1.0 - (s_unit * t_unit).sum(-1).mean()
         smooth = F.smooth_l1_loss(student, target)
         if student.shape[0] > 1:
-            rel_s = student @ student.t()
-            rel_t = target @ target.t()
+            rel_s = s_unit @ s_unit.t()
+            rel_t = t_unit @ t_unit.t()
             relational = F.mse_loss(rel_s, rel_t)
         else:
             relational = student.new_zeros(())

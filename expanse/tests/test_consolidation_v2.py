@@ -146,3 +146,33 @@ def test_phase_schedule_has_strict_teacher_free_tail():
     assert early["teacher"] == 1.0 and early["align"] == 1.0
     assert 0.35 < bake["distill"] < 1.0 and bake["teacher"] == 1.0
     assert final == {"distill": 0.0, "align": 0.0, "teacher": 0.0}
+
+
+def test_closed_gate_is_exact_but_trainable():
+    """Regression: a zero out_gate must still receive gradient in training, or it never opens."""
+    torch.manual_seed(0)
+    cfg = cv2.V2Config(hidden_size=16, shared_dim=24, layers=(0,), latent_experts=4,
+                       latent_rank=8, latent_top_k=2, memory_slots=5)
+    b = cv2.NativeLatentBlock(cfg).train()
+    x = torch.randn(2, 3, 16)
+    y, _ = b(x)
+    assert torch.equal(x, y)                       # still exact at birth, in training mode too
+    y.pow(2).sum().backward()
+    assert b.out_gate.grad is not None and float(b.out_gate.grad.abs().sum()) > 0
+    b.eval()
+    with torch.no_grad():
+        y2, _ = b(x)
+    assert torch.equal(x, y2)                      # inference with a closed gate skips the write
+
+
+def test_student_loss_is_scale_bounded():
+    """Regression: cosine/relational terms use unit vectors, so the loss stays O(1) at any width."""
+    torch.manual_seed(0)
+    for dim in (16, 512):
+        s, t = torch.randn(4, 1, dim), torch.randn(4, dim)
+        parts = cv2.TeacherFusionBank.student_loss(s, t)
+        assert 0.0 <= float(parts["cosine"]) <= 2.0
+        assert float(parts["relational"]) <= 4.0
+        assert float(parts["total"]) < 10.0
+        same = cv2.TeacherFusionBank.student_loss(t.unsqueeze(1), t)
+        assert float(same["total"]) < 1e-4
