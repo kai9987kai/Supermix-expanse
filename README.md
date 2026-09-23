@@ -55,7 +55,35 @@ Dev loss per source (nats/token on reply tokens; connectome dev = held-out *cell
 * **Honest graft numbers:** teacher→student representation maps are weak (held-out R² 0.05-0.15); only **1 of 32** grafted experts reproduces its teacher neuron group on held-out tokens (R² 0.21). Most transferred knowledge comes from distillation.
 * **Teacher data quality:** code answers kept only if they pass our own tests in a sandbox (92.8% pass); BioMedLM definitions kept if Qwen judged them accurate (94% — a lenient judge); PubMedQA answers capped because BioMedLM answers almost everything "yes" (59.3% on held-out vs a 60.5% always-yes baseline).
 * Sample answers: arithmetic and code-tracing prompts are answered correctly in the house style; connectome questions are answered in the right format but sometimes to the wrong question; writing new functions and defining biomedical terms is not usable yet.
-* Full held-out generation evaluation and ablations (CNS core off / on a degree-preserving rewired graph, Omni v7 off, donor experts off, fly off): `expanse/checkpoints/eval_report.md` (added when the run completes).
+
+
+**Held-out generation** (greedy; 150 items per metric; full report: [`expanse/checkpoints/eval_report.md`](expanse/checkpoints/eval_report.md)):
+
+| metric | Archimedes | Expanse |
+|---|---|---|
+| replay-style problems with freshly drawn numbers (exact answer) | 21.3% | 22.0% |
+| code pass rate (our sandbox tests) | 0% | 0% |
+| biomedical token-F1 vs BioMedLM's answers | 0.088 | **0.313** |
+| PubMedQA accuracy (always-yes baseline 60.5%) | 0% | 0% (never answers yes/no/maybe) |
+| connectome exact match on held-out cell types | 0% | **17.3%** |
+| connectome token-F1 | 0.340 | **0.681** |
+
+**Ablations** (Expanse dev loss with one component removed at inference; code = Expanse-covered rows, others = rows both models cover):
+
+| removed | replay | fly | code | connectome |
+|---|---|---|---|---|
+| nothing (Expanse) | 0.418 | 1.198 | 4.006 | 0.571 |
+| male-CNS core gate → 0 | 0.447 | 1.233 | 4.088 | 0.596 |
+| male-CNS core on the degree/sign-preserving **rewired** graph | 0.437 | 1.229 | 4.075 | 0.592 |
+| Omni v7 gate → 0 | 0.429 | 1.217 | 4.025 | 0.583 |
+| Qwen/BioMedLM donor experts dead | 0.419 | 1.199 | 4.005 | 0.570 |
+| FlyCore off | 0.419 | 1.198 | 4.006 | 0.571 |
+
+What this shows:
+* The **male-CNS core is the component the model relies on most**, on every source including code; swapping in a matched random graph loses 65-90% of its contribution, so the trained model depends on the fly's *specific* wiring. (Whether the real wiring *trains* better than a null needs a matched training run on the rewired graph — not yet done.)
+* **Omni v7** helps a little everywhere.
+* The **grafted donor experts and FlyCore contribute nothing measurable** — the new code/bio knowledge came from distillation, not from the weight grafts.
+* Gains are real for connectome facts and biomedical wording; code writing and PubMedQA-style answering did not transfer at this scale. Bio dev loss is omitted above because every bio dev row contains at least one word outside Expanse's vocabulary.
 
 ## Set it up yourself
 

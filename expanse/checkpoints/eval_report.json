@@ -1,0 +1,658 @@
+{
+ "expanse_path": "C:\\Users\\kai99\\Desktop\\supermix-expanse\\expanse\\checkpoints\\supermix_expanse.pt",
+ "arch_path": "C:\\Users\\kai99\\Desktop\\supermix-expanse\\external\\base\\supermix_archimedes.pt",
+ "args": {
+  "expanse": "C:\\Users\\kai99\\Desktop\\supermix-expanse\\expanse\\checkpoints\\supermix_expanse.pt",
+  "arch": "C:\\Users\\kai99\\Desktop\\supermix-expanse\\external\\base\\supermix_archimedes.pt",
+  "limit": 0,
+  "gen_limit": 150,
+  "ablations": "all",
+  "ablation_gen": false,
+  "max_new_tokens": 96,
+  "seq": 128,
+  "batch": 8,
+  "seed": null,
+  "out": "C:\\Users\\kai99\\Desktop\\supermix-expanse\\expanse\\checkpoints\\eval_report.json",
+  "md": null,
+  "threads": 8
+ },
+ "seed": 2026,
+ "created": "2026-09-23 16:23:50",
+ "items": {
+  "exact": 150,
+  "code": 150,
+  "bio": 142,
+  "pubmedqa": 81,
+  "connectome": 150
+ },
+ "dev_rows": {
+  "replay": 100,
+  "fly": 62,
+  "code": 79,
+  "bio": 76,
+  "connectome": 100
+ },
+ "expanse_gate_report": {
+  "fly_gate_abs_mean": 0.024960733950138092,
+  "omni_gate_abs_mean": 0.03160495683550835,
+  "cns_gate_abs_mean": 0.04468260332942009,
+  "cns_alive": 826,
+  "omni7_gate_abs_mean": 0.07611258327960968,
+  "cns_full_gate_abs_mean": 0.086408831179142,
+  "moe1_alive": 88,
+  "moe2_alive": 88,
+  "moe3_alive": 72,
+  "moe4_alive": 72,
+  "donor_qwen_alive": 16,
+  "donor_qwen_slots": 16,
+  "donor_qwen_bias_mean": 21.372262477874756,
+  "donor_qwen_weight_rms": 0.1300225185865496,
+  "donor_biomedlm_alive": 16,
+  "donor_biomedlm_slots": 16,
+  "donor_biomedlm_bias_mean": 21.347456336021423,
+  "donor_biomedlm_weight_rms": 0.11209729811728728
+ },
+ "dev_loss": {
+  "replay": {
+   "rows": 100,
+   "rows_covered_by_all": 100,
+   "archimedes": {
+    "coverage": 1.0,
+    "loss_covered": 0.7872474043509224,
+    "loss_common": 0.7872474043509224
+   },
+   "expanse": {
+    "coverage": 1.0,
+    "loss_covered": 0.41822783593138163,
+    "loss_common": 0.41822783593138163
+   }
+  },
+  "fly": {
+   "rows": 62,
+   "rows_covered_by_all": 62,
+   "archimedes": {
+    "coverage": 1.0,
+    "loss_covered": 4.608524750271517,
+    "loss_common": 4.608524750271517
+   },
+   "expanse": {
+    "coverage": 1.0,
+    "loss_covered": 1.1982710282129931,
+    "loss_common": 1.1982710282129931
+   }
+  },
+  "code": {
+   "rows": 79,
+   "rows_covered_by_all": 0,
+   "archimedes": {
+    "coverage": 0.0,
+    "loss_covered": null,
+    "loss_common": null
+   },
+   "expanse": {
+    "coverage": 0.9746835443037974,
+    "loss_covered": 4.005557136506591,
+    "loss_common": null
+   }
+  },
+  "bio": {
+   "rows": 76,
+   "rows_covered_by_all": 0,
+   "archimedes": {
+    "coverage": 0.0,
+    "loss_covered": null,
+    "loss_common": null
+   },
+   "expanse": {
+    "coverage": 0.0,
+    "loss_covered": null,
+    "loss_common": null
+   }
+  },
+  "connectome": {
+   "rows": 100,
+   "rows_covered_by_all": 37,
+   "archimedes": {
+    "coverage": 0.37,
+    "loss_covered": 3.5223203046458966,
+    "loss_common": 3.5223203046458966
+   },
+   "expanse": {
+    "coverage": 0.99,
+    "loss_covered": 0.6080982973817264,
+    "loss_common": 0.5709049559575813
+   }
+  }
+ },
+ "generation": {
+  "archimedes": {
+   "exact": {
+    "accuracy": 0.21333333333333335,
+    "correct": 32,
+    "checked": 150,
+    "per_task": {
+     "multiplication": [
+      4,
+      12
+     ],
+     "electrical_power": [
+      0,
+      4
+     ],
+     "algebra_one_step": [
+      1,
+      14
+     ],
+     "power": [
+      0,
+      9
+     ],
+     "work": [
+      1,
+      4
+     ],
+     "subtraction": [
+      2,
+      13
+     ],
+     "addition": [
+      6,
+      7
+     ],
+     "final_velocity": [
+      0,
+      3
+     ],
+     "average": [
+      1,
+      7
+     ],
+     "kinetic_energy": [
+      1,
+      5
+     ],
+     "ohms_current": [
+      0,
+      8
+     ],
+     "voltage": [
+      3,
+      4
+     ],
+     "two_step": [
+      0,
+      7
+     ],
+     "division": [
+      0,
+      10
+     ],
+     "percent": [
+      0,
+      7
+     ],
+     "spring_energy": [
+      0,
+      4
+     ],
+     "acceleration": [
+      0,
+      2
+     ],
+     "wave_speed": [
+      3,
+      5
+     ],
+     "word_problem": [
+      0,
+      5
+     ],
+     "arithmetic_series": [
+      0,
+      4
+     ],
+     "force": [
+      2,
+      2
+     ],
+     "molarity": [
+      1,
+      5
+     ],
+     "impulse": [
+      6,
+      7
+     ],
+     "permutations": [
+      0,
+      1
+     ],
+     "momentum": [
+      1,
+      1
+     ]
+    }
+   },
+   "code": {
+    "pass_rate": 0.0,
+    "passed": 0,
+    "items": 150,
+    "reasons": {
+     "no_def": 150
+    }
+   },
+   "bio": {
+    "token_f1": 0.08793108221014484,
+    "items": 142,
+    "pubmedqa_accuracy": 0.0,
+    "pubmedqa_items": 81,
+    "pubmedqa_majority_baseline": 0.6049382716049383,
+    "pubmedqa_answers": {
+     "none": 81
+    }
+   },
+   "connectome": {
+    "exact_match": 0.0,
+    "token_f1": 0.3403412430389762,
+    "items": 150,
+    "answer_hit": 0.05333333333333334
+   },
+   "seconds": 1929.2
+  },
+  "expanse": {
+   "exact": {
+    "accuracy": 0.22,
+    "correct": 33,
+    "checked": 150,
+    "per_task": {
+     "multiplication": [
+      4,
+      12
+     ],
+     "electrical_power": [
+      1,
+      4
+     ],
+     "algebra_one_step": [
+      0,
+      14
+     ],
+     "power": [
+      0,
+      9
+     ],
+     "work": [
+      2,
+      4
+     ],
+     "subtraction": [
+      2,
+      13
+     ],
+     "addition": [
+      6,
+      7
+     ],
+     "final_velocity": [
+      0,
+      3
+     ],
+     "average": [
+      1,
+      7
+     ],
+     "kinetic_energy": [
+      2,
+      5
+     ],
+     "ohms_current": [
+      0,
+      8
+     ],
+     "voltage": [
+      3,
+      4
+     ],
+     "two_step": [
+      0,
+      7
+     ],
+     "division": [
+      0,
+      10
+     ],
+     "percent": [
+      0,
+      7
+     ],
+     "spring_energy": [
+      0,
+      4
+     ],
+     "acceleration": [
+      0,
+      2
+     ],
+     "wave_speed": [
+      3,
+      5
+     ],
+     "word_problem": [
+      1,
+      5
+     ],
+     "arithmetic_series": [
+      0,
+      4
+     ],
+     "force": [
+      2,
+      2
+     ],
+     "molarity": [
+      0,
+      5
+     ],
+     "impulse": [
+      5,
+      7
+     ],
+     "permutations": [
+      0,
+      1
+     ],
+     "momentum": [
+      1,
+      1
+     ]
+    }
+   },
+   "code": {
+    "pass_rate": 0.0,
+    "passed": 0,
+    "items": 150,
+    "reasons": {
+     "no_def": 150
+    }
+   },
+   "bio": {
+    "token_f1": 0.31323977271882947,
+    "items": 142,
+    "pubmedqa_accuracy": 0.0,
+    "pubmedqa_items": 81,
+    "pubmedqa_majority_baseline": 0.6049382716049383,
+    "pubmedqa_answers": {
+     "none": 81
+    }
+   },
+   "connectome": {
+    "exact_match": 0.17333333333333334,
+    "token_f1": 0.6806843144178013,
+    "items": 150,
+    "answer_hit": 0.17333333333333334
+   },
+   "seconds": 9844.4
+  }
+ },
+ "ablations": {
+  "cns_gate0": {
+   "dev_loss": {
+    "replay": {
+     "rows": 100,
+     "rows_covered_by_all": 100,
+     "expanse": {
+      "coverage": 1.0,
+      "loss_covered": 0.44715499297194206,
+      "loss_common": 0.44715499297194206
+     }
+    },
+    "fly": {
+     "rows": 62,
+     "rows_covered_by_all": 62,
+     "expanse": {
+      "coverage": 1.0,
+      "loss_covered": 1.2325373394209729,
+      "loss_common": 1.2325373394209729
+     }
+    },
+    "code": {
+     "rows": 79,
+     "rows_covered_by_all": 0,
+     "expanse": {
+      "coverage": 0.9746835443037974,
+      "loss_covered": 4.088018189290055,
+      "loss_common": null
+     }
+    },
+    "bio": {
+     "rows": 76,
+     "rows_covered_by_all": 0,
+     "expanse": {
+      "coverage": 0.0,
+      "loss_covered": null,
+      "loss_common": null
+     }
+    },
+    "connectome": {
+     "rows": 100,
+     "rows_covered_by_all": 37,
+     "expanse": {
+      "coverage": 0.99,
+      "loss_covered": 0.6299303734627848,
+      "loss_common": 0.5957035941462363
+     }
+    }
+   },
+   "seconds": 79.3
+  },
+  "cns_rewired": {
+   "dev_loss": {
+    "replay": {
+     "rows": 100,
+     "rows_covered_by_all": 100,
+     "expanse": {
+      "coverage": 1.0,
+      "loss_covered": 0.43679536735264846,
+      "loss_common": 0.43679536735264846
+     }
+    },
+    "fly": {
+     "rows": 62,
+     "rows_covered_by_all": 62,
+     "expanse": {
+      "coverage": 1.0,
+      "loss_covered": 1.2290464441286741,
+      "loss_common": 1.2290464441286741
+     }
+    },
+    "code": {
+     "rows": 79,
+     "rows_covered_by_all": 0,
+     "expanse": {
+      "coverage": 0.9746835443037974,
+      "loss_covered": 4.074648625416694,
+      "loss_common": null
+     }
+    },
+    "bio": {
+     "rows": 76,
+     "rows_covered_by_all": 0,
+     "expanse": {
+      "coverage": 0.0,
+      "loss_covered": null,
+      "loss_common": null
+     }
+    },
+    "connectome": {
+     "rows": 100,
+     "rows_covered_by_all": 37,
+     "expanse": {
+      "coverage": 0.99,
+      "loss_covered": 0.6259771436162395,
+      "loss_common": 0.5917424834627256
+     }
+    }
+   },
+   "info": {
+    "null": "stratified_by_source_sign_and_role_value_carried_with_target",
+    "null_seed": 0,
+    "edge_overlap_with_real": 0.071816,
+    "abs_spectral_radius": 0.8999986716681064,
+    "in_degree_changed_types": 0,
+    "value_sign_matches_source": true
+   },
+   "seconds": 165.7
+  },
+  "omni7_gate0": {
+   "dev_loss": {
+    "replay": {
+     "rows": 100,
+     "rows_covered_by_all": 100,
+     "expanse": {
+      "coverage": 1.0,
+      "loss_covered": 0.4289605167331871,
+      "loss_common": 0.4289605167331871
+     }
+    },
+    "fly": {
+     "rows": 62,
+     "rows_covered_by_all": 62,
+     "expanse": {
+      "coverage": 1.0,
+      "loss_covered": 1.216888646498376,
+      "loss_common": 1.216888646498376
+     }
+    },
+    "code": {
+     "rows": 79,
+     "rows_covered_by_all": 0,
+     "expanse": {
+      "coverage": 0.9746835443037974,
+      "loss_covered": 4.025215500470617,
+      "loss_common": null
+     }
+    },
+    "bio": {
+     "rows": 76,
+     "rows_covered_by_all": 0,
+     "expanse": {
+      "coverage": 0.0,
+      "loss_covered": null,
+      "loss_common": null
+     }
+    },
+    "connectome": {
+     "rows": 100,
+     "rows_covered_by_all": 37,
+     "expanse": {
+      "coverage": 0.99,
+      "loss_covered": 0.62002410497117,
+      "loss_common": 0.5829370518386113
+     }
+    }
+   },
+   "seconds": 111.6
+  },
+  "donors_dead": {
+   "dev_loss": {
+    "replay": {
+     "rows": 100,
+     "rows_covered_by_all": 100,
+     "expanse": {
+      "coverage": 1.0,
+      "loss_covered": 0.41930319804788374,
+      "loss_common": 0.41930319804788374
+     }
+    },
+    "fly": {
+     "rows": 62,
+     "rows_covered_by_all": 62,
+     "expanse": {
+      "coverage": 1.0,
+      "loss_covered": 1.1994441784899235,
+      "loss_common": 1.1994441784899235
+     }
+    },
+    "code": {
+     "rows": 79,
+     "rows_covered_by_all": 0,
+     "expanse": {
+      "coverage": 0.9746835443037974,
+      "loss_covered": 4.005175007270296,
+      "loss_common": null
+     }
+    },
+    "bio": {
+     "rows": 76,
+     "rows_covered_by_all": 0,
+     "expanse": {
+      "coverage": 0.0,
+      "loss_covered": null,
+      "loss_common": null
+     }
+    },
+    "connectome": {
+     "rows": 100,
+     "rows_covered_by_all": 37,
+     "expanse": {
+      "coverage": 0.99,
+      "loss_covered": 0.6066692512751091,
+      "loss_common": 0.5699288407014095
+     }
+    }
+   },
+   "seconds": 103.0
+  },
+  "fly_off": {
+   "dev_loss": {
+    "replay": {
+     "rows": 100,
+     "rows_covered_by_all": 100,
+     "expanse": {
+      "coverage": 1.0,
+      "loss_covered": 0.4190367204571976,
+      "loss_common": 0.4190367204571976
+     }
+    },
+    "fly": {
+     "rows": 62,
+     "rows_covered_by_all": 62,
+     "expanse": {
+      "coverage": 1.0,
+      "loss_covered": 1.19829590773497,
+      "loss_common": 1.19829590773497
+     }
+    },
+    "code": {
+     "rows": 79,
+     "rows_covered_by_all": 0,
+     "expanse": {
+      "coverage": 0.9746835443037974,
+      "loss_covered": 4.005822294283168,
+      "loss_common": null
+     }
+    },
+    "bio": {
+     "rows": 76,
+     "rows_covered_by_all": 0,
+     "expanse": {
+      "coverage": 0.0,
+      "loss_covered": null,
+      "loss_common": null
+     }
+    },
+    "connectome": {
+     "rows": 100,
+     "rows_covered_by_all": 37,
+     "expanse": {
+      "coverage": 0.99,
+      "loss_covered": 0.6077654500569981,
+      "loss_common": 0.5711812041752135
+     }
+    }
+   },
+   "seconds": 100.1
+  }
+ },
+ "seconds": 12459.9
+}
