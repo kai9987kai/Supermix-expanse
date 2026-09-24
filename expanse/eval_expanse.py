@@ -380,7 +380,8 @@ def main() -> int:
     torch.set_num_threads(args.threads)
     t0 = time.time()
 
-    E, tokE, payE = ec.load_expanse(args.expanse)
+    E, tokE, payE, _schema = te.load_checkpoint(args.expanse)  # v1/v2 schema, word or BPE tokenizer
+    args.seq = max(int(args.seq), int(E.config.max_position_embeddings))
     payE["state_dict"] = None
     receipt = payE.get("expanse") or {}
     training = receipt.get("training") or {}
@@ -396,7 +397,11 @@ def main() -> int:
     # dev rows: the trainer's split (fly rows re-derived from the original fly core = Archimedes' fly_core)
     corpus = te.load_corpus(A.fly_core, fly_rows=int(cargs.get("fly_rows", 4000)), seed=seed,
                             dev_frac=float(cargs.get("dev_frac", 0.05)), dev_cap=int(cargs.get("dev_cap", 200)),
-                            max_rows_per_source=int(cargs.get("max_rows_per_source", 6000)))
+                            max_rows_per_source=int(cargs.get("max_rows_per_source", 6000)),
+                            # the corpus the evaluated run trained on: v1 files unless its receipt says data/v3
+                            # (an older receipt has no v3_data -> v1), never whatever data/v3 holds today
+                            v3=None if cargs.get("v3_data") else False,
+                            data={"v3": Path(cargs["v3_dir"])} if cargs.get("v3_dir") else None)
     dev_keys = training.get("dev_keys") or {}
     dev: Dict[str, List[Dict[str, Any]]] = {}
     for s in te.SOURCES:

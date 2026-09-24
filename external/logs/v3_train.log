@@ -1,0 +1,598 @@
+[train] loaded checkpoints/supermix_expanse_v3_init.pt (supermix-expanse-v1): 131,939,196 params, bpe vocab 8864 (base 8864), seq 128
+[train] kd_arch disabled: tokenizer is BPETokenizer, not Archimedes' word tokenizer -- Archimedes' logits index a different vocabulary
+[train] corpus files: connectome connectome_rows_v3.jsonl, fresh ['fresh_omni.jsonl', 'fresh_code.jsonl', 'fresh_math.jsonl'] (v3 data on)
+[train] rows replay: train 3554 dev 100 fly: train 1440 dev 60 code: train 4760 dev 100 bio: train 2402 dev 100 connectome: train 12000 dev 100 fresh: train 17830 dev 100
+[train] packed train (41986, 128) dev (560, 128) dropped 0+0 over-length; unk rate 0.0000
+[train] omni7 states: encoding 42516 prompts (0 cached)
+[train]    1280/42516 (28s)
+[train]    2560/42516 (85s)
+[train]    3840/42516 (128s)
+[train]    5120/42516 (170s)
+[train]    6400/42516 (214s)
+[train]    7680/42516 (257s)
+[train]    8960/42516 (297s)
+[train]    10240/42516 (344s)
+[train]    11520/42516 (387s)
+[train]    12800/42516 (428s)
+[train]    14080/42516 (472s)
+[train]    15360/42516 (514s)
+[train]    16640/42516 (556s)
+[train]    17920/42516 (598s)
+[train]    19200/42516 (640s)
+[train]    20480/42516 (685s)
+[train]    21760/42516 (727s)
+[train]    23040/42516 (769s)
+[train]    24320/42516 (815s)
+[train]    25600/42516 (858s)
+[train]    26880/42516 (900s)
+[train]    28160/42516 (944s)
+[train]    29440/42516 (988s)
+[train]    30720/42516 (1030s)
+[train]    32000/42516 (1071s)
+[train]    33280/42516 (1115s)
+[train]    34560/42516 (1160s)
+[train]    35840/42516 (1204s)
+[train]    37120/42516 (1247s)
+[train]    38400/42516 (1290s)
+[train]    39680/42516 (1330s)
+[train]    40960/42516 (1374s)
+[train]    42240/42516 (1419s)
+[train] trainable: trunk 39,387,525 graft 4,185,308; frozen 460 tensors (88,366,363 params)
+[train] row boost x4.00 on 8896 rows (all embedding rows (retokenised) + donor router rows)
+[train] freeze_trunk_steps 300: until then only the tied embedding/LM head (8864 rows) + graft/v2 params move; 1090 trunk tensors (36,551,045 params) held
+[train] [eval start] dev_loss=2.5529 dev_replay=0.4811 dev_fly=1.2342 dev_code=6.1202 dev_bio=7.4323 dev_connectome=0.7035 dev_fresh=0.4389 fly_port_agree=1.0000 sense_mae=0.3928 omni7_intent_agree=0.6750 omni7_domain_agree=0.6804 fly_gate_abs_mean=0.0250 omni_gate_abs_mean=0.0316 cns_gate_abs_mean=0.0447 cns_alive=826 omni7_gate_abs_mean=0.0761 cns_full_gate_abs_mean=0.0864 moe1_alive=88 moe2_alive=88 moe3_alive=72 moe4_alive=72 donor_qwen_alive=16 donor_qwen_slots=16 donor_qwen_bias_mean=21.3723 donor_qwen_weight_rms=0.1300 donor_biomedlm_alive=16 donor_biomedlm_slots=16 donor_biomedlm_bias_mean=21.3475 donor_biomedlm_weight_rms=0.1121
+[train] [step 1/5000] loss 2.3481 model 2.2186 lm 1.6738 omni7_kd 0.6477 lr 2.00e-07 wake 0.00 2.60s/step eta 216.9m
+[train] [step 10/5000] loss 0.7152 model 0.5925 lm 0.4987 omni7_kd 0.6135 lr 2.00e-06 wake 0.00 2.53s/step eta 210.7m
+[train] [step 20/5000] loss 2.7156 model 2.6194 lm 1.9854 omni7_kd 0.4812 lr 4.00e-06 wake 0.00 2.52s/step eta 208.9m
+[train] [step 30/5000] loss 1.2189 model 1.1558 lm 0.9024 omni7_kd 0.3156 lr 6.00e-06 wake 0.00 2.65s/step eta 219.8m
+[train] [step 40/5000] loss 5.9302 model 5.8274 lm 4.4043 omni7_kd 0.5140 lr 8.00e-06 wake 0.00 2.71s/step eta 223.9m
+[train] [step 50/5000] loss 2.2104 model 2.1432 lm 1.6174 omni7_kd 0.3359 lr 1.00e-05 wake 0.00 2.74s/step eta 225.8m
+[train] [step 60/5000] loss 1.5675 model 1.4348 lm 1.1361 omni7_kd 0.6631 lr 1.20e-05 wake 0.00 2.76s/step eta 227.4m
+[train] [step 70/5000] loss 3.2543 model 3.0762 lm 2.3847 omni7_kd 0.8904 lr 1.40e-05 wake 0.00 2.79s/step eta 229.3m
+[train] [step 80/5000] loss 2.6081 model 2.4787 lm 1.8659 omni7_kd 0.6469 lr 1.60e-05 wake 0.00 2.77s/step eta 227.1m
+[train] [step 90/5000] loss 0.9892 model 0.8678 lm 0.7084 omni7_kd 0.6071 lr 1.80e-05 wake 0.00 2.74s/step eta 224.5m
+[train] [step 100/5000] loss 2.4202 model 2.3259 lm 1.8088 omni7_kd 0.4712 lr 2.00e-05 wake 0.00 2.72s/step eta 222.1m
+[train] partial checkpoint (rolling) step 100 -> checkpoints\supermix_expanse_v3.partial.pt in 0.4s
+[train] [step 110/5000] loss 3.0076 model 2.8969 lm 2.2197 omni7_kd 0.5532 lr 2.20e-05 wake 0.00 2.72s/step eta 222.0m
+[train] [step 120/5000] loss 0.8762 model 0.4746 lm 0.3896 omni7_kd 0.5787 fly_port 0.0001 fly_sense 0.2858 lr 2.40e-05 wake 0.00 2.71s/step eta 220.4m
+[train] [step 130/5000] loss 2.5045 model 2.4097 lm 1.8668 omni7_kd 0.4740 lr 2.60e-05 wake 0.00 2.70s/step eta 218.9m
+[train] [step 140/5000] loss 1.2641 model 1.1367 lm 0.8529 omni7_kd 0.6368 lr 2.80e-05 wake 0.00 2.69s/step eta 217.5m
+[train] [step 150/5000] loss 4.3442 model 3.9693 lm 2.9918 omni7_kd 0.5392 fly_port 0.0000 fly_sense 0.2670 lr 3.00e-05 wake 0.00 2.67s/step eta 215.6m
+[train] [step 160/5000] loss 1.2250 model 1.1311 lm 0.8126 omni7_kd 0.4692 lr 3.20e-05 wake 0.00 2.67s/step eta 215.6m
+[train] [step 170/5000] loss 0.4079 model 0.3105 lm 0.2424 omni7_kd 0.4870 lr 3.40e-05 wake 0.00 2.66s/step eta 214.3m
+[train] [step 180/5000] loss 1.7814 model 1.6629 lm 1.2710 omni7_kd 0.5921 lr 3.60e-05 wake 0.00 2.66s/step eta 213.3m
+[train] [step 190/5000] loss 3.2737 model 3.2049 lm 2.4047 omni7_kd 0.3439 lr 3.80e-05 wake 0.00 2.64s/step eta 212.0m
+[train] [step 200/5000] loss 2.2567 model 2.1702 lm 1.7037 omni7_kd 0.4329 lr 4.00e-05 wake 0.00 2.66s/step eta 212.9m
+[train] partial checkpoint (rolling) step 200 -> checkpoints\supermix_expanse_v3.partial.pt in 0.5s
+[train] [step 210/5000] loss 2.3319 model 2.1336 lm 1.6125 omni7_kd 0.9913 lr 4.20e-05 wake 0.00 2.66s/step eta 212.3m
+[train] [step 220/5000] loss 0.4501 model 0.3269 lm 0.2440 omni7_kd 0.6161 lr 4.40e-05 wake 0.00 2.66s/step eta 212.2m
+[train] [step 230/5000] loss 2.4695 model 2.3739 lm 1.7837 omni7_kd 0.4784 lr 4.60e-05 wake 0.00 2.66s/step eta 211.8m
+[train] [step 240/5000] loss 1.9351 model 1.5406 lm 1.1719 omni7_kd 0.5203 fly_port 0.0001 fly_sense 0.2904 lr 4.80e-05 wake 0.00 2.66s/step eta 211.1m
+[train] [step 250/5000] loss 0.3019 model 0.1996 lm 0.1380 omni7_kd 0.5115 lr 5.00e-05 wake 0.00 2.66s/step eta 210.2m
+[train] [step 260/5000] loss 2.6037 model 2.4930 lm 1.8549 omni7_kd 0.5538 lr 5.00e-05 wake 0.00 2.66s/step eta 210.0m
+[train] [step 270/5000] loss 1.2307 model 1.1191 lm 0.8471 omni7_kd 0.5581 lr 5.00e-05 wake 0.00 2.65s/step eta 209.2m
+[train] [step 280/5000] loss 1.0135 model 0.8719 lm 0.6503 omni7_kd 0.7079 lr 5.00e-05 wake 0.00 2.65s/step eta 208.3m
+[train] [step 290/5000] loss 1.5448 model 1.4338 lm 1.0806 omni7_kd 0.5546 lr 5.00e-05 wake 0.00 2.65s/step eta 208.1m
+[train] [step 300/5000] loss 1.7805 model 1.6582 lm 1.3312 omni7_kd 0.6116 lr 5.00e-05 wake 0.00 2.65s/step eta 207.6m
+[train] partial checkpoint (rolling) step 300 -> checkpoints\supermix_expanse_v3.partial.pt in 0.5s
+[train] trunk unfrozen at step 300
+[train] [step 310/5000] loss 1.9703 model 1.6506 lm 1.2769 omni7_kd 0.3355 fly_port 0.0001 fly_sense 0.2525 lr 5.00e-05 wake 0.00 2.65s/step eta 207.5m
+[train] [step 320/5000] loss 2.2318 model 2.0975 lm 1.6102 omni7_kd 0.6718 lr 5.00e-05 wake 0.00 2.67s/step eta 208.1m
+[train] [step 330/5000] loss 1.4701 model 1.3296 lm 1.0508 omni7_kd 0.7028 lr 5.00e-05 wake 0.00 2.67s/step eta 207.9m
+[train] [step 340/5000] loss 1.2206 model 1.1057 lm 0.8517 omni7_kd 0.5745 lr 5.00e-05 wake 0.00 2.68s/step eta 208.4m
+[train] [step 350/5000] loss 0.4199 model 0.3294 lm 0.2461 omni7_kd 0.4527 lr 4.99e-05 wake 0.00 2.69s/step eta 208.7m
+[train] [step 360/5000] loss 0.2182 model 0.1315 lm 0.0871 omni7_kd 0.4338 lr 4.99e-05 wake 0.00 2.70s/step eta 209.0m
+[train] [step 370/5000] loss 1.5665 model 1.5029 lm 1.1289 omni7_kd 0.3179 lr 4.99e-05 wake 0.00 2.71s/step eta 209.1m
+[train] [step 380/5000] loss 2.3870 model 2.3056 lm 1.7576 omni7_kd 0.4066 lr 4.99e-05 wake 0.00 2.72s/step eta 209.1m
+[train] [step 390/5000] loss 1.7189 model 1.5535 lm 1.1816 omni7_kd 0.8269 lr 4.99e-05 wake 0.00 2.71s/step eta 208.5m
+[train] [step 400/5000] loss 1.6351 model 1.2874 lm 0.9702 omni7_kd 0.4355 fly_port 0.0006 fly_sense 0.2601 lr 4.99e-05 wake 0.00 2.72s/step eta 208.9m
+[train] partial checkpoint (rolling) step 400 -> checkpoints\supermix_expanse_v3.partial.pt in 1.1s
+[train] [step 410/5000] loss 2.3482 model 2.0185 lm 1.5585 omni7_kd 0.5231 fly_port 0.0002 fly_sense 0.2249 lr 4.99e-05 wake 0.00 2.73s/step eta 208.6m
+[train] [step 420/5000] loss 1.4131 model 1.1365 lm 0.9071 omni7_kd 0.4897 fly_port 0.0002 fly_sense 0.1785 lr 4.99e-05 wake 0.00 2.74s/step eta 208.8m
+[train] [step 430/5000] loss 0.7032 model 0.4054 lm 0.3239 omni7_kd 0.2358 fly_port 0.0005 fly_sense 0.2501 lr 4.98e-05 wake 0.00 2.73s/step eta 208.2m
+[train] [step 440/5000] loss 0.8431 model 0.7395 lm 0.5644 omni7_kd 0.5181 lr 4.98e-05 wake 0.00 2.74s/step eta 208.2m
+[train] [step 450/5000] loss 0.2027 model 0.1075 lm 0.0781 omni7_kd 0.4762 lr 4.98e-05 wake 0.00 2.75s/step eta 208.2m
+[train] [step 460/5000] loss 1.8321 model 1.6932 lm 1.2870 omni7_kd 0.6941 lr 4.98e-05 wake 0.00 2.75s/step eta 207.7m
+[train] [step 470/5000] loss 1.4950 model 1.1620 lm 0.8933 omni7_kd 0.3205 fly_port 0.0005 fly_sense 0.2683 lr 4.98e-05 wake 0.00 2.76s/step eta 208.1m
+[train] [step 480/5000] loss 1.2296 model 1.1454 lm 0.8672 omni7_kd 0.4211 lr 4.97e-05 wake 0.00 2.76s/step eta 207.6m
+[train] [step 490/5000] loss 1.5051 model 1.1955 lm 0.9030 omni7_kd 0.4433 fly_port 0.0001 fly_sense 0.2208 lr 4.97e-05 wake 0.00 2.76s/step eta 207.6m
+[train] [step 500/5000] loss 1.1519 model 1.0617 lm 0.8016 omni7_kd 0.4513 lr 4.97e-05 wake 0.00 2.77s/step eta 207.7m
+[train] [eval 500] dev_loss=1.8181 dev_replay=0.1962 dev_fly=1.1163 dev_code=3.6700 dev_bio=6.5715 dev_connectome=0.5967 dev_fresh=0.1325 fly_port_agree=0.9500 sense_mae=0.4114 omni7_intent_agree=0.7232 omni7_domain_agree=0.7214 fly_gate_abs_mean=0.0257 omni_gate_abs_mean=0.0342 cns_gate_abs_mean=0.0446 cns_alive=826 omni7_gate_abs_mean=0.0866 cns_full_gate_abs_mean=0.1025 moe1_alive=88 moe2_alive=88 moe3_alive=72 moe4_alive=72 donor_qwen_alive=16 donor_qwen_slots=16 donor_qwen_bias_mean=21.3723 donor_qwen_weight_rms=0.1300 donor_biomedlm_alive=16 donor_biomedlm_slots=16 donor_biomedlm_bias_mean=21.3475 donor_biomedlm_weight_rms=0.1121
+[train] partial checkpoint (rolling) step 500 -> checkpoints\supermix_expanse_v3.partial.pt in 1.2s
+[train] [step 510/5000] loss 0.3633 model 0.3258 lm 0.2353 omni7_kd 0.1871 lr 4.97e-05 wake 0.00 2.91s/step eta 217.7m
+[train] [step 520/5000] loss 1.0771 model 1.0324 lm 0.7863 omni7_kd 0.2233 lr 4.96e-05 wake 0.01 2.91s/step eta 217.0m
+[train] [step 530/5000] loss 1.9921 model 1.9268 lm 1.5065 omni7_kd 0.3267 lr 4.96e-05 wake 0.01 2.90s/step eta 216.3m
+[train] [step 540/5000] loss 0.2420 model 0.1920 lm 0.1356 omni7_kd 0.2500 lr 4.96e-05 wake 0.02 2.90s/step eta 215.8m
+[train] [step 550/5000] loss 0.9674 model 0.6717 lm 0.4950 omni7_kd 0.4074 fly_port 0.0002 fly_sense 0.2140 lr 4.95e-05 wake 0.02 2.91s/step eta 215.5m
+[train] [step 560/5000] loss 1.2073 model 1.1404 lm 0.8627 omni7_kd 0.3348 lr 4.95e-05 wake 0.03 2.92s/step eta 216.4m
+[train] [step 570/5000] loss 1.4037 model 1.3540 lm 1.0252 omni7_kd 0.2486 lr 4.95e-05 wake 0.03 2.95s/step eta 217.7m
+[train] [step 580/5000] loss 1.4277 model 1.3374 lm 0.9791 omni7_kd 0.4515 lr 4.94e-05 wake 0.04 2.97s/step eta 218.9m
+[train] [step 590/5000] loss 1.6178 model 1.5149 lm 1.1564 omni7_kd 0.5145 lr 4.94e-05 wake 0.04 3.00s/step eta 220.2m
+[train] [step 600/5000] loss 1.5712 model 1.4514 lm 1.1136 omni7_kd 0.5993 lr 4.94e-05 wake 0.05 3.02s/step eta 221.5m
+[train] partial checkpoint (rolling) step 600 -> checkpoints\supermix_expanse_v3.partial.pt in 1.4s
+[train] [step 610/5000] loss 1.1783 model 1.0863 lm 0.8042 omni7_kd 0.4599 lr 4.93e-05 wake 0.05 3.05s/step eta 223.0m
+[train] [step 620/5000] loss 1.4301 model 1.0912 lm 0.8296 omni7_kd 0.2932 fly_port 0.0005 fly_sense 0.2798 lr 4.93e-05 wake 0.06 3.07s/step eta 224.1m
+[train] [step 630/5000] loss 1.6341 model 1.2362 lm 0.9186 omni7_kd 0.3518 fly_port 0.0005 fly_sense 0.3271 lr 4.93e-05 wake 0.06 3.09s/step eta 225.3m
+[train] [step 640/5000] loss 2.5729 model 2.4697 lm 1.8974 omni7_kd 0.5160 lr 4.92e-05 wake 0.07 3.12s/step eta 226.4m
+[train] [step 650/5000] loss 0.5732 model 0.4965 lm 0.3611 omni7_kd 0.3832 lr 4.92e-05 wake 0.07 3.14s/step eta 227.5m
+[train] [step 660/5000] loss 1.9722 model 1.8855 lm 1.4129 omni7_kd 0.4334 lr 4.91e-05 wake 0.08 3.16s/step eta 228.4m
+[train] [step 670/5000] loss 1.3132 model 1.2493 lm 0.9339 omni7_kd 0.3195 lr 4.91e-05 wake 0.08 3.18s/step eta 229.4m
+[train] [step 680/5000] loss 0.7779 model 0.3685 lm 0.2728 omni7_kd 0.3474 fly_port 0.0051 fly_sense 0.3348 lr 4.91e-05 wake 0.09 3.20s/step eta 230.3m
+[train] [step 690/5000] loss 2.4515 model 2.3844 lm 1.8068 omni7_kd 0.3353 lr 4.90e-05 wake 0.09 3.22s/step eta 231.1m
+[train] [step 700/5000] loss 0.7992 model 0.7310 lm 0.5397 omni7_kd 0.3409 lr 4.90e-05 wake 0.10 3.23s/step eta 231.8m
+[train] partial checkpoint (rolling) step 700 -> checkpoints\supermix_expanse_v3.partial.pt in 1.8s
+[train] [step 710/5000] loss 0.8245 model 0.7585 lm 0.5710 omni7_kd 0.3302 lr 4.89e-05 wake 0.10 3.25s/step eta 232.7m
+[train] [step 720/5000] loss 0.5379 model 0.4859 lm 0.3515 omni7_kd 0.2601 lr 4.89e-05 wake 0.11 3.27s/step eta 233.4m
+[train] [step 730/5000] loss 1.6952 model 1.3472 lm 1.0072 omni7_kd 0.3533 fly_port 0.0002 fly_sense 0.2771 lr 4.88e-05 wake 0.11 3.29s/step eta 234.0m
+[train] [step 740/5000] loss 0.7401 model 0.5117 lm 0.3742 omni7_kd 0.2721 fly_port 0.0004 fly_sense 0.1737 lr 4.88e-05 wake 0.12 3.30s/step eta 234.6m
+[train] [step 750/5000] loss 1.6117 model 1.5036 lm 1.1100 omni7_kd 0.5405 lr 4.87e-05 wake 0.12 3.32s/step eta 235.2m
+[train] [step 760/5000] loss 0.7473 model 0.6936 lm 0.5209 omni7_kd 0.2688 lr 4.87e-05 wake 0.13 3.34s/step eta 235.7m
+[train] [step 770/5000] loss 0.3110 model 0.2412 lm 0.1779 omni7_kd 0.3491 lr 4.86e-05 wake 0.13 3.35s/step eta 236.3m
+[train] [step 780/5000] loss 1.3120 model 1.2316 lm 0.9303 omni7_kd 0.4019 lr 4.86e-05 wake 0.14 3.37s/step eta 236.8m
+[train] [step 790/5000] loss 1.4207 model 1.3289 lm 0.9856 omni7_kd 0.4592 lr 4.85e-05 wake 0.14 3.38s/step eta 237.2m
+[train] [step 800/5000] loss 1.1857 model 1.1442 lm 0.8501 omni7_kd 0.2074 lr 4.85e-05 wake 0.15 3.40s/step eta 237.7m
+[train] partial checkpoint (rolling) step 800 -> checkpoints\supermix_expanse_v3.partial.pt in 1.3s
+[train] [step 810/5000] loss 0.6546 model 0.3008 lm 0.2297 omni7_kd 0.3354 fly_port 0.0004 fly_sense 0.2863 lr 4.84e-05 wake 0.15 3.41s/step eta 238.1m
+[train] [step 820/5000] loss 2.5517 model 2.4767 lm 1.8755 omni7_kd 0.3748 lr 4.83e-05 wake 0.16 3.42s/step eta 238.3m
+[train] [step 830/5000] loss 1.4717 model 1.4121 lm 1.0659 omni7_kd 0.2982 lr 4.83e-05 wake 0.16 3.43s/step eta 238.5m
+[train] [step 840/5000] loss 1.3814 model 1.3279 lm 0.9937 omni7_kd 0.2675 lr 4.82e-05 wake 0.17 3.44s/step eta 238.7m
+[train] [step 850/5000] loss 1.1601 model 1.1072 lm 0.8350 omni7_kd 0.2644 lr 4.82e-05 wake 0.17 3.45s/step eta 238.9m
+[train] [step 860/5000] loss 0.8485 model 0.3835 lm 0.2898 omni7_kd 0.1804 fly_port 0.0008 fly_sense 0.4281 lr 4.81e-05 wake 0.18 3.46s/step eta 239.0m
+[train] [step 870/5000] loss 0.6624 model 0.5903 lm 0.4388 omni7_kd 0.3603 lr 4.80e-05 wake 0.18 3.47s/step eta 239.1m
+[train] [step 880/5000] loss 1.4545 model 1.3832 lm 1.0316 omni7_kd 0.3568 lr 4.80e-05 wake 0.19 3.48s/step eta 239.1m
+[train] [step 890/5000] loss 1.2455 model 0.9511 lm 0.7311 omni7_kd 0.4186 fly_port 0.0001 fly_sense 0.2105 lr 4.79e-05 wake 0.19 3.49s/step eta 239.3m
+[train] [step 900/5000] loss 0.8486 model 0.7905 lm 0.5788 omni7_kd 0.2910 lr 4.78e-05 wake 0.20 3.50s/step eta 239.3m
+[train] partial checkpoint (rolling) step 900 -> checkpoints\supermix_expanse_v3.partial.pt in 1.3s
+[train] [step 910/5000] loss 1.5884 model 1.4747 lm 1.0841 omni7_kd 0.5681 lr 4.78e-05 wake 0.20 3.51s/step eta 239.4m
+[train] [step 920/5000] loss 2.6168 model 2.5519 lm 1.9267 omni7_kd 0.3243 lr 4.77e-05 wake 0.21 3.52s/step eta 239.5m
+[train] [step 930/5000] loss 1.4199 model 1.1175 lm 0.8385 omni7_kd 0.4440 fly_port 0.0001 fly_sense 0.2135 lr 4.76e-05 wake 0.21 3.53s/step eta 239.5m
+[train] [step 940/5000] loss 0.3508 model 0.2823 lm 0.1940 omni7_kd 0.3426 lr 4.76e-05 wake 0.22 3.54s/step eta 239.5m
+[train] [step 950/5000] loss 1.2254 model 1.1464 lm 0.8680 omni7_kd 0.3948 lr 4.75e-05 wake 0.22 3.55s/step eta 239.5m
+[train] [step 960/5000] loss 2.5444 model 2.1835 lm 1.6330 omni7_kd 0.3687 fly_port 0.0004 fly_sense 0.2868 lr 4.74e-05 wake 0.23 3.56s/step eta 239.5m
+[train] [step 970/5000] loss 0.2492 model 0.1751 lm 0.1238 omni7_kd 0.3706 lr 4.74e-05 wake 0.23 3.57s/step eta 239.5m
+[train] [step 980/5000] loss 2.3608 model 2.0983 lm 1.6044 omni7_kd 0.3528 fly_port 0.0002 fly_sense 0.1918 lr 4.73e-05 wake 0.24 3.57s/step eta 239.4m
+[train] [step 990/5000] loss 2.2024 model 2.1403 lm 1.5555 omni7_kd 0.3106 lr 4.72e-05 wake 0.24 3.58s/step eta 239.3m
+[train] [step 1000/5000] loss 1.2942 model 1.1983 lm 0.9050 omni7_kd 0.4795 lr 4.71e-05 wake 0.25 3.59s/step eta 239.1m
+[train] [eval 1000] dev_loss=1.5966 dev_replay=0.1237 dev_fly=1.0514 dev_code=3.0250 dev_bio=6.1297 dev_connectome=0.5417 dev_fresh=0.0795 fly_port_agree=0.9667 sense_mae=0.3943 omni7_intent_agree=0.7250 omni7_domain_agree=0.7679 fly_gate_abs_mean=0.0252 omni_gate_abs_mean=0.0340 cns_gate_abs_mean=0.0445 cns_alive=826 omni7_gate_abs_mean=0.1003 cns_full_gate_abs_mean=0.1201 moe1_alive=88 moe2_alive=88 moe3_alive=72 moe4_alive=72 donor_qwen_alive=16 donor_qwen_slots=16 donor_qwen_bias_mean=20.2128 donor_qwen_weight_rms=0.1300 donor_biomedlm_alive=16 donor_biomedlm_slots=16 donor_biomedlm_bias_mean=20.2067 donor_biomedlm_weight_rms=0.1121
+[train] partial checkpoint (rolling) step 1000 -> checkpoints\supermix_expanse_v3.partial.pt in 1.6s
+[train] [step 1010/5000] loss 1.3224 model 1.2186 lm 0.8914 omni7_kd 0.5188 lr 4.71e-05 wake 0.25 3.69s/step eta 245.1m
+[train] [step 1020/5000] loss 2.6297 model 2.5168 lm 1.8928 omni7_kd 0.5646 lr 4.70e-05 wake 0.26 3.69s/step eta 244.9m
+[train] [step 1030/5000] loss 0.7517 model 0.6974 lm 0.5227 omni7_kd 0.2717 lr 4.69e-05 wake 0.26 3.70s/step eta 244.8m
+[train] [step 1040/5000] loss 1.4005 model 1.1073 lm 0.8298 omni7_kd 0.3732 fly_port 0.0011 fly_sense 0.2175 lr 4.68e-05 wake 0.27 3.71s/step eta 244.7m
+[train] [step 1050/5000] loss 0.9489 model 0.5854 lm 0.4280 omni7_kd 0.3480 fly_port 0.0001 fly_sense 0.2937 lr 4.68e-05 wake 0.27 3.71s/step eta 244.4m
+[train] [step 1060/5000] loss 0.2963 model 0.2622 lm 0.1858 omni7_kd 0.1704 lr 4.67e-05 wake 0.28 3.72s/step eta 244.3m
+[train] [step 1070/5000] loss 1.4488 model 1.3530 lm 1.0148 omni7_kd 0.4792 lr 4.66e-05 wake 0.28 3.73s/step eta 244.1m
+[train] [step 1080/5000] loss 1.4851 model 1.2422 lm 0.9334 omni7_kd 0.1817 fly_port 0.0006 fly_sense 0.2061 lr 4.65e-05 wake 0.29 3.73s/step eta 243.8m
+[train] [step 1090/5000] loss 2.1949 model 1.8454 lm 1.4107 omni7_kd 0.3325 fly_port 0.0004 fly_sense 0.2827 lr 4.64e-05 wake 0.29 3.74s/step eta 243.6m
+[train] [step 1100/5000] loss 0.6948 model 0.6415 lm 0.4763 omni7_kd 0.2664 lr 4.64e-05 wake 0.30 3.74s/step eta 243.3m
+[train] partial checkpoint (rolling) step 1100 -> checkpoints\supermix_expanse_v3.partial.pt in 1.3s
+[train] [step 1110/5000] loss 0.5932 model 0.5363 lm 0.3696 omni7_kd 0.2844 lr 4.63e-05 wake 0.30 3.75s/step eta 243.1m
+[train] [step 1120/5000] loss 0.7835 model 0.6893 lm 0.5071 omni7_kd 0.4711 lr 4.62e-05 wake 0.31 3.75s/step eta 242.8m
+[train] [step 1130/5000] loss 0.5802 model 0.3332 lm 0.2605 omni7_kd 0.1435 fly_port 0.0003 fly_sense 0.2180 lr 4.61e-05 wake 0.31 3.76s/step eta 242.5m
+[train] [step 1140/5000] loss 1.2207 model 1.1763 lm 0.9078 omni7_kd 0.2219 lr 4.60e-05 wake 0.32 3.77s/step eta 242.2m
+[train] [step 1150/5000] loss 1.7370 model 1.4609 lm 1.1196 omni7_kd 0.2708 fly_port 0.0018 fly_sense 0.2201 lr 4.59e-05 wake 0.32 3.77s/step eta 241.9m
+[train] [step 1160/5000] loss 1.2189 model 1.1695 lm 0.9008 omni7_kd 0.2471 lr 4.58e-05 wake 0.33 3.78s/step eta 241.6m
+[train] [step 1170/5000] loss 1.9118 model 1.4944 lm 1.1448 omni7_kd 0.2811 fly_port 0.0003 fly_sense 0.3608 lr 4.57e-05 wake 0.33 3.78s/step eta 241.3m
+[train] [step 1180/5000] loss 1.4626 model 1.2090 lm 0.9216 omni7_kd 0.2237 fly_port 0.0001 fly_sense 0.2087 lr 4.57e-05 wake 0.34 3.78s/step eta 241.0m
+[train] [step 1190/5000] loss 2.0023 model 1.7839 lm 1.3421 omni7_kd 0.3661 fly_port 0.0000 fly_sense 0.1451 lr 4.56e-05 wake 0.34 3.79s/step eta 240.6m
+[train] [step 1200/5000] loss 1.2182 model 1.1651 lm 0.8430 omni7_kd 0.2657 lr 4.55e-05 wake 0.35 3.79s/step eta 240.2m
+[train] partial checkpoint (rolling) step 1200 -> checkpoints\supermix_expanse_v3.partial.pt in 1.5s
+[train] [step 1210/5000] loss 0.8507 model 0.4572 lm 0.3485 omni7_kd 0.1814 fly_port 0.0008 fly_sense 0.3565 lr 4.54e-05 wake 0.35 3.80s/step eta 240.0m
+[train] [step 1220/5000] loss 1.8845 model 1.8278 lm 1.3606 omni7_kd 0.2832 lr 4.53e-05 wake 0.36 3.80s/step eta 239.7m
+[train] [step 1230/5000] loss 1.3144 model 1.2702 lm 0.9346 omni7_kd 0.2213 lr 4.52e-05 wake 0.36 3.81s/step eta 239.3m
+[train] [step 1240/5000] loss 1.2026 model 1.1270 lm 0.8506 omni7_kd 0.3781 lr 4.51e-05 wake 0.37 3.81s/step eta 238.9m
+[train] [step 1250/5000] loss 0.5845 model 0.5218 lm 0.3885 omni7_kd 0.3135 lr 4.50e-05 wake 0.37 3.82s/step eta 238.6m
+[train] [step 1260/5000] loss 0.8569 model 0.7909 lm 0.5594 omni7_kd 0.3299 lr 4.49e-05 wake 0.38 3.82s/step eta 238.2m
+[train] [step 1270/5000] loss 0.7342 model 0.6709 lm 0.4838 omni7_kd 0.3165 lr 4.48e-05 wake 0.38 3.83s/step eta 237.8m
+[train] [step 1280/5000] loss 1.2138 model 1.1606 lm 0.8783 omni7_kd 0.2656 lr 4.47e-05 wake 0.39 3.83s/step eta 237.4m
+[train] [step 1290/5000] loss 0.1595 model 0.1229 lm 0.0717 omni7_kd 0.1834 lr 4.46e-05 wake 0.39 3.83s/step eta 237.0m
+[train] [step 1300/5000] loss 1.7769 model 1.7138 lm 1.2541 omni7_kd 0.3156 lr 4.45e-05 wake 0.40 3.84s/step eta 236.6m
+[train] partial checkpoint (rolling) step 1300 -> checkpoints\supermix_expanse_v3.partial.pt in 1.2s
+[train] [step 1310/5000] loss 1.2064 model 1.1583 lm 0.8518 omni7_kd 0.2402 lr 4.44e-05 wake 0.40 3.84s/step eta 236.2m
+[train] [step 1320/5000] loss 1.3788 model 1.3188 lm 0.9974 omni7_kd 0.3001 lr 4.43e-05 wake 0.41 3.84s/step eta 235.8m
+[train] [step 1330/5000] loss 1.6261 model 1.5712 lm 1.1705 omni7_kd 0.2746 lr 4.42e-05 wake 0.41 3.85s/step eta 235.4m
+[train] [step 1340/5000] loss 1.1350 model 1.0573 lm 0.7926 omni7_kd 0.3887 lr 4.41e-05 wake 0.42 3.85s/step eta 235.0m
+[train] [step 1350/5000] loss 1.4589 model 1.4036 lm 1.0377 omni7_kd 0.2762 lr 4.40e-05 wake 0.42 3.86s/step eta 234.6m
+[train] [step 1360/5000] loss 0.4401 model 0.4002 lm 0.2889 omni7_kd 0.1995 lr 4.39e-05 wake 0.43 3.86s/step eta 234.2m
+[train] [step 1370/5000] loss 1.1393 model 1.0803 lm 0.7964 omni7_kd 0.2947 lr 4.38e-05 wake 0.43 3.86s/step eta 233.7m
+[train] [step 1380/5000] loss 1.4300 model 1.3628 lm 1.0265 omni7_kd 0.3360 lr 4.37e-05 wake 0.44 3.87s/step eta 233.3m
+[train] [step 1390/5000] loss 3.1569 model 3.1027 lm 2.3741 omni7_kd 0.2706 lr 4.36e-05 wake 0.44 3.87s/step eta 232.8m
+[train] [step 1400/5000] loss 1.8891 model 1.8248 lm 1.3455 omni7_kd 0.3213 lr 4.35e-05 wake 0.45 3.87s/step eta 232.2m
+[train] partial checkpoint (rolling) step 1400 -> checkpoints\supermix_expanse_v3.partial.pt in 0.7s
+[train] [step 1410/5000] loss 1.3160 model 1.2522 lm 0.9356 omni7_kd 0.3190 lr 4.34e-05 wake 0.45 3.86s/step eta 230.9m
+[train] [step 1420/5000] loss 1.4404 model 1.3732 lm 1.0216 omni7_kd 0.3358 lr 4.32e-05 wake 0.46 3.85s/step eta 229.7m
+[train] [step 1430/5000] loss 1.4329 model 1.4003 lm 1.0559 omni7_kd 0.1631 lr 4.31e-05 wake 0.46 3.84s/step eta 228.6m
+[train] [step 1440/5000] loss 1.4379 model 1.3231 lm 0.9902 omni7_kd 0.5744 lr 4.30e-05 wake 0.47 3.83s/step eta 227.3m
+[train] [step 1450/5000] loss 0.2545 model 0.2068 lm 0.1514 omni7_kd 0.2388 lr 4.29e-05 wake 0.47 3.82s/step eta 226.3m
+[train] [step 1460/5000] loss 0.9455 model 0.8995 lm 0.6674 omni7_kd 0.2300 lr 4.28e-05 wake 0.48 3.81s/step eta 225.0m
+[train] [step 1470/5000] loss 1.5545 model 1.1143 lm 0.8664 omni7_kd 0.2235 fly_port 0.0000 fly_sense 0.3954 lr 4.27e-05 wake 0.48 3.81s/step eta 223.9m
+[train] [step 1480/5000] loss 2.4704 model 2.3768 lm 1.8061 omni7_kd 0.4682 lr 4.26e-05 wake 0.49 3.80s/step eta 222.9m
+[train] [step 1490/5000] loss 0.9421 model 0.8765 lm 0.5980 omni7_kd 0.3281 lr 4.25e-05 wake 0.49 3.79s/step eta 221.9m
+[train] [step 1500/5000] loss 0.7884 model 0.5156 lm 0.3890 omni7_kd 0.2178 fly_port 0.0004 fly_sense 0.2287 lr 4.23e-05 wake 0.50 3.79s/step eta 220.9m
+[train] [eval 1500] dev_loss=1.4966 dev_replay=0.1152 dev_fly=1.0088 dev_code=2.6600 dev_bio=5.9879 dev_connectome=0.5195 dev_fresh=0.0684 fly_port_agree=0.9667 sense_mae=0.4013 omni7_intent_agree=0.7643 omni7_domain_agree=0.7696 fly_gate_abs_mean=0.0249 omni_gate_abs_mean=0.0345 cns_gate_abs_mean=0.0444 cns_alive=826 omni7_gate_abs_mean=0.1117 cns_full_gate_abs_mean=0.1326 moe1_alive=88 moe2_alive=88 moe3_alive=72 moe4_alive=72 donor_qwen_alive=16 donor_qwen_slots=16 donor_qwen_bias_mean=20.5991 donor_qwen_weight_rms=0.1300 donor_biomedlm_alive=16 donor_biomedlm_slots=16 donor_biomedlm_bias_mean=20.5867 donor_biomedlm_weight_rms=0.1121
+[train] partial checkpoint (rolling) step 1500 -> checkpoints\supermix_expanse_v3.partial.pt in 1.2s
+[train] [step 1510/5000] loss 0.7823 model 0.3956 lm 0.3002 omni7_kd 0.2002 fly_port 0.0013 fly_sense 0.3454 lr 4.22e-05 wake 0.50 3.82s/step eta 222.5m
+[train] [step 1520/5000] loss 1.2857 model 1.2533 lm 0.9086 omni7_kd 0.1620 lr 4.21e-05 wake 0.51 3.82s/step eta 221.5m
+[train] [step 1530/5000] loss 0.5739 model 0.5291 lm 0.3912 omni7_kd 0.2237 lr 4.20e-05 wake 0.51 3.81s/step eta 220.5m
+[train] [step 1540/5000] loss 1.1821 model 1.1502 lm 0.8849 omni7_kd 0.1595 lr 4.19e-05 wake 0.52 3.81s/step eta 219.6m
+[train] [step 1550/5000] loss 1.7468 model 1.4745 lm 1.1017 omni7_kd 0.2600 fly_port 0.0005 fly_sense 0.2198 lr 4.18e-05 wake 0.52 3.80s/step eta 218.6m
+[train] [step 1560/5000] loss 0.9160 model 0.6177 lm 0.4815 omni7_kd 0.3299 fly_port 0.0001 fly_sense 0.2322 lr 4.16e-05 wake 0.53 3.80s/step eta 217.7m
+[train] [step 1570/5000] loss 0.2154 model 0.1662 lm 0.1236 omni7_kd 0.2458 lr 4.15e-05 wake 0.53 3.79s/step eta 216.8m
+[train] [step 1580/5000] loss 2.6433 model 2.3212 lm 1.7837 omni7_kd 0.2697 fly_port 0.0000 fly_sense 0.2681 lr 4.14e-05 wake 0.54 3.79s/step eta 215.8m
+[train] [step 1590/5000] loss 1.5607 model 1.4839 lm 1.1109 omni7_kd 0.3839 lr 4.13e-05 wake 0.54 3.78s/step eta 215.0m
+[train] [step 1600/5000] loss 0.3027 model 0.2555 lm 0.1714 omni7_kd 0.2362 lr 4.12e-05 wake 0.55 3.78s/step eta 214.0m
+[train] partial checkpoint (rolling) step 1600 -> checkpoints\supermix_expanse_v3.partial.pt in 1.6s
+[train] [step 1610/5000] loss 1.3771 model 1.0603 lm 0.8110 omni7_kd 0.2641 fly_port 0.0002 fly_sense 0.2638 lr 4.10e-05 wake 0.55 3.77s/step eta 213.2m
+[train] [step 1620/5000] loss 0.5347 model 0.4578 lm 0.3389 omni7_kd 0.3845 lr 4.09e-05 wake 0.56 3.77s/step eta 212.3m
+[train] [step 1630/5000] loss 1.1571 model 1.0700 lm 0.7956 omni7_kd 0.4356 lr 4.08e-05 wake 0.56 3.76s/step eta 211.4m
+[train] [step 1640/5000] loss 1.4281 model 1.3836 lm 1.0042 omni7_kd 0.2224 lr 4.07e-05 wake 0.57 3.76s/step eta 210.6m
+[train] [step 1650/5000] loss 2.4870 model 2.4438 lm 1.8276 omni7_kd 0.2157 lr 4.05e-05 wake 0.57 3.76s/step eta 209.7m
+[train] [step 1660/5000] loss 0.8893 model 0.8505 lm 0.6386 omni7_kd 0.1938 lr 4.04e-05 wake 0.58 3.75s/step eta 208.8m
+[train] [step 1670/5000] loss 0.6928 model 0.6676 lm 0.5046 omni7_kd 0.1257 lr 4.03e-05 wake 0.58 3.75s/step eta 207.9m
+[train] [step 1680/5000] loss 1.6729 model 1.6078 lm 1.2266 omni7_kd 0.3259 lr 4.02e-05 wake 0.59 3.74s/step eta 206.9m
+[train] [step 1690/5000] loss 0.7566 model 0.7283 lm 0.5354 omni7_kd 0.1412 lr 4.00e-05 wake 0.59 3.73s/step eta 206.0m
+[train] [step 1700/5000] loss 0.1532 model 0.0981 lm 0.0601 omni7_kd 0.2756 lr 3.99e-05 wake 0.60 3.73s/step eta 205.2m
+[train] partial checkpoint (rolling) step 1700 -> checkpoints\supermix_expanse_v3.partial.pt in 0.9s
+[train] [step 1710/5000] loss 0.8519 model 0.8162 lm 0.6175 omni7_kd 0.1785 lr 3.98e-05 wake 0.60 3.73s/step eta 204.3m
+[train] [step 1720/5000] loss 1.1342 model 1.0123 lm 0.7704 omni7_kd 0.1891 fly_port 0.0002 fly_sense 0.0839 lr 3.96e-05 wake 0.61 3.72s/step eta 203.4m
+[train] [step 1730/5000] loss 0.5680 model 0.4945 lm 0.3642 omni7_kd 0.3675 lr 3.95e-05 wake 0.61 3.71s/step eta 202.4m
+[train] [step 1740/5000] loss 2.7506 model 2.7174 lm 2.0599 omni7_kd 0.1659 lr 3.94e-05 wake 0.62 3.71s/step eta 201.7m
+[train] [step 1750/5000] loss 0.8422 model 0.6994 lm 0.5057 omni7_kd 0.2010 fly_port 0.0000 fly_sense 0.1026 lr 3.93e-05 wake 0.62 3.71s/step eta 200.8m
+[train] [step 1760/5000] loss 0.1501 model 0.0821 lm 0.0525 omni7_kd 0.3400 lr 3.91e-05 wake 0.63 3.70s/step eta 200.0m
+[train] [step 1770/5000] loss 2.1657 model 1.8333 lm 1.3923 omni7_kd 0.4648 fly_port 0.0001 fly_sense 0.2392 lr 3.90e-05 wake 0.63 3.70s/step eta 199.0m
+[train] [step 1780/5000] loss 0.6209 model 0.5419 lm 0.4076 omni7_kd 0.3949 lr 3.89e-05 wake 0.64 3.69s/step eta 198.2m
+[train] [step 1790/5000] loss 0.2524 model 0.1911 lm 0.1377 omni7_kd 0.3063 lr 3.87e-05 wake 0.64 3.69s/step eta 197.3m
+[train] [step 1800/5000] loss 1.1128 model 1.0646 lm 0.7724 omni7_kd 0.2411 lr 3.86e-05 wake 0.65 3.68s/step eta 196.4m
+[train] partial checkpoint (rolling) step 1800 -> checkpoints\supermix_expanse_v3.partial.pt in 1.1s
+[train] [step 1810/5000] loss 0.8975 model 0.8447 lm 0.6363 omni7_kd 0.2640 lr 3.85e-05 wake 0.65 3.68s/step eta 195.6m
+[train] [step 1820/5000] loss 0.7020 model 0.5716 lm 0.4213 omni7_kd 0.6520 lr 3.83e-05 wake 0.66 3.68s/step eta 194.8m
+[train] [step 1830/5000] loss 0.9081 model 0.6896 lm 0.5270 omni7_kd 0.2551 fly_port 0.0002 fly_sense 0.1673 lr 3.82e-05 wake 0.66 3.67s/step eta 194.0m
+[train] [step 1840/5000] loss 0.8307 model 0.7631 lm 0.5695 omni7_kd 0.3382 lr 3.80e-05 wake 0.67 3.67s/step eta 193.1m
+[train] [step 1850/5000] loss 3.3176 model 3.2661 lm 2.4466 omni7_kd 0.2579 lr 3.79e-05 wake 0.67 3.66s/step eta 192.3m
+[train] [step 1860/5000] loss 0.7459 model 0.7002 lm 0.5025 omni7_kd 0.2282 lr 3.78e-05 wake 0.68 3.66s/step eta 191.5m
+[train] [step 1870/5000] loss 2.4420 model 2.2355 lm 1.6726 omni7_kd 0.3053 fly_port 0.0003 fly_sense 0.1453 lr 3.76e-05 wake 0.68 3.66s/step eta 190.8m
+[train] [step 1880/5000] loss 0.9434 model 0.9007 lm 0.6664 omni7_kd 0.2133 lr 3.75e-05 wake 0.69 3.65s/step eta 189.9m
+[train] [step 1890/5000] loss 2.6060 model 2.5650 lm 1.9448 omni7_kd 0.2047 lr 3.74e-05 wake 0.69 3.65s/step eta 189.0m
+[train] [step 1900/5000] loss 0.9901 model 0.9617 lm 0.7305 omni7_kd 0.1417 lr 3.72e-05 wake 0.70 3.64s/step eta 188.2m
+[train] partial checkpoint (rolling) step 1900 -> checkpoints\supermix_expanse_v3.partial.pt in 0.9s
+[train] [step 1910/5000] loss 2.3644 model 2.3314 lm 1.7685 omni7_kd 0.1651 lr 3.71e-05 wake 0.70 3.64s/step eta 187.4m
+[train] [step 1920/5000] loss 1.2633 model 1.1879 lm 0.9046 omni7_kd 0.3769 lr 3.69e-05 wake 0.71 3.63s/step eta 186.5m
+[train] [step 1930/5000] loss 1.4467 model 1.4097 lm 1.0660 omni7_kd 0.1853 lr 3.68e-05 wake 0.71 3.63s/step eta 185.7m
+[train] [step 1940/5000] loss 2.6617 model 2.2858 lm 1.7559 omni7_kd 0.2373 fly_port 0.0000 fly_sense 0.3283 lr 3.67e-05 wake 0.72 3.63s/step eta 184.9m
+[train] [step 1950/5000] loss 0.5848 model 0.5570 lm 0.3847 omni7_kd 0.1388 lr 3.65e-05 wake 0.72 3.62s/step eta 184.1m
+[train] [step 1960/5000] loss 1.7032 model 1.4362 lm 1.0996 omni7_kd 0.2030 fly_port 0.0000 fly_sense 0.2264 lr 3.64e-05 wake 0.73 3.62s/step eta 183.4m
+[train] [step 1970/5000] loss 0.9408 model 0.8705 lm 0.6565 omni7_kd 0.3516 lr 3.62e-05 wake 0.73 3.62s/step eta 182.8m
+[train] [step 1980/5000] loss 0.6187 model 0.5781 lm 0.4274 omni7_kd 0.2033 lr 3.61e-05 wake 0.74 3.62s/step eta 182.2m
+[train] [step 1990/5000] loss 1.3860 model 1.1852 lm 0.8975 omni7_kd 0.3021 fly_port 0.0003 fly_sense 0.1401 lr 3.59e-05 wake 0.74 3.62s/step eta 181.6m
+[train] [step 2000/5000] loss 1.2399 model 1.1937 lm 0.8828 omni7_kd 0.2313 lr 3.58e-05 wake 0.75 3.62s/step eta 181.0m
+[train] [eval 2000] dev_loss=1.4423 dev_replay=0.1032 dev_fly=0.9900 dev_code=2.4510 dev_bio=5.9408 dev_connectome=0.4956 dev_fresh=0.0662 fly_port_agree=0.9667 sense_mae=0.3857 omni7_intent_agree=0.7625 omni7_domain_agree=0.7875 fly_gate_abs_mean=0.0249 omni_gate_abs_mean=0.0351 cns_gate_abs_mean=0.0444 cns_alive=826 omni7_gate_abs_mean=0.1209 cns_full_gate_abs_mean=0.1425 moe1_alive=88 moe2_alive=88 moe3_alive=72 moe4_alive=72 donor_qwen_alive=16 donor_qwen_slots=16 donor_qwen_bias_mean=20.9853 donor_qwen_weight_rms=0.1300 donor_biomedlm_alive=16 donor_biomedlm_slots=16 donor_biomedlm_bias_mean=20.9667 donor_biomedlm_weight_rms=0.1121
+[train] partial checkpoint (rolling) step 2000 -> checkpoints\supermix_expanse_v3.partial.pt in 1.1s
+[train] [step 2010/5000] loss 1.7671 model 1.4324 lm 1.0891 omni7_kd 0.1668 fly_port 0.0003 fly_sense 0.3010 lr 3.57e-05 wake 0.75 3.66s/step eta 182.2m
+[train] [step 2020/5000] loss 1.1049 model 1.0486 lm 0.7830 omni7_kd 0.2815 lr 3.55e-05 wake 0.76 3.66s/step eta 181.5m
+[train] [step 2030/5000] loss 1.0053 model 0.9723 lm 0.7055 omni7_kd 0.1647 lr 3.54e-05 wake 0.76 3.66s/step eta 180.9m
+[train] [step 2040/5000] loss 2.1482 model 2.0824 lm 1.5908 omni7_kd 0.3287 lr 3.52e-05 wake 0.77 3.65s/step eta 180.3m
+[train] [step 2050/5000] loss 0.5026 model 0.4687 lm 0.3461 omni7_kd 0.1694 lr 3.51e-05 wake 0.77 3.65s/step eta 179.6m
+[train] [step 2060/5000] loss 2.2631 model 2.2328 lm 1.6926 omni7_kd 0.1516 lr 3.49e-05 wake 0.78 3.65s/step eta 179.0m
+[train] [step 2070/5000] loss 1.0153 model 0.9691 lm 0.7258 omni7_kd 0.2312 lr 3.48e-05 wake 0.78 3.65s/step eta 178.4m
+[train] [step 2080/5000] loss 0.5155 model 0.4700 lm 0.3446 omni7_kd 0.2273 lr 3.46e-05 wake 0.79 3.65s/step eta 177.7m
+[train] [step 2090/5000] loss 0.8854 model 0.8586 lm 0.6248 omni7_kd 0.1340 lr 3.45e-05 wake 0.79 3.65s/step eta 177.1m
+[train] [step 2100/5000] loss 0.5769 model 0.5171 lm 0.3655 omni7_kd 0.2991 lr 3.43e-05 wake 0.80 3.65s/step eta 176.5m
+[train] partial checkpoint (rolling) step 2100 -> checkpoints\supermix_expanse_v3.partial.pt in 1.2s
+[train] [step 2110/5000] loss 0.2161 model 0.1837 lm 0.1302 omni7_kd 0.1616 lr 3.42e-05 wake 0.80 3.65s/step eta 175.8m
+[train] [step 2120/5000] loss 0.1657 model 0.1094 lm 0.0806 omni7_kd 0.2817 lr 3.41e-05 wake 0.81 3.65s/step eta 175.2m
+[train] [step 2130/5000] loss 0.8543 model 0.7956 lm 0.6012 omni7_kd 0.2935 lr 3.39e-05 wake 0.81 3.65s/step eta 174.5m
+[train] [step 2140/5000] loss 0.5647 model 0.3275 lm 0.2308 omni7_kd 0.3197 fly_port 0.0009 fly_sense 0.1723 lr 3.38e-05 wake 0.82 3.65s/step eta 173.9m
+[train] [step 2150/5000] loss 1.0871 model 1.0372 lm 0.7818 omni7_kd 0.2495 lr 3.36e-05 wake 0.82 3.65s/step eta 173.3m
+[train] [step 2160/5000] loss 0.1927 model 0.1455 lm 0.0952 omni7_kd 0.2358 lr 3.35e-05 wake 0.83 3.65s/step eta 172.6m
+[train] [step 2170/5000] loss 0.7635 model 0.7353 lm 0.5341 omni7_kd 0.1411 lr 3.33e-05 wake 0.83 3.65s/step eta 172.0m
+[train] [step 2180/5000] loss 0.9631 model 0.7410 lm 0.5684 omni7_kd 0.2631 fly_port 0.0002 fly_sense 0.1692 lr 3.32e-05 wake 0.84 3.65s/step eta 171.4m
+[train] [step 2190/5000] loss 0.9542 model 0.7439 lm 0.5562 omni7_kd 0.1774 fly_port 0.0002 fly_sense 0.1746 lr 3.30e-05 wake 0.84 3.65s/step eta 170.7m
+[train] [step 2200/5000] loss 1.2142 model 0.7640 lm 0.5820 omni7_kd 0.4414 fly_port 0.0003 fly_sense 0.3617 lr 3.29e-05 wake 0.85 3.64s/step eta 170.1m
+[train] partial checkpoint (rolling) step 2200 -> checkpoints\supermix_expanse_v3.partial.pt in 1.0s
+[train] [step 2210/5000] loss 0.6491 model 0.6084 lm 0.4276 omni7_kd 0.2035 lr 3.27e-05 wake 0.85 3.64s/step eta 169.4m
+[train] [step 2220/5000] loss 1.4218 model 1.3571 lm 1.0118 omni7_kd 0.3235 lr 3.26e-05 wake 0.86 3.64s/step eta 168.8m
+[train] [step 2230/5000] loss 0.9012 model 0.8500 lm 0.6346 omni7_kd 0.2560 lr 3.24e-05 wake 0.86 3.64s/step eta 168.2m
+[train] [step 2240/5000] loss 2.2244 model 2.1742 lm 1.6397 omni7_kd 0.2512 lr 3.22e-05 wake 0.87 3.64s/step eta 167.5m
+[train] [step 2250/5000] loss 1.1923 model 1.1425 lm 0.8765 omni7_kd 0.2490 lr 3.21e-05 wake 0.87 3.64s/step eta 166.9m
+[train] [step 2260/5000] loss 0.1737 model 0.1280 lm 0.0876 omni7_kd 0.2284 lr 3.19e-05 wake 0.88 3.64s/step eta 166.3m
+[train] [step 2270/5000] loss 0.1096 model 0.0662 lm 0.0381 omni7_kd 0.2166 lr 3.18e-05 wake 0.88 3.64s/step eta 165.6m
+[train] [step 2280/5000] loss 1.1720 model 0.9407 lm 0.6979 omni7_kd 0.2871 fly_port 0.0003 fly_sense 0.1735 lr 3.16e-05 wake 0.89 3.64s/step eta 165.0m
+[train] [step 2290/5000] loss 1.1899 model 0.9360 lm 0.6945 omni7_kd 0.1743 fly_port 0.0000 fly_sense 0.2190 lr 3.15e-05 wake 0.89 3.64s/step eta 164.4m
+[train] [step 2300/5000] loss 0.7119 model 0.6604 lm 0.4902 omni7_kd 0.2579 lr 3.13e-05 wake 0.90 3.64s/step eta 163.8m
+[train] partial checkpoint (rolling) step 2300 -> checkpoints\supermix_expanse_v3.partial.pt in 1.2s
+[train] [step 2310/5000] loss 1.2089 model 0.8137 lm 0.5962 omni7_kd 0.1980 fly_port 0.0005 fly_sense 0.3550 lr 3.12e-05 wake 0.90 3.64s/step eta 163.2m
+[train] [step 2320/5000] loss 1.7702 model 1.7342 lm 1.3263 omni7_kd 0.1801 lr 3.10e-05 wake 0.91 3.64s/step eta 162.5m
+[train] [step 2330/5000] loss 1.4523 model 1.4004 lm 1.0532 omni7_kd 0.2595 lr 3.09e-05 wake 0.91 3.64s/step eta 161.9m
+[train] [step 2340/5000] loss 1.8626 model 1.8039 lm 1.3678 omni7_kd 0.2935 lr 3.07e-05 wake 0.92 3.64s/step eta 161.3m
+[train] [step 2350/5000] loss 1.2505 model 1.0052 lm 0.7694 omni7_kd 0.3872 fly_port 0.0001 fly_sense 0.1678 lr 3.06e-05 wake 0.92 3.64s/step eta 160.6m
+[train] [step 2360/5000] loss 0.3427 model 0.3121 lm 0.2171 omni7_kd 0.1528 lr 3.04e-05 wake 0.93 3.64s/step eta 160.0m
+[train] [step 2370/5000] loss 1.3608 model 1.2962 lm 0.9450 omni7_kd 0.3230 lr 3.03e-05 wake 0.93 3.64s/step eta 159.4m
+[train] [step 2380/5000] loss 1.0539 model 0.9932 lm 0.7367 omni7_kd 0.3032 lr 3.01e-05 wake 0.94 3.64s/step eta 158.7m
+[train] [step 2390/5000] loss 0.4622 model 0.4116 lm 0.3023 omni7_kd 0.2530 lr 2.99e-05 wake 0.94 3.63s/step eta 158.1m
+[train] [step 2400/5000] loss 1.7433 model 1.3300 lm 0.9932 omni7_kd 0.3258 fly_port 0.0002 fly_sense 0.3480 lr 2.98e-05 wake 0.95 3.63s/step eta 157.5m
+[train] partial checkpoint (rolling) step 2400 -> checkpoints\supermix_expanse_v3.partial.pt in 1.3s
+[train] [step 2410/5000] loss 0.8010 model 0.7637 lm 0.5673 omni7_kd 0.1866 lr 2.96e-05 wake 0.95 3.63s/step eta 156.9m
+[train] [step 2420/5000] loss 0.5559 model 0.3553 lm 0.2675 omni7_kd 0.1927 fly_port 0.0012 fly_sense 0.1608 lr 2.95e-05 wake 0.96 3.63s/step eta 156.2m
+[train] [step 2430/5000] loss 0.2552 model 0.2264 lm 0.1682 omni7_kd 0.1443 lr 2.93e-05 wake 0.96 3.63s/step eta 155.6m
+[train] [step 2440/5000] loss 0.2722 model 0.2356 lm 0.1652 omni7_kd 0.1828 lr 2.92e-05 wake 0.97 3.63s/step eta 155.0m
+[train] [step 2450/5000] loss 0.6383 model 0.5888 lm 0.4172 omni7_kd 0.2477 lr 2.90e-05 wake 0.97 3.63s/step eta 154.3m
+[train] [step 2460/5000] loss 0.3519 model 0.3174 lm 0.2324 omni7_kd 0.1724 lr 2.89e-05 wake 0.98 3.63s/step eta 153.7m
+[train] [step 2470/5000] loss 0.5366 model 0.4825 lm 0.3322 omni7_kd 0.2706 lr 2.87e-05 wake 0.98 3.63s/step eta 153.1m
+[train] [step 2480/5000] loss 0.9688 model 0.9279 lm 0.6884 omni7_kd 0.2045 lr 2.85e-05 wake 0.99 3.63s/step eta 152.5m
+[train] [step 2490/5000] loss 0.6680 model 0.4538 lm 0.3354 omni7_kd 0.2333 fly_port 0.0000 fly_sense 0.1675 lr 2.84e-05 wake 0.99 3.63s/step eta 151.9m
+[train] [step 2500/5000] loss 0.2533 model 0.2206 lm 0.1578 omni7_kd 0.1632 lr 2.82e-05 wake 1.00 3.63s/step eta 151.2m
+[train] [eval 2500] dev_loss=1.3926 dev_replay=0.0983 dev_fly=0.9793 dev_code=2.2537 dev_bio=5.8818 dev_connectome=0.4857 dev_fresh=0.0622 fly_port_agree=0.9500 sense_mae=0.3728 omni7_intent_agree=0.7857 omni7_domain_agree=0.7964 fly_gate_abs_mean=0.0248 omni_gate_abs_mean=0.0352 cns_gate_abs_mean=0.0443 cns_alive=826 omni7_gate_abs_mean=0.1283 cns_full_gate_abs_mean=0.1507 moe1_alive=88 moe2_alive=88 moe3_alive=72 moe4_alive=72 donor_qwen_alive=16 donor_qwen_slots=16 donor_qwen_bias_mean=21.3715 donor_qwen_weight_rms=0.1300 donor_biomedlm_alive=16 donor_biomedlm_slots=16 donor_biomedlm_bias_mean=21.3467 donor_biomedlm_weight_rms=0.1121
+[train] partial checkpoint (rolling) step 2500 -> checkpoints\supermix_expanse_v3.partial.pt in 1.0s
+[train] [step 2510/5000] loss 0.8025 model 0.7694 lm 0.5732 omni7_kd 0.1657 lr 2.81e-05 wake 1.00 3.66s/step eta 151.8m
+[train] [step 2520/5000] loss 1.0922 model 1.0620 lm 0.7885 omni7_kd 0.1509 lr 2.79e-05 wake 1.00 3.66s/step eta 151.2m
+[train] [step 2530/5000] loss 0.2980 model 0.2565 lm 0.1871 omni7_kd 0.2076 lr 2.78e-05 wake 1.00 3.66s/step eta 150.6m
+[train] [step 2540/5000] loss 0.7649 model 0.4502 lm 0.3386 omni7_kd 0.2386 fly_port 0.0003 fly_sense 0.2667 lr 2.76e-05 wake 1.00 3.66s/step eta 149.9m
+[train] [step 2550/5000] loss 0.5064 model 0.4422 lm 0.3159 omni7_kd 0.3209 lr 2.74e-05 wake 1.00 3.66s/step eta 149.3m
+[train] [step 2560/5000] loss 1.1234 model 1.0905 lm 0.8221 omni7_kd 0.1645 lr 2.73e-05 wake 1.00 3.66s/step eta 148.7m
+[train] [step 2570/5000] loss 1.4682 model 1.4260 lm 1.0754 omni7_kd 0.2107 lr 2.71e-05 wake 1.00 3.66s/step eta 148.0m
+[train] [step 2580/5000] loss 0.7926 model 0.5234 lm 0.4152 omni7_kd 0.2034 fly_port 0.0001 fly_sense 0.2285 lr 2.70e-05 wake 1.00 3.65s/step eta 147.4m
+[train] [step 2590/5000] loss 0.5418 model 0.5075 lm 0.3498 omni7_kd 0.1718 lr 2.68e-05 wake 1.00 3.65s/step eta 146.8m
+[train] [step 2600/5000] loss 0.1571 model 0.1333 lm 0.0907 omni7_kd 0.1194 lr 2.67e-05 wake 1.00 3.65s/step eta 146.1m
+[train] partial checkpoint (rolling) step 2600 -> checkpoints\supermix_expanse_v3.partial.pt in 1.1s
+[train] [step 2610/5000] loss 1.2699 model 1.0456 lm 0.7999 omni7_kd 0.3751 fly_port 0.0006 fly_sense 0.1486 lr 2.65e-05 wake 1.00 3.65s/step eta 145.5m
+[train] [step 2620/5000] loss 1.4815 model 1.4359 lm 1.0964 omni7_kd 0.2276 lr 2.63e-05 wake 1.00 3.65s/step eta 144.9m
+[train] [step 2630/5000] loss 0.6320 model 0.5827 lm 0.4423 omni7_kd 0.2465 lr 2.62e-05 wake 1.00 3.65s/step eta 144.2m
+[train] [step 2640/5000] loss 0.8062 model 0.7633 lm 0.5319 omni7_kd 0.2149 lr 2.60e-05 wake 1.00 3.65s/step eta 143.6m
+[train] [step 2650/5000] loss 0.3379 model 0.2886 lm 0.1931 omni7_kd 0.2463 lr 2.59e-05 wake 1.00 3.65s/step eta 143.0m
+[train] [step 2660/5000] loss 2.1565 model 2.0788 lm 1.5619 omni7_kd 0.3883 lr 2.57e-05 wake 1.00 3.65s/step eta 142.4m
+[train] [step 2670/5000] loss 0.5897 model 0.5374 lm 0.4117 omni7_kd 0.2615 lr 2.56e-05 wake 1.00 3.65s/step eta 141.7m
+[train] [step 2680/5000] loss 1.0722 model 1.0403 lm 0.7547 omni7_kd 0.1593 lr 2.54e-05 wake 1.00 3.65s/step eta 141.1m
+[train] [step 2690/5000] loss 0.1858 model 0.1091 lm 0.0740 omni7_kd 0.3838 lr 2.52e-05 wake 1.00 3.65s/step eta 140.5m
+[train] [step 2700/5000] loss 0.9341 model 0.6201 lm 0.4591 omni7_kd 0.2054 fly_port 0.0016 fly_sense 0.2713 lr 2.51e-05 wake 1.00 3.65s/step eta 139.9m
+[train] partial checkpoint (rolling) step 2700 -> checkpoints\supermix_expanse_v3.partial.pt in 1.1s
+[train] [step 2710/5000] loss 0.5216 model 0.4541 lm 0.3348 omni7_kd 0.3375 lr 2.49e-05 wake 1.00 3.65s/step eta 139.3m
+[train] [step 2720/5000] loss 1.3206 model 0.8687 lm 0.6613 omni7_kd 0.2378 fly_port 0.0001 fly_sense 0.4043 lr 2.48e-05 wake 1.00 3.65s/step eta 138.6m
+[train] [step 2730/5000] loss 2.0112 model 1.9679 lm 1.5011 omni7_kd 0.2164 lr 2.46e-05 wake 1.00 3.65s/step eta 138.0m
+[train] [step 2740/5000] loss 0.7443 model 0.6729 lm 0.4919 omni7_kd 0.3572 lr 2.45e-05 wake 1.00 3.65s/step eta 137.4m
+[train] [step 2750/5000] loss 0.1862 model 0.1583 lm 0.1073 omni7_kd 0.1396 lr 2.43e-05 wake 1.00 3.65s/step eta 136.8m
+[train] [step 2760/5000] loss 1.5457 model 1.5152 lm 1.1453 omni7_kd 0.1527 lr 2.41e-05 wake 1.00 3.65s/step eta 136.1m
+[train] [step 2770/5000] loss 0.8257 model 0.6585 lm 0.4905 omni7_kd 0.1798 fly_port 0.0008 fly_sense 0.1304 lr 2.40e-05 wake 1.00 3.65s/step eta 135.5m
+[train] [step 2780/5000] loss 2.8382 model 2.7881 lm 2.1143 omni7_kd 0.2504 lr 2.38e-05 wake 1.00 3.65s/step eta 134.9m
+[train] [step 2790/5000] loss 0.6160 model 0.3124 lm 0.2351 omni7_kd 0.0944 fly_port 0.0008 fly_sense 0.2839 lr 2.37e-05 wake 1.00 3.65s/step eta 134.3m
+[train] [step 2800/5000] loss 1.1920 model 1.1593 lm 0.8542 omni7_kd 0.1632 lr 2.35e-05 wake 1.00 3.64s/step eta 133.6m
+[train] partial checkpoint (rolling) step 2800 -> checkpoints\supermix_expanse_v3.partial.pt in 1.1s
+[train] [step 2810/5000] loss 0.4374 model 0.3920 lm 0.2897 omni7_kd 0.2270 lr 2.34e-05 wake 1.00 3.64s/step eta 133.0m
+[train] [step 2820/5000] loss 2.1518 model 2.0881 lm 1.6137 omni7_kd 0.3181 lr 2.32e-05 wake 1.00 3.64s/step eta 132.4m
+[train] [step 2830/5000] loss 0.2614 model 0.2393 lm 0.1715 omni7_kd 0.1103 lr 2.31e-05 wake 1.00 3.64s/step eta 131.8m
+[train] [step 2840/5000] loss 1.2434 model 0.8726 lm 0.6466 omni7_kd 0.1863 fly_port 0.0005 fly_sense 0.3331 lr 2.29e-05 wake 1.00 3.64s/step eta 131.2m
+[train] [step 2850/5000] loss 1.1990 model 1.1402 lm 0.8347 omni7_kd 0.2943 lr 2.27e-05 wake 1.00 3.64s/step eta 130.5m
+[train] [step 2860/5000] loss 0.9673 model 0.9047 lm 0.6499 omni7_kd 0.3129 lr 2.26e-05 wake 1.00 3.64s/step eta 129.9m
+[train] [step 2870/5000] loss 0.9762 model 0.9284 lm 0.6799 omni7_kd 0.2388 lr 2.24e-05 wake 1.00 3.64s/step eta 129.3m
+[train] [step 2880/5000] loss 1.3833 model 1.3431 lm 0.9873 omni7_kd 0.2009 lr 2.23e-05 wake 1.00 3.64s/step eta 128.7m
+[train] [step 2890/5000] loss 0.1931 model 0.1622 lm 0.1097 omni7_kd 0.1546 lr 2.21e-05 wake 1.00 3.64s/step eta 128.0m
+[train] [step 2900/5000] loss 1.2938 model 1.2412 lm 0.9195 omni7_kd 0.2633 lr 2.20e-05 wake 1.00 3.64s/step eta 127.4m
+[train] partial checkpoint (rolling) step 2900 -> checkpoints\supermix_expanse_v3.partial.pt in 1.1s
+[train] [step 2910/5000] loss 0.6678 model 0.5105 lm 0.3806 omni7_kd 0.1806 fly_port 0.0014 fly_sense 0.1198 lr 2.18e-05 wake 1.00 3.64s/step eta 126.8m
+[train] [step 2920/5000] loss 1.1204 model 1.0824 lm 0.8219 omni7_kd 0.1897 lr 2.17e-05 wake 1.00 3.64s/step eta 126.2m
+[train] [step 2930/5000] loss 0.1565 model 0.0950 lm 0.0671 omni7_kd 0.3074 lr 2.15e-05 wake 1.00 3.64s/step eta 125.6m
+[train] [step 2940/5000] loss 2.4870 model 2.2205 lm 1.6509 omni7_kd 0.2979 fly_port 0.0008 fly_sense 0.2060 lr 2.14e-05 wake 1.00 3.64s/step eta 124.9m
+[train] [step 2950/5000] loss 0.8266 model 0.6153 lm 0.4682 omni7_kd 0.1447 fly_port 0.0001 fly_sense 0.1822 lr 2.12e-05 wake 1.00 3.64s/step eta 124.3m
+[train] [step 2960/5000] loss 1.1337 model 1.0889 lm 0.8256 omni7_kd 0.2239 lr 2.10e-05 wake 1.00 3.64s/step eta 123.7m
+[train] [step 2970/5000] loss 1.4294 model 1.4015 lm 1.0726 omni7_kd 0.1398 lr 2.09e-05 wake 1.00 3.64s/step eta 123.0m
+[train] [step 2980/5000] loss 2.1135 model 1.7754 lm 1.3514 omni7_kd 0.2062 fly_port 0.0004 fly_sense 0.2965 lr 2.07e-05 wake 1.00 3.64s/step eta 122.4m
+[train] [step 2990/5000] loss 1.2124 model 1.1391 lm 0.8475 omni7_kd 0.3666 lr 2.06e-05 wake 1.00 3.64s/step eta 121.8m
+[train] [step 3000/5000] loss 1.7742 model 1.7234 lm 1.2884 omni7_kd 0.2538 lr 2.04e-05 wake 1.00 3.64s/step eta 121.2m
+[train] [eval 3000] dev_loss=1.3657 dev_replay=0.0916 dev_fly=0.9584 dev_code=2.1467 dev_bio=5.8667 dev_connectome=0.4818 dev_fresh=0.0613 fly_port_agree=0.9500 sense_mae=0.3649 omni7_intent_agree=0.7982 omni7_domain_agree=0.7893 fly_gate_abs_mean=0.0248 omni_gate_abs_mean=0.0354 cns_gate_abs_mean=0.0443 cns_alive=826 omni7_gate_abs_mean=0.1334 cns_full_gate_abs_mean=0.1569 moe1_alive=88 moe2_alive=88 moe3_alive=72 moe4_alive=72 donor_qwen_alive=16 donor_qwen_slots=16 donor_qwen_bias_mean=21.3723 donor_qwen_weight_rms=0.1300 donor_biomedlm_alive=16 donor_biomedlm_slots=16 donor_biomedlm_bias_mean=21.3475 donor_biomedlm_weight_rms=0.1121
+[train] partial checkpoint (rolling) step 3000 -> checkpoints\supermix_expanse_v3.partial.pt in 1.0s
+[train] [step 3010/5000] loss 0.7698 model 0.7329 lm 0.5469 omni7_kd 0.1842 lr 2.03e-05 wake 1.00 3.66s/step eta 121.4m
+[train] [step 3020/5000] loss 0.3134 model 0.2734 lm 0.2040 omni7_kd 0.2000 lr 2.01e-05 wake 1.00 3.66s/step eta 120.8m
+[train] [step 3030/5000] loss 0.3572 model 0.3405 lm 0.2449 omni7_kd 0.0833 lr 2.00e-05 wake 1.00 3.66s/step eta 120.2m
+[train] [step 3040/5000] loss 0.5435 model 0.5063 lm 0.3636 omni7_kd 0.1862 lr 1.98e-05 wake 1.00 3.66s/step eta 119.6m
+[train] [step 3050/5000] loss 2.4466 model 2.1595 lm 1.6089 omni7_kd 0.4603 fly_port 0.0000 fly_sense 0.1950 lr 1.97e-05 wake 1.00 3.66s/step eta 118.9m
+[train] [step 3060/5000] loss 0.7803 model 0.5873 lm 0.4323 omni7_kd 0.1396 fly_port 0.0006 fly_sense 0.1644 lr 1.95e-05 wake 1.00 3.66s/step eta 118.3m
+[train] [step 3070/5000] loss 0.6801 model 0.6217 lm 0.4566 omni7_kd 0.2923 lr 1.94e-05 wake 1.00 3.66s/step eta 117.7m
+[train] [step 3080/5000] loss 0.1328 model 0.1060 lm 0.0711 omni7_kd 0.1344 lr 1.92e-05 wake 1.00 3.66s/step eta 117.1m
+[train] [step 3090/5000] loss 1.6226 model 1.5921 lm 1.1816 omni7_kd 0.1525 lr 1.91e-05 wake 1.00 3.66s/step eta 116.5m
+[train] [step 3100/5000] loss 0.5630 model 0.5310 lm 0.3742 omni7_kd 0.1602 lr 1.89e-05 wake 1.00 3.66s/step eta 115.8m
+[train] partial checkpoint (rolling) step 3100 -> checkpoints\supermix_expanse_v3.partial.pt in 1.0s
+[train] [step 3110/5000] loss 0.3700 model 0.3234 lm 0.2273 omni7_kd 0.2327 lr 1.88e-05 wake 1.00 3.66s/step eta 115.2m
+[train] [step 3120/5000] loss 0.6301 model 0.5904 lm 0.4364 omni7_kd 0.1988 lr 1.86e-05 wake 1.00 3.66s/step eta 114.6m
+[train] [step 3130/5000] loss 0.7194 model 0.6676 lm 0.4886 omni7_kd 0.2593 lr 1.85e-05 wake 1.00 3.66s/step eta 114.0m
+[train] [step 3140/5000] loss 1.0752 model 1.0361 lm 0.7418 omni7_kd 0.1956 lr 1.83e-05 wake 1.00 3.66s/step eta 113.4m
+[train] [step 3150/5000] loss 0.6469 model 0.3598 lm 0.2597 omni7_kd 0.1750 fly_port 0.0000 fly_sense 0.2520 lr 1.82e-05 wake 1.00 3.66s/step eta 112.8m
+[train] [step 3160/5000] loss 1.1929 model 1.1475 lm 0.8790 omni7_kd 0.2271 lr 1.80e-05 wake 1.00 3.66s/step eta 112.1m
+[train] [step 3170/5000] loss 1.9230 model 1.8750 lm 1.4253 omni7_kd 0.2400 lr 1.79e-05 wake 1.00 3.66s/step eta 111.5m
+[train] [step 3180/5000] loss 0.5159 model 0.4645 lm 0.3472 omni7_kd 0.2572 lr 1.77e-05 wake 1.00 3.66s/step eta 110.9m
+[train] [step 3190/5000] loss 0.3282 model 0.1327 lm 0.0973 omni7_kd 0.1167 fly_port 0.0003 fly_sense 0.1719 lr 1.76e-05 wake 1.00 3.66s/step eta 110.3m
+[train] [step 3200/5000] loss 1.1345 model 1.0655 lm 0.8082 omni7_kd 0.3455 lr 1.74e-05 wake 1.00 3.66s/step eta 109.7m
+[train] partial checkpoint (rolling) step 3200 -> checkpoints\supermix_expanse_v3.partial.pt in 1.2s
+[train] [step 3210/5000] loss 0.3760 model 0.3526 lm 0.2505 omni7_kd 0.1172 lr 1.73e-05 wake 1.00 3.66s/step eta 109.0m
+[train] [step 3220/5000] loss 0.7661 model 0.7407 lm 0.5396 omni7_kd 0.1271 lr 1.72e-05 wake 1.00 3.65s/step eta 108.4m
+[train] [step 3230/5000] loss 0.4861 model 0.4373 lm 0.2968 omni7_kd 0.2440 lr 1.70e-05 wake 1.00 3.65s/step eta 107.8m
+[train] [step 3240/5000] loss 0.5997 model 0.5548 lm 0.4195 omni7_kd 0.2248 lr 1.69e-05 wake 1.00 3.65s/step eta 107.2m
+[train] [step 3250/5000] loss 0.2916 model 0.2575 lm 0.1856 omni7_kd 0.1707 lr 1.67e-05 wake 1.00 3.65s/step eta 106.6m
+[train] [step 3260/5000] loss 2.2518 model 2.0148 lm 1.5142 omni7_kd 0.3264 fly_port 0.0003 fly_sense 0.1713 lr 1.66e-05 wake 1.00 3.65s/step eta 105.9m
+[train] [step 3270/5000] loss 0.2703 model 0.1973 lm 0.1396 omni7_kd 0.3650 lr 1.64e-05 wake 1.00 3.65s/step eta 105.3m
+[train] [step 3280/5000] loss 1.7112 model 1.6564 lm 1.2659 omni7_kd 0.2739 lr 1.63e-05 wake 1.00 3.65s/step eta 104.7m
+[train] [step 3290/5000] loss 0.0814 model 0.0421 lm 0.0224 omni7_kd 0.1965 lr 1.62e-05 wake 1.00 3.65s/step eta 104.1m
+[train] [step 3300/5000] loss 1.2396 model 0.9027 lm 0.6876 omni7_kd 0.1758 fly_port 0.0000 fly_sense 0.3017 lr 1.60e-05 wake 1.00 3.65s/step eta 103.5m
+[train] partial checkpoint (rolling) step 3300 -> checkpoints\supermix_expanse_v3.partial.pt in 1.0s
+[train] [step 3310/5000] loss 1.3496 model 1.2950 lm 0.9445 omni7_kd 0.2729 lr 1.59e-05 wake 1.00 3.65s/step eta 102.8m
+[train] [step 3320/5000] loss 0.3189 model 0.3013 lm 0.2242 omni7_kd 0.0879 lr 1.57e-05 wake 1.00 3.65s/step eta 102.2m
+[train] [step 3330/5000] loss 0.5183 model 0.4689 lm 0.3410 omni7_kd 0.2471 lr 1.56e-05 wake 1.00 3.65s/step eta 101.6m
+[train] [step 3340/5000] loss 1.3432 model 1.0375 lm 0.7652 omni7_kd 0.1908 fly_port 0.0001 fly_sense 0.2675 lr 1.54e-05 wake 1.00 3.65s/step eta 101.0m
+[train] [step 3350/5000] loss 2.3568 model 2.1549 lm 1.6683 omni7_kd 0.1531 fly_port 0.0000 fly_sense 0.1713 lr 1.53e-05 wake 1.00 3.65s/step eta 100.4m
+[train] [step 3360/5000] loss 1.2716 model 1.2392 lm 0.9406 omni7_kd 0.1620 lr 1.52e-05 wake 1.00 3.65s/step eta 99.7m
+[train] [step 3370/5000] loss 1.3869 model 1.3479 lm 0.9903 omni7_kd 0.1950 lr 1.50e-05 wake 1.00 3.65s/step eta 99.1m
+[train] [step 3380/5000] loss 1.4837 model 1.4566 lm 1.1132 omni7_kd 0.1355 lr 1.49e-05 wake 1.00 3.65s/step eta 98.5m
+[train] [step 3390/5000] loss 0.8058 model 0.7731 lm 0.5771 omni7_kd 0.1638 lr 1.48e-05 wake 1.00 3.65s/step eta 97.9m
+[train] [step 3400/5000] loss 1.6720 model 1.6374 lm 1.2431 omni7_kd 0.1730 lr 1.46e-05 wake 1.00 3.65s/step eta 97.3m
+[train] partial checkpoint (rolling) step 3400 -> checkpoints\supermix_expanse_v3.partial.pt in 1.0s
+[train] [step 3410/5000] loss 0.8244 model 0.7754 lm 0.5749 omni7_kd 0.2448 lr 1.45e-05 wake 1.00 3.65s/step eta 96.7m
+[train] [step 3420/5000] loss 0.8521 model 0.8095 lm 0.5975 omni7_kd 0.2130 lr 1.43e-05 wake 1.00 3.65s/step eta 96.0m
+[train] [step 3430/5000] loss 1.1191 model 1.0799 lm 0.8119 omni7_kd 0.1962 lr 1.42e-05 wake 1.00 3.65s/step eta 95.4m
+[train] [step 3440/5000] loss 2.0906 model 2.0012 lm 1.5162 omni7_kd 0.4472 lr 1.41e-05 wake 1.00 3.65s/step eta 94.8m
+[train] [step 3450/5000] loss 0.7079 model 0.6770 lm 0.4824 omni7_kd 0.1544 lr 1.39e-05 wake 1.00 3.65s/step eta 94.2m
+[train] [step 3460/5000] loss 2.3578 model 2.3198 lm 1.7587 omni7_kd 0.1897 lr 1.38e-05 wake 1.00 3.65s/step eta 93.6m
+[train] [step 3470/5000] loss 0.4267 model 0.3996 lm 0.2873 omni7_kd 0.1352 lr 1.37e-05 wake 1.00 3.65s/step eta 93.0m
+[train] [step 3480/5000] loss 2.0790 model 1.8426 lm 1.3967 omni7_kd 0.2269 fly_port 0.0001 fly_sense 0.1909 lr 1.35e-05 wake 1.00 3.64s/step eta 92.3m
+[train] [step 3490/5000] loss 1.7629 model 1.7313 lm 1.3103 omni7_kd 0.1581 lr 1.34e-05 wake 1.00 3.64s/step eta 91.7m
+[train] [step 3500/5000] loss 0.2022 model 0.1735 lm 0.1219 omni7_kd 0.1436 lr 1.33e-05 wake 1.00 3.64s/step eta 91.1m
+[train] [eval 3500] dev_loss=1.3444 dev_replay=0.0892 dev_fly=0.9514 dev_code=2.0633 dev_bio=5.8419 dev_connectome=0.4782 dev_fresh=0.0597 fly_port_agree=0.9667 sense_mae=0.3691 omni7_intent_agree=0.7982 omni7_domain_agree=0.7982 fly_gate_abs_mean=0.0249 omni_gate_abs_mean=0.0354 cns_gate_abs_mean=0.0443 cns_alive=826 omni7_gate_abs_mean=0.1369 cns_full_gate_abs_mean=0.1611 moe1_alive=88 moe2_alive=88 moe3_alive=72 moe4_alive=72 donor_qwen_alive=16 donor_qwen_slots=16 donor_qwen_bias_mean=21.3723 donor_qwen_weight_rms=0.1300 donor_biomedlm_alive=16 donor_biomedlm_slots=16 donor_biomedlm_bias_mean=21.3475 donor_biomedlm_weight_rms=0.1121
+[train] partial checkpoint (rolling) step 3500 -> checkpoints\supermix_expanse_v3.partial.pt in 1.0s
+[train] [step 3510/5000] loss 0.8168 model 0.7758 lm 0.5390 omni7_kd 0.2050 lr 1.31e-05 wake 1.00 3.67s/step eta 91.0m
+[train] [step 3520/5000] loss 1.8003 model 1.7705 lm 1.3233 omni7_kd 0.1487 lr 1.30e-05 wake 1.00 3.67s/step eta 90.4m
+[train] [step 3530/5000] loss 1.1570 model 1.1105 lm 0.8484 omni7_kd 0.2324 lr 1.29e-05 wake 1.00 3.67s/step eta 89.8m
+[train] [step 3540/5000] loss 2.0886 model 2.0502 lm 1.5379 omni7_kd 0.1923 lr 1.28e-05 wake 1.00 3.66s/step eta 89.2m
+[train] [step 3550/5000] loss 2.2327 model 2.2015 lm 1.6347 omni7_kd 0.1560 lr 1.26e-05 wake 1.00 3.66s/step eta 88.5m
+[train] [step 3560/5000] loss 0.6688 model 0.3425 lm 0.2593 omni7_kd 0.2521 fly_port 0.0001 fly_sense 0.2758 lr 1.25e-05 wake 1.00 3.66s/step eta 87.9m
+[train] [step 3570/5000] loss 0.5733 model 0.5484 lm 0.4048 omni7_kd 0.1249 lr 1.24e-05 wake 1.00 3.66s/step eta 87.3m
+[train] [step 3580/5000] loss 3.4966 model 3.4356 lm 2.5952 omni7_kd 0.3049 lr 1.22e-05 wake 1.00 3.66s/step eta 86.7m
+[train] [step 3590/5000] loss 0.7424 model 0.7017 lm 0.5122 omni7_kd 0.2039 lr 1.21e-05 wake 1.00 3.66s/step eta 86.0m
+[train] [step 3600/5000] loss 0.3849 model 0.3271 lm 0.2343 omni7_kd 0.2889 lr 1.20e-05 wake 1.00 3.66s/step eta 85.4m
+[train] partial checkpoint (rolling) step 3600 -> checkpoints\supermix_expanse_v3.partial.pt in 1.2s
+[train] [step 3610/5000] loss 2.8996 model 2.8399 lm 2.1429 omni7_kd 0.2987 lr 1.19e-05 wake 1.00 3.66s/step eta 84.8m
+[train] [step 3620/5000] loss 0.7385 model 0.5561 lm 0.4116 omni7_kd 0.1237 fly_port 0.0000 fly_sense 0.1576 lr 1.17e-05 wake 1.00 3.66s/step eta 84.2m
+[train] [step 3630/5000] loss 0.8066 model 0.7750 lm 0.5877 omni7_kd 0.1580 lr 1.16e-05 wake 1.00 3.66s/step eta 83.6m
+[train] [step 3640/5000] loss 1.2600 model 1.2205 lm 0.8518 omni7_kd 0.1977 lr 1.15e-05 wake 1.00 3.66s/step eta 83.0m
+[train] [step 3650/5000] loss 1.2953 model 1.0045 lm 0.7691 omni7_kd 0.1512 fly_port 0.0000 fly_sense 0.2605 lr 1.14e-05 wake 1.00 3.66s/step eta 82.4m
+[train] [step 3660/5000] loss 0.9460 model 0.8951 lm 0.6229 omni7_kd 0.2549 lr 1.12e-05 wake 1.00 3.66s/step eta 81.7m
+[train] [step 3670/5000] loss 1.2933 model 1.2636 lm 0.9113 omni7_kd 0.1485 lr 1.11e-05 wake 1.00 3.66s/step eta 81.1m
+[train] [step 3680/5000] loss 1.6559 model 1.6013 lm 1.2126 omni7_kd 0.2729 lr 1.10e-05 wake 1.00 3.66s/step eta 80.5m
+[train] [step 3690/5000] loss 0.6437 model 0.6153 lm 0.4527 omni7_kd 0.1422 lr 1.09e-05 wake 1.00 3.66s/step eta 79.9m
+[train] [step 3700/5000] loss 1.2069 model 1.1447 lm 0.8092 omni7_kd 0.3114 lr 1.08e-05 wake 1.00 3.66s/step eta 79.3m
+[train] partial checkpoint (rolling) step 3700 -> checkpoints\supermix_expanse_v3.partial.pt in 1.1s
+[train] [step 3710/5000] loss 1.7020 model 1.6558 lm 1.1957 omni7_kd 0.2307 lr 1.06e-05 wake 1.00 3.66s/step eta 78.7m
+[train] [step 3720/5000] loss 0.3724 model 0.2990 lm 0.2152 omni7_kd 0.3672 lr 1.05e-05 wake 1.00 3.66s/step eta 78.1m
+[train] [step 3730/5000] loss 0.9408 model 0.9076 lm 0.6785 omni7_kd 0.1662 lr 1.04e-05 wake 1.00 3.66s/step eta 77.4m
+[train] [step 3740/5000] loss 0.6306 model 0.2934 lm 0.2213 omni7_kd 0.2224 fly_port 0.0000 fly_sense 0.2927 lr 1.03e-05 wake 1.00 3.66s/step eta 76.8m
+[train] [step 3750/5000] loss 0.6028 model 0.5577 lm 0.3888 omni7_kd 0.2256 lr 1.02e-05 wake 1.00 3.66s/step eta 76.2m
+[train] [step 3760/5000] loss 0.7554 model 0.5825 lm 0.4312 omni7_kd 0.1043 fly_port 0.0003 fly_sense 0.1517 lr 1.01e-05 wake 1.00 3.66s/step eta 75.6m
+[train] [step 3770/5000] loss 0.4261 model 0.3908 lm 0.2687 omni7_kd 0.1767 lr 9.95e-06 wake 1.00 3.66s/step eta 75.0m
+[train] [step 3780/5000] loss 0.6624 model 0.6120 lm 0.4568 omni7_kd 0.2520 lr 9.83e-06 wake 1.00 3.66s/step eta 74.4m
+[train] [step 3790/5000] loss 0.7064 model 0.6817 lm 0.4994 omni7_kd 0.1235 lr 9.72e-06 wake 1.00 3.66s/step eta 73.7m
+[train] [step 3800/5000] loss 2.3616 model 2.1611 lm 1.5931 omni7_kd 0.3031 fly_port 0.0043 fly_sense 0.1356 lr 9.61e-06 wake 1.00 3.66s/step eta 73.1m
+[train] partial checkpoint (rolling) step 3800 -> checkpoints\supermix_expanse_v3.partial.pt in 1.0s
+[train] [step 3810/5000] loss 0.5487 model 0.4980 lm 0.3733 omni7_kd 0.2536 lr 9.50e-06 wake 1.00 3.66s/step eta 72.5m
+[train] [step 3820/5000] loss 2.2482 model 2.2260 lm 1.7107 omni7_kd 0.1107 lr 9.38e-06 wake 1.00 3.66s/step eta 71.9m
+[train] [step 3830/5000] loss 0.6955 model 0.4743 lm 0.3255 omni7_kd 0.1552 fly_port 0.0000 fly_sense 0.1902 lr 9.27e-06 wake 1.00 3.66s/step eta 71.3m
+[train] [step 3840/5000] loss 1.5634 model 1.5135 lm 1.1230 omni7_kd 0.2497 lr 9.16e-06 wake 1.00 3.66s/step eta 70.7m
+[train] [step 3850/5000] loss 2.3883 model 2.3556 lm 1.7942 omni7_kd 0.1639 lr 9.06e-06 wake 1.00 3.65s/step eta 70.1m
+[train] [step 3860/5000] loss 0.9521 model 0.9087 lm 0.6711 omni7_kd 0.2170 lr 8.95e-06 wake 1.00 3.65s/step eta 69.4m
+[train] [step 3870/5000] loss 0.9207 model 0.6802 lm 0.5229 omni7_kd 0.2644 fly_port 0.0000 fly_sense 0.1876 lr 8.84e-06 wake 1.00 3.65s/step eta 68.8m
+[train] [step 3880/5000] loss 1.0897 model 0.8644 lm 0.6311 omni7_kd 0.2011 fly_port 0.0000 fly_sense 0.1851 lr 8.73e-06 wake 1.00 3.65s/step eta 68.2m
+[train] [step 3890/5000] loss 1.3139 model 1.2614 lm 0.9050 omni7_kd 0.2624 lr 8.63e-06 wake 1.00 3.65s/step eta 67.6m
+[train] [step 3900/5000] loss 1.0546 model 1.0036 lm 0.7515 omni7_kd 0.2553 lr 8.52e-06 wake 1.00 3.65s/step eta 67.0m
+[train] partial checkpoint (rolling) step 3900 -> checkpoints\supermix_expanse_v3.partial.pt in 1.1s
+[train] [step 3910/5000] loss 0.4826 model 0.4496 lm 0.3153 omni7_kd 0.1652 lr 8.42e-06 wake 1.00 3.65s/step eta 66.4m
+[train] [step 3920/5000] loss 0.8482 model 0.8021 lm 0.5787 omni7_kd 0.2302 lr 8.32e-06 wake 1.00 3.65s/step eta 65.8m
+[train] [step 3930/5000] loss 0.9027 model 0.8603 lm 0.6498 omni7_kd 0.2122 lr 8.21e-06 wake 1.00 3.65s/step eta 65.1m
+[train] [step 3940/5000] loss 1.1530 model 1.1295 lm 0.8248 omni7_kd 0.1174 lr 8.11e-06 wake 1.00 3.65s/step eta 64.5m
+[train] [step 3950/5000] loss 0.9370 model 0.9081 lm 0.6667 omni7_kd 0.1445 lr 8.01e-06 wake 1.00 3.65s/step eta 63.9m
+[train] [step 3960/5000] loss 0.1784 model 0.1412 lm 0.0979 omni7_kd 0.1860 lr 7.91e-06 wake 1.00 3.65s/step eta 63.3m
+[train] [step 3970/5000] loss 1.6940 model 1.6577 lm 1.2507 omni7_kd 0.1816 lr 7.81e-06 wake 1.00 3.65s/step eta 62.7m
+[train] [step 3980/5000] loss 0.6460 model 0.6286 lm 0.4578 omni7_kd 0.0870 lr 7.71e-06 wake 1.00 3.65s/step eta 62.1m
+[train] [step 3990/5000] loss 3.4805 model 3.4216 lm 2.5777 omni7_kd 0.2945 lr 7.61e-06 wake 1.00 3.65s/step eta 61.5m
+[train] [step 4000/5000] loss 0.2108 model 0.1886 lm 0.1379 omni7_kd 0.1109 lr 7.52e-06 wake 1.00 3.65s/step eta 60.8m
+[train] [eval 4000] dev_loss=1.3298 dev_replay=0.0864 dev_fly=0.9521 dev_code=2.0025 dev_bio=5.8312 dev_connectome=0.4726 dev_fresh=0.0581 fly_port_agree=0.9667 sense_mae=0.3609 omni7_intent_agree=0.8036 omni7_domain_agree=0.8000 fly_gate_abs_mean=0.0249 omni_gate_abs_mean=0.0356 cns_gate_abs_mean=0.0443 cns_alive=826 omni7_gate_abs_mean=0.1390 cns_full_gate_abs_mean=0.1638 moe1_alive=88 moe2_alive=88 moe3_alive=72 moe4_alive=72 donor_qwen_alive=16 donor_qwen_slots=16 donor_qwen_bias_mean=21.3723 donor_qwen_weight_rms=0.1300 donor_biomedlm_alive=16 donor_biomedlm_slots=16 donor_biomedlm_bias_mean=21.3475 donor_biomedlm_weight_rms=0.1121
+[train] partial checkpoint (rolling) step 4000 -> checkpoints\supermix_expanse_v3.partial.pt in 1.1s
+[train] [step 4010/5000] loss 0.3190 model 0.2925 lm 0.2197 omni7_kd 0.1325 lr 7.42e-06 wake 1.00 3.67s/step eta 60.5m
+[train] [step 4020/5000] loss 0.3307 model 0.3046 lm 0.2089 omni7_kd 0.1306 lr 7.33e-06 wake 1.00 3.67s/step eta 59.9m
+[train] [step 4030/5000] loss 0.5348 model 0.4800 lm 0.3501 omni7_kd 0.2740 lr 7.23e-06 wake 1.00 3.67s/step eta 59.3m
+[train] [step 4040/5000] loss 1.0700 model 0.9187 lm 0.7007 omni7_kd 0.2658 fly_port 0.0000 fly_sense 0.0981 lr 7.14e-06 wake 1.00 3.67s/step eta 58.7m
+[train] [step 4050/5000] loss 1.2044 model 1.1676 lm 0.8611 omni7_kd 0.1839 lr 7.05e-06 wake 1.00 3.67s/step eta 58.1m
+[train] [step 4060/5000] loss 1.5267 model 1.2404 lm 0.9408 omni7_kd 0.2298 fly_port 0.0000 fly_sense 0.2403 lr 6.95e-06 wake 1.00 3.67s/step eta 57.5m
+[train] [step 4070/5000] loss 0.9030 model 0.8645 lm 0.6336 omni7_kd 0.1923 lr 6.86e-06 wake 1.00 3.67s/step eta 56.8m
+[train] [step 4080/5000] loss 0.5810 model 0.5490 lm 0.4132 omni7_kd 0.1599 lr 6.77e-06 wake 1.00 3.67s/step eta 56.2m
+[train] [step 4090/5000] loss 1.6721 model 1.6407 lm 1.2445 omni7_kd 0.1566 lr 6.68e-06 wake 1.00 3.67s/step eta 55.6m
+[train] [step 4100/5000] loss 1.6249 model 1.4524 lm 1.0847 omni7_kd 0.1827 fly_port 0.0000 fly_sense 0.1360 lr 6.59e-06 wake 1.00 3.67s/step eta 55.0m
+[train] partial checkpoint (rolling) step 4100 -> checkpoints\supermix_expanse_v3.partial.pt in 1.2s
+[train] [step 4110/5000] loss 0.3942 model 0.3185 lm 0.1991 omni7_kd 0.3785 lr 6.51e-06 wake 1.00 3.67s/step eta 54.4m
+[train] [step 4120/5000] loss 0.7750 model 0.7210 lm 0.5318 omni7_kd 0.2703 lr 6.42e-06 wake 1.00 3.67s/step eta 53.8m
+[train] [step 4130/5000] loss 0.5043 model 0.4682 lm 0.3255 omni7_kd 0.1805 lr 6.33e-06 wake 1.00 3.67s/step eta 53.2m
+[train] [step 4140/5000] loss 0.9418 model 0.9076 lm 0.6451 omni7_kd 0.1709 lr 6.25e-06 wake 1.00 3.67s/step eta 52.5m
+[train] [step 4150/5000] loss 1.3355 model 1.0272 lm 0.7727 omni7_kd 0.1432 fly_port 0.0000 fly_sense 0.2796 lr 6.16e-06 wake 1.00 3.67s/step eta 51.9m
+[train] [step 4160/5000] loss 1.7085 model 1.6773 lm 1.2746 omni7_kd 0.1559 lr 6.08e-06 wake 1.00 3.67s/step eta 51.3m
+[train] [step 4170/5000] loss 1.2265 model 1.1962 lm 0.8567 omni7_kd 0.1515 lr 6.00e-06 wake 1.00 3.66s/step eta 50.7m
+[train] [step 4180/5000] loss 0.2646 model 0.2338 lm 0.1646 omni7_kd 0.1540 lr 5.92e-06 wake 1.00 3.66s/step eta 50.1m
+[train] [step 4190/5000] loss 0.7481 model 0.7096 lm 0.5197 omni7_kd 0.1925 lr 5.84e-06 wake 1.00 3.66s/step eta 49.5m
+[train] [step 4200/5000] loss 0.1934 model 0.1565 lm 0.1100 omni7_kd 0.1846 lr 5.76e-06 wake 1.00 3.66s/step eta 48.9m
+[train] partial checkpoint (rolling) step 4200 -> checkpoints\supermix_expanse_v3.partial.pt in 1.2s
+[train] [step 4210/5000] loss 0.6854 model 0.6350 lm 0.4720 omni7_kd 0.2519 lr 5.68e-06 wake 1.00 3.66s/step eta 48.2m
+[train] [step 4220/5000] loss 1.7805 model 1.5478 lm 1.1538 omni7_kd 0.1896 fly_port 0.0002 fly_sense 0.1947 lr 5.60e-06 wake 1.00 3.66s/step eta 47.6m
+[train] [step 4230/5000] loss 0.9056 model 0.8767 lm 0.6656 omni7_kd 0.1443 lr 5.52e-06 wake 1.00 3.66s/step eta 47.0m
+[train] [step 4240/5000] loss 1.6644 model 1.6312 lm 1.2137 omni7_kd 0.1659 lr 5.45e-06 wake 1.00 3.66s/step eta 46.4m
+[train] [step 4250/5000] loss 2.3649 model 2.3435 lm 1.8005 omni7_kd 0.1070 lr 5.37e-06 wake 1.00 3.66s/step eta 45.8m
+[train] [step 4260/5000] loss 0.6126 model 0.5555 lm 0.4122 omni7_kd 0.2851 lr 5.30e-06 wake 1.00 3.66s/step eta 45.2m
+[train] [step 4270/5000] loss 0.9434 model 0.9069 lm 0.6822 omni7_kd 0.1826 lr 5.22e-06 wake 1.00 3.66s/step eta 44.6m
+[train] [step 4280/5000] loss 0.5601 model 0.5412 lm 0.4038 omni7_kd 0.0944 lr 5.15e-06 wake 1.00 3.66s/step eta 43.9m
+[train] [step 4290/5000] loss 0.8011 model 0.7508 lm 0.5585 omni7_kd 0.2515 lr 5.08e-06 wake 1.00 3.66s/step eta 43.3m
+[train] [step 4300/5000] loss 0.4143 model 0.2226 lm 0.1692 omni7_kd 0.1194 fly_port 0.0000 fly_sense 0.1679 lr 5.01e-06 wake 1.00 3.66s/step eta 42.7m
+[train] partial checkpoint (rolling) step 4300 -> checkpoints\supermix_expanse_v3.partial.pt in 1.3s
+[train] [step 4310/5000] loss 0.7116 model 0.6869 lm 0.5162 omni7_kd 0.1235 lr 4.94e-06 wake 1.00 3.66s/step eta 42.1m
+[train] [step 4320/5000] loss 0.5528 model 0.5164 lm 0.3741 omni7_kd 0.1818 lr 4.87e-06 wake 1.00 3.66s/step eta 41.5m
+[train] [step 4330/5000] loss 1.1290 model 1.0681 lm 0.7635 omni7_kd 0.3040 lr 4.80e-06 wake 1.00 3.66s/step eta 40.9m
+[train] [step 4340/5000] loss 0.2276 model 0.1747 lm 0.1284 omni7_kd 0.2648 lr 4.73e-06 wake 1.00 3.66s/step eta 40.3m
+[train] [step 4350/5000] loss 0.7181 model 0.6644 lm 0.4699 omni7_kd 0.2686 lr 4.67e-06 wake 1.00 3.66s/step eta 39.7m
+[train] [step 4360/5000] loss 1.5100 model 1.4707 lm 1.0894 omni7_kd 0.1968 lr 4.60e-06 wake 1.00 3.66s/step eta 39.0m
+[train] [step 4370/5000] loss 1.4912 model 1.2790 lm 0.9392 omni7_kd 0.1023 fly_port 0.0013 fly_sense 0.1905 lr 4.54e-06 wake 1.00 3.66s/step eta 38.4m
+[train] [step 4380/5000] loss 0.6582 model 0.3070 lm 0.2307 omni7_kd 0.1624 fly_port 0.0000 fly_sense 0.3187 lr 4.48e-06 wake 1.00 3.66s/step eta 37.8m
+[train] [step 4390/5000] loss 0.6752 model 0.6142 lm 0.4255 omni7_kd 0.3054 lr 4.41e-06 wake 1.00 3.66s/step eta 37.2m
+[train] [step 4400/5000] loss 1.0954 model 1.0654 lm 0.7923 omni7_kd 0.1499 lr 4.35e-06 wake 1.00 3.66s/step eta 36.6m
+[train] partial checkpoint (rolling) step 4400 -> checkpoints\supermix_expanse_v3.partial.pt in 1.2s
+[train] [step 4410/5000] loss 1.2825 model 1.2429 lm 0.9196 omni7_kd 0.1981 lr 4.29e-06 wake 1.00 3.66s/step eta 36.0m
+[train] [step 4420/5000] loss 2.7679 model 2.7196 lm 2.0010 omni7_kd 0.2415 lr 4.23e-06 wake 1.00 3.66s/step eta 35.4m
+[train] [step 4430/5000] loss 0.4914 model 0.4635 lm 0.3408 omni7_kd 0.1397 lr 4.17e-06 wake 1.00 3.66s/step eta 34.8m
+[train] [step 4440/5000] loss 1.3640 model 1.3159 lm 1.0030 omni7_kd 0.2406 lr 4.12e-06 wake 1.00 3.66s/step eta 34.2m
+[train] [step 4450/5000] loss 0.6854 model 0.6591 lm 0.4953 omni7_kd 0.1313 lr 4.06e-06 wake 1.00 3.66s/step eta 33.6m
+[train] [step 4460/5000] loss 1.8820 model 1.8486 lm 1.3472 omni7_kd 0.1671 lr 4.00e-06 wake 1.00 3.66s/step eta 33.0m
+[train] [step 4470/5000] loss 1.8421 model 1.7996 lm 1.3355 omni7_kd 0.2122 lr 3.95e-06 wake 1.00 3.66s/step eta 32.4m
+[train] [step 4480/5000] loss 0.7999 model 0.4915 lm 0.3712 omni7_kd 0.1545 fly_port 0.0013 fly_sense 0.2762 lr 3.90e-06 wake 1.00 3.66s/step eta 31.7m
+[train] [step 4490/5000] loss 0.2373 model 0.1946 lm 0.1419 omni7_kd 0.2136 lr 3.84e-06 wake 1.00 3.66s/step eta 31.1m
+[train] [step 4500/5000] loss 2.6599 model 2.3402 lm 1.7378 omni7_kd 0.1913 fly_port 0.0000 fly_sense 0.2814 lr 3.79e-06 wake 1.00 3.66s/step eta 30.5m
+[train] [eval 4500] dev_loss=1.3220 dev_replay=0.0851 dev_fly=0.9459 dev_code=1.9756 dev_bio=5.8229 dev_connectome=0.4698 dev_fresh=0.0571 fly_port_agree=0.9500 sense_mae=0.3595 omni7_intent_agree=0.8036 omni7_domain_agree=0.8125 fly_gate_abs_mean=0.0250 omni_gate_abs_mean=0.0357 cns_gate_abs_mean=0.0443 cns_alive=826 omni7_gate_abs_mean=0.1401 cns_full_gate_abs_mean=0.1652 moe1_alive=88 moe2_alive=88 moe3_alive=72 moe4_alive=72 donor_qwen_alive=16 donor_qwen_slots=16 donor_qwen_bias_mean=21.3723 donor_qwen_weight_rms=0.1300 donor_biomedlm_alive=16 donor_biomedlm_slots=16 donor_biomedlm_bias_mean=21.3475 donor_biomedlm_weight_rms=0.1121
+[train] partial checkpoint (rolling) step 4500 -> checkpoints\supermix_expanse_v3.partial.pt in 1.2s
+[train] [step 4510/5000] loss 0.6496 model 0.6104 lm 0.4627 omni7_kd 0.1959 lr 3.74e-06 wake 1.00 3.68s/step eta 30.1m
+[train] [step 4520/5000] loss 0.2914 model 0.2532 lm 0.1876 omni7_kd 0.1910 lr 3.69e-06 wake 1.00 3.68s/step eta 29.5m
+[train] [step 4530/5000] loss 1.2261 model 1.1850 lm 0.8397 omni7_kd 0.2056 lr 3.64e-06 wake 1.00 3.68s/step eta 28.8m
+[train] [step 4540/5000] loss 0.2182 model 0.1820 lm 0.1262 omni7_kd 0.1811 lr 3.60e-06 wake 1.00 3.68s/step eta 28.2m
+[train] [step 4550/5000] loss 0.4394 model 0.4039 lm 0.2853 omni7_kd 0.1776 lr 3.55e-06 wake 1.00 3.68s/step eta 27.6m
+[train] [step 4560/5000] loss 0.4388 model 0.3864 lm 0.2785 omni7_kd 0.2620 lr 3.50e-06 wake 1.00 3.68s/step eta 27.0m
+[train] [step 4570/5000] loss 0.6596 model 0.6263 lm 0.4336 omni7_kd 0.1665 lr 3.46e-06 wake 1.00 3.68s/step eta 26.4m
+[train] [step 4580/5000] loss 0.4662 model 0.4396 lm 0.3089 omni7_kd 0.1331 lr 3.41e-06 wake 1.00 3.68s/step eta 25.8m
+[train] [step 4590/5000] loss 0.7501 model 0.4360 lm 0.3226 omni7_kd 0.2016 fly_port 0.0000 fly_sense 0.2737 lr 3.37e-06 wake 1.00 3.68s/step eta 25.2m
+[train] [step 4600/5000] loss 0.6541 model 0.4907 lm 0.3747 omni7_kd 0.1312 fly_port 0.0003 fly_sense 0.1369 lr 3.33e-06 wake 1.00 3.68s/step eta 24.6m
+[train] partial checkpoint (rolling) step 4600 -> checkpoints\supermix_expanse_v3.partial.pt in 1.3s
+[train] [step 4610/5000] loss 0.5588 model 0.5293 lm 0.3877 omni7_kd 0.1474 lr 3.29e-06 wake 1.00 3.68s/step eta 23.9m
+[train] [step 4620/5000] loss 0.4993 model 0.4546 lm 0.3502 omni7_kd 0.2234 lr 3.25e-06 wake 1.00 3.68s/step eta 23.3m
+[train] [step 4630/5000] loss 1.9919 model 1.9619 lm 1.4579 omni7_kd 0.1499 lr 3.21e-06 wake 1.00 3.68s/step eta 22.7m
+[train] [step 4640/5000] loss 0.5379 model 0.5072 lm 0.3606 omni7_kd 0.1538 lr 3.17e-06 wake 1.00 3.68s/step eta 22.1m
+[train] [step 4650/5000] loss 0.8517 model 0.8276 lm 0.6105 omni7_kd 0.1208 lr 3.14e-06 wake 1.00 3.68s/step eta 21.5m
+[train] [step 4660/5000] loss 1.5165 model 1.4794 lm 1.1082 omni7_kd 0.1858 lr 3.10e-06 wake 1.00 3.68s/step eta 20.9m
+[train] [step 4670/5000] loss 1.4094 model 1.2177 lm 0.9082 omni7_kd 0.1711 fly_port 0.0000 fly_sense 0.1575 lr 3.07e-06 wake 1.00 3.68s/step eta 20.3m
+[train] [step 4680/5000] loss 1.2092 model 1.1807 lm 0.8725 omni7_kd 0.1424 lr 3.03e-06 wake 1.00 3.68s/step eta 19.7m
+[train] [step 4690/5000] loss 1.8032 model 1.5950 lm 1.2098 omni7_kd 0.1280 fly_port 0.0000 fly_sense 0.1825 lr 3.00e-06 wake 1.00 3.68s/step eta 19.0m
+[train] [step 4700/5000] loss 0.4808 model 0.4610 lm 0.3382 omni7_kd 0.0991 lr 2.97e-06 wake 1.00 3.68s/step eta 18.4m
+[train] partial checkpoint (rolling) step 4700 -> checkpoints\supermix_expanse_v3.partial.pt in 1.3s
+[train] [step 4710/5000] loss 0.6523 model 0.5902 lm 0.4317 omni7_kd 0.3107 lr 2.94e-06 wake 1.00 3.68s/step eta 17.8m
+[train] [step 4720/5000] loss 0.8668 model 0.8417 lm 0.5952 omni7_kd 0.1257 lr 2.91e-06 wake 1.00 3.68s/step eta 17.2m
+[train] [step 4730/5000] loss 1.4719 model 1.3190 lm 1.0021 omni7_kd 0.1923 fly_port 0.0000 fly_sense 0.1144 lr 2.88e-06 wake 1.00 3.68s/step eta 16.6m
+[train] [step 4740/5000] loss 1.3491 model 1.2914 lm 0.9475 omni7_kd 0.2884 lr 2.85e-06 wake 1.00 3.68s/step eta 16.0m
+[train] [step 4750/5000] loss 0.4262 model 0.3694 lm 0.2673 omni7_kd 0.2841 lr 2.83e-06 wake 1.00 3.68s/step eta 15.4m
+[train] [step 4760/5000] loss 0.6380 model 0.6072 lm 0.4433 omni7_kd 0.1537 lr 2.80e-06 wake 1.00 3.68s/step eta 14.7m
+[train] [step 4770/5000] loss 0.4374 model 0.3787 lm 0.2804 omni7_kd 0.2935 lr 2.78e-06 wake 1.00 3.68s/step eta 14.1m
+[train] [step 4780/5000] loss 0.9993 model 0.7646 lm 0.5587 omni7_kd 0.2447 fly_port 0.0000 fly_sense 0.1858 lr 2.75e-06 wake 1.00 3.68s/step eta 13.5m
+[train] [step 4790/5000] loss 0.6612 model 0.6235 lm 0.4551 omni7_kd 0.1885 lr 2.73e-06 wake 1.00 3.68s/step eta 12.9m
+[train] [step 4800/5000] loss 0.7492 model 0.7325 lm 0.5418 omni7_kd 0.0836 lr 2.71e-06 wake 1.00 3.68s/step eta 12.3m
+[train] partial checkpoint (rolling) step 4800 -> checkpoints\supermix_expanse_v3.partial.pt in 1.4s
+[train] [step 4810/5000] loss 0.4268 model 0.3859 lm 0.2809 omni7_kd 0.2044 lr 2.69e-06 wake 1.00 3.68s/step eta 11.7m
+[train] [step 4820/5000] loss 1.1829 model 0.8738 lm 0.6424 omni7_kd 0.2711 fly_port 0.0002 fly_sense 0.2546 lr 2.67e-06 wake 1.00 3.68s/step eta 11.1m
+[train] [step 4830/5000] loss 1.5815 model 1.5059 lm 1.1193 omni7_kd 0.3779 lr 2.65e-06 wake 1.00 3.68s/step eta 10.4m
+[train] [step 4840/5000] loss 0.2704 model 0.2430 lm 0.1621 omni7_kd 0.1371 lr 2.63e-06 wake 1.00 3.68s/step eta 9.8m
+[train] [step 4850/5000] loss 0.1118 model 0.0785 lm 0.0531 omni7_kd 0.1665 lr 2.62e-06 wake 1.00 3.68s/step eta 9.2m
+[train] [step 4860/5000] loss 1.0281 model 0.9903 lm 0.7204 omni7_kd 0.1892 lr 2.60e-06 wake 1.00 3.68s/step eta 8.6m
+[train] [step 4870/5000] loss 1.4846 model 1.4284 lm 1.0381 omni7_kd 0.2811 lr 2.59e-06 wake 1.00 3.68s/step eta 8.0m
+[train] [step 4880/5000] loss 2.1085 model 2.0770 lm 1.5375 omni7_kd 0.1574 lr 2.58e-06 wake 1.00 3.68s/step eta 7.4m
+[train] [step 4890/5000] loss 0.8521 model 0.6933 lm 0.5068 omni7_kd 0.1827 fly_port 0.0000 fly_sense 0.1222 lr 2.56e-06 wake 1.00 3.68s/step eta 6.8m
+[train] [step 4900/5000] loss 0.9980 model 0.7194 lm 0.5452 omni7_kd 0.2253 fly_port 0.0000 fly_sense 0.2336 lr 2.55e-06 wake 1.00 3.68s/step eta 6.1m
+[train] partial checkpoint (rolling) step 4900 -> checkpoints\supermix_expanse_v3.partial.pt in 1.3s
+[train] [step 4910/5000] loss 1.0945 model 1.0691 lm 0.7827 omni7_kd 0.1266 lr 2.54e-06 wake 1.00 3.68s/step eta 5.5m
+[train] [step 4920/5000] loss 0.9013 model 0.7326 lm 0.5505 omni7_kd 0.1588 fly_port 0.0000 fly_sense 0.1369 lr 2.53e-06 wake 1.00 3.69s/step eta 4.9m
+[train] partial checkpoint (budget) step 4928 -> checkpoints\supermix_expanse_v3.partial.pt in 7.1s
+[train] [eval final] dev_loss=1.3196 dev_replay=0.0841 dev_fly=0.9465 dev_code=1.9630 dev_bio=5.8267 dev_connectome=0.4686 dev_fresh=0.0562 fly_port_agree=0.9833 sense_mae=0.3577 omni7_intent_agree=0.8054 omni7_domain_agree=0.8125 fly_gate_abs_mean=0.0250 omni_gate_abs_mean=0.0357 cns_gate_abs_mean=0.0443 cns_alive=826 omni7_gate_abs_mean=0.1406 cns_full_gate_abs_mean=0.1659 moe1_alive=88 moe2_alive=88 moe3_alive=72 moe4_alive=72 donor_qwen_alive=16 donor_qwen_slots=16 donor_qwen_bias_mean=21.3723 donor_qwen_weight_rms=0.1300 donor_biomedlm_alive=16 donor_biomedlm_slots=16 donor_biomedlm_bias_mean=21.3475 donor_biomedlm_weight_rms=0.1121
+[train] saved checkpoints\supermix_expanse_v3.pt in 604.5 min

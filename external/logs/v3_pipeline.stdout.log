@@ -1,0 +1,12 @@
+23:42:23 [v3] start (train budget 480 min)
+23:42:23 [v3] fresh data
+23:43:59 [v3] fresh data ready:   32678 total
+23:43:59 [v3] teacher code rows -> 5000 train
+08:39:05 [v3] teacher bio rows -> 3000 train
+09:24:29 [v3] teacher data: code 5150 rows, bio clean 2722 rows
+09:24:32 [v3] retokenise v1
+09:25:21 [v3] v3 init: [retok] BPE trained on 88,710 texts (44,355 rows): vocab 8,864 (asked 16,000) in 5.3s [retok] embedding rules special 6 copy 2893 old_tokenise 71 fragment 2601 mean_noise 3293 (rescaled to median old norm 2.3936) [retok] context 128 -> 128 (p99 new 108.0, cap 256); tokens/word old 1.5286 new 1.5254; old unk rate 0.00368 
+09:25:21 [v3] train v3
+19:29:54 [v3] trained: [train] [eval final] dev_loss=1.3196 dev_replay=0.0841 dev_fly=0.9465 dev_code=1.9630 dev_bio=5.8267 dev_connectome=0.4686 dev_fresh=0.0562 fly_port_agree=0.9833 sense_mae=0.3577 omni7_intent_agree=0.8054 omni7_domain_agree=0.8125 fly_gate_
+19:29:54 [v3] compare v1 / v2 / v3
+19:57:34 [v3] V3 PIPELINE DONE

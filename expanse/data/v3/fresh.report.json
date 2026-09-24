@@ -1,0 +1,267 @@
+{
+ "schema": "supermix-expanse-v3-fresh-v1",
+ "created": "2026-09-23 23:43:30",
+ "builders_dir": "C:/Users/kai99/Desktop/supermix-expanse/Supermix-expanse/supermix-archimedes/models/supermix-v93/src",
+ "builders_provenance": "kai9987kai/supermix-archimedes@1952cf1c92cb506fff60f9ee0c055c2365988e5e models/supermix-v93/src (MIT)",
+ "row_fields_added": {
+  "source": "fresh",
+  "family": "omni|code|math",
+  "split": "train|heldout"
+ },
+ "heldout_split": {
+  "fraction": 0.03,
+  "rule": "sha1('expanse-v3-heldout|' + user)[:12] < fraction * 2^48"
+ },
+ "filters": {
+  "order": [
+   "replay_prompt",
+   "eval_heldout_prompt",
+   "replay_problem",
+   "replay_reply",
+   "eval_problem",
+   "duplicate"
+  ],
+  "replay_prompts": 3711,
+  "replay_corpus": "C:/Users/kai99/Desktop/supermix-expanse/Supermix-expanse/supermix-archimedes/corpus",
+  "eval_heldout_prompts": 5185,
+  "eval_heldout_seeds": [
+   2026,
+   260923
+  ],
+  "eval_heldout_n": 100000,
+  "eval_heldout_per_seed": {
+   "2026": 2609,
+   "260923": 2606
+  }
+ },
+ "seeds_not_reused": [
+  66,
+  79,
+  87,
+  2026
+ ],
+ "totals": {
+  "built": 22783,
+  "kept": 19345,
+  "dropped": {
+   "replay_prompt": 889,
+   "eval_heldout_prompt": 149,
+   "replay_problem": 1257,
+   "replay_reply": 23,
+   "eval_problem": 734,
+   "duplicate": 386
+  },
+  "heldout": 593
+ },
+ "families": {
+  "omni": {
+   "builder": "build_omni_corpus.py",
+   "builder_sha256": "09ab0de0eca1a52ae9c62cecc9679af681dc4ac55194abb39724e4960ee41692",
+   "argv": [
+    "build_omni_corpus.py",
+    "--per_task",
+    "834",
+    "--seed",
+    "3079",
+    "--unique",
+    "--output",
+    "<tmp>",
+    "--natural_phrasings"
+   ],
+   "seed": 3079,
+   "target": 10000,
+   "n_tasks": 12,
+   "per_task": 834,
+   "built": 8782,
+   "seconds": 12.5,
+   "builder_report": {
+    "schema": "supermix-v79-omni-corpus-v1",
+    "rows": 8782,
+    "per_task": {
+     "force": 834,
+     "acceleration": 834,
+     "momentum": 834,
+     "kinetic_energy": 249,
+     "work": 834,
+     "power": 834,
+     "voltage": 834,
+     "electrical_power": 834,
+     "wave_speed": 834,
+     "molarity": 834,
+     "combination": 193,
+     "arithmetic_series": 834
+    },
+    "dropped_failing_verification": {},
+    "short_of_requested": {
+     "kinetic_energy": {
+      "asked": 834,
+      "produced": 249,
+      "reason": "parameter space exhausted"
+     },
+     "combination": {
+      "asked": 834,
+      "produced": 193,
+      "reason": "parameter space exhausted"
+     }
+    },
+    "verified_by": "nexus_solver.solve_problem",
+    "options": {
+     "repeat": false,
+     "retry_rate": 0.0,
+     "balanced_operands": false,
+     "priming_fraction": 0.0,
+     "keep_canonical": false,
+     "combination_in_envelope": false,
+     "natural_phrasings": true,
+     "decompose_quotient": false,
+     "long_division": false
+    }
+   },
+   "dropped": {
+    "replay_prompt": 600,
+    "eval_heldout_prompt": 67,
+    "replay_problem": 986,
+    "replay_reply": 23,
+    "eval_problem": 578,
+    "duplicate": 0
+   },
+   "kept": 6528,
+   "split": {
+    "train": 6311,
+    "heldout": 217
+   },
+   "kept_per_task": {
+    "acceleration": 829,
+    "arithmetic_series": 465,
+    "combination": 4,
+    "electrical_power": 564,
+    "force": 665,
+    "kinetic_energy": 6,
+    "molarity": 806,
+    "momentum": 610,
+    "power": 834,
+    "voltage": 566,
+    "wave_speed": 577,
+    "work": 602
+   },
+   "output": "C:/Users/kai99/Desktop/supermix-expanse/Supermix-expanse/expanse/data/v3/fresh_omni.jsonl",
+   "output_sha256": "a381966ed7d5a32abc3b9b70cdabc0ebf7d89063f7f6679a35bbcffadddfce8f"
+  },
+  "code": {
+   "builder": "build_code_corpus.py",
+   "builder_sha256": "7f019386406048e78c930594b74a5fa6dd1316736b395e2714cbd7ed9fd21730",
+   "argv": [
+    "build_code_corpus.py",
+    "--per_task",
+    "889",
+    "--seed",
+    "3087",
+    "--unique",
+    "--output",
+    "<tmp>"
+   ],
+   "seed": 3087,
+   "target": 8000,
+   "n_tasks": 9,
+   "per_task": 889,
+   "built": 8001,
+   "seconds": 7.8,
+   "builder_report": {
+    "schema": "supermix-v87-code-corpus-v1",
+    "rows": 8001,
+    "per_task": {
+     "code_loop_add": 889,
+     "code_loop_subtract": 889,
+     "code_list_sum": 889,
+     "code_list_extreme": 889,
+     "code_index": 889,
+     "code_conditional": 889,
+     "code_divmod": 889,
+     "code_nested_loop": 889,
+     "code_while_accumulate": 889
+    },
+    "dropped_failing_execution": {},
+    "drop_rate": 0.0,
+    "short_of_requested": {},
+    "verified_by": "cpython exec in a restricted namespace",
+    "options": {
+     "repeat": false,
+     "keep_canonical": false
+    }
+   },
+   "dropped": {
+    "replay_prompt": 0,
+    "eval_heldout_prompt": 0,
+    "replay_problem": 0,
+    "replay_reply": 0,
+    "eval_problem": 0,
+    "duplicate": 0
+   },
+   "kept": 8001,
+   "split": {
+    "train": 7749,
+    "heldout": 252
+   },
+   "kept_per_task": {
+    "code_conditional": 889,
+    "code_divmod": 889,
+    "code_index": 889,
+    "code_list_extreme": 889,
+    "code_list_sum": 889,
+    "code_loop_add": 889,
+    "code_loop_subtract": 889,
+    "code_nested_loop": 889,
+    "code_while_accumulate": 889
+   },
+   "output": "C:/Users/kai99/Desktop/supermix-expanse/Supermix-expanse/expanse/data/v3/fresh_code.jsonl",
+   "output_sha256": "b890571875fec9c416d13aa7b263857973d8115a5f974878b0f848e4cb88cfe5"
+  },
+  "math": {
+   "builder": "build_scratchpad_math.py",
+   "builder_sha256": "379a2e2251a100717d0c869864303537c42d991cea4978fc2befe6244e129c90",
+   "argv": [
+    "build_scratchpad_math.py",
+    "--target",
+    "6000",
+    "--seed",
+    "3066",
+    "--output",
+    "<tmp>"
+   ],
+   "seed": 3066,
+   "target": 6000,
+   "n_tasks": 1,
+   "per_task": null,
+   "built": 6000,
+   "seconds": 0.8,
+   "dropped": {
+    "replay_prompt": 289,
+    "eval_heldout_prompt": 82,
+    "replay_problem": 271,
+    "replay_reply": 0,
+    "eval_problem": 156,
+    "duplicate": 386
+   },
+   "kept": 4816,
+   "split": {
+    "train": 4692,
+    "heldout": 124
+   },
+   "kept_per_task": {
+    "addition": 598,
+    "algebra_one_step": 387,
+    "average": 600,
+    "division": 342,
+    "multiplication": 301,
+    "percent": 583,
+    "sequence": 214,
+    "subtraction": 600,
+    "two_step": 592,
+    "word_problem": 599
+   },
+   "output": "C:/Users/kai99/Desktop/supermix-expanse/Supermix-expanse/expanse/data/v3/fresh_math.jsonl",
+   "output_sha256": "ebbdb6de25b11d4a17405a0f8853ab73fbd3286ac461ca2f425a13de061729a0"
+  }
+ },
+ "seconds": 61.2
+}

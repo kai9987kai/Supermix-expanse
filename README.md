@@ -85,6 +85,40 @@ What this shows:
 * The **grafted donor experts and FlyCore contribute nothing measurable** — the new code/bio knowledge came from distillation, not from the weight grafts.
 * Gains are real for connectome facts and biomedical wording; code writing and PubMedQA-style answering did not transfer at this scale. Bio dev loss is omitted above because every bio dev row contains at least one word outside Expanse's vocabulary.
 
+## v2 and v3
+
+Two follow-ups to v1 were trained on the same laptop CPU and compared on **the same held-out rows** (v1's dev split) with `expanse/compare_models.py`, which reports loss **per reply character** so word-level (v1/v2) and BPE (v3) models are comparable. Full tables: [`compare_v1_v2.md`](expanse/checkpoints/compare_v1_v2.md), [`compare_v1_v2_v3.md`](expanse/checkpoints/compare_v1_v2_v3.md).
+
+**v2 — native latent consolidation** (`expanse/src/consolidation_v2.py`, [`V2_DESIGN.md`](expanse/V2_DESIGN.md)). Three zero-gated consolidation blocks (shared 512-d latent, top-2/8 latent MoE, learned memory, +7.3M params) trained for 800 steps against a temporary fusion bank of Archimedes, donor-expert, Omni, FlyCore and male-CNS signals, with a teacher-free final phase. Two bugs were fixed before training (a closed gate could never receive gradient; the distill loss was ~300x the LM loss). Result: v2 is slightly better than v1 (its own held-out dev loss 1.511 -> 1.446; bio token-F1 0.285 -> 0.343), but **zeroing the new blocks removes almost none of the gain** (replay 0.1316 vs 0.1324 nats/char) — the improvement came from 800 more training steps, not from the consolidation blocks.
+
+**v3 — subword tokenizer + more data** (`expanse/src/bpe_tokenizer.py`, `expanse/retokenize_v3.py`, `expanse/make_v3_data.py`, [`V3_DESIGN.md`](expanse/V3_DESIGN.md)). v1 re-tokenised with a byte-level BPE (8,864 tokens, digits kept separate with the leading space on the first digit, **no `<unk>`** — v1 had one in every bio dev row), embeddings re-initialised from the old word embeddings, then 5,000 steps (trunk frozen for the first 300) on 42k rows: ~18k fresh solver/execution-verified problems from the Supermix builders (rows that restate a replay or evaluation problem under new wording were blocked: ~2,000 of them), 5,150 verified Qwen code rows, 2,700 filtered BioMedLM rows and 12k connectome facts. Same seed as v1, so v1's dev rows stayed unseen.
+
+| nats per reply character (lower is better) | v1 | v2 | **v3** |
+|---|---|---|---|
+| replay (science / code tracing / arithmetic) | 0.166 | 0.132* | **0.033** |
+| code | 1.146 | 1.118 | **0.473** |
+| male-CNS connectome (held-out cell types) | 0.181 | 0.176 | **0.124** |
+| fly | 0.393 | 0.369 | **0.314** |
+| bio (all rows) | 0.996 | 0.973 | 1.370 |
+
+| held-out generation (25 items each) | v1 | v2 | **v3** |
+|---|---|---|---|
+| replay-style problems with fresh numbers | 20% | 28% | **32%** |
+| connectome exact match / token-F1 | 16% / 0.674 | 16% / 0.674 | **36% / 0.814** |
+| biomedical token-F1 | 0.285 | **0.343** | 0.220 |
+| code pass rate, PubMedQA | 0% | 0% | 0% |
+
+\* v2 used a different split seed, so part of its replay gain is on rows it trained on.
+
+v3 is the strongest version on replay, code loss, fly and the connectome, and now writes code in the right shape (*"Find the list of the list. def max_of_value(xs): return max(x)"*) though not yet correctly enough to pass the tests. It **regressed on biomedical answers**: connectome rows (12k) swamp bio rows (2.4k), and part of v1's lower bio loss is `<unk>` making rare terms cheap. Next step: rebalance the mix and continue training.
+
+```bash
+# v2 (after the v1 pipeline)
+python expanse/train_consolidation_v2.py --steps 800 --batch 4 --threads 8
+# v3: fresh data -> more teacher rows -> retokenise v1 -> train -> compare v1/v2/v3
+bash expanse/run_v3.sh 480
+```
+
 ## Set it up yourself
 
 ### Requirements
@@ -104,9 +138,11 @@ pip install -r requirements.txt
 ### Option A — chat with the trained model (5 minutes)
 
 ```bash
-hf download Kai9987kai/supermix-expanse supermix_expanse.pt --local-dir expanse/checkpoints
-python expanse/expanse_chat.py      # opens http://127.0.0.1:7861
+hf download Kai9987kai/supermix-expanse supermix_expanse_v3.pt --local-dir expanse/checkpoints
+python expanse/expanse_chat.py --checkpoint expanse/checkpoints/supermix_expanse_v3.pt   # opens http://127.0.0.1:7861
 ```
+
+`supermix_expanse.pt` (v1, word-level) is also on the Hub; v3 is the recommended checkpoint.
 
 The chat UI streams answers and has live switches for each graft (CNS core, Omni v7, FlyCore, donor experts). To also compare against Archimedes, download its checkpoint first with `python external/fetch_base.py` (or just `hf download Kai9987kai/archimedes-final-model supermix_archimedes.pt --local-dir external/base`).
 
@@ -115,7 +151,7 @@ From Python:
 ```python
 import sys, torch; sys.path.insert(0, "expanse/src")
 import expanse_core as ec
-model, tok, _ = ec.load_expanse("expanse/checkpoints/supermix_expanse.pt")
+model, tok, _ = ec.load_expanse("expanse/checkpoints/supermix_expanse_v3.pt")  # v1 or v3; word or BPE tokenizer
 q = "whats the impulse from 40 N acting for 6 s"
 ids, _ = tok.encode_turn(q, None)
 out = ec.greedy_decode(model, torch.tensor([ids]), max_new_tokens=80,
@@ -124,7 +160,7 @@ out = ec.greedy_decode(model, torch.tensor([ids]), max_new_tokens=80,
 print(tok.decode(out))   # impulse = force x time, 40 x 6 = 240, ... total 240
 ```
 
-Single-turn, 128-token context, word-level vocabulary. The checkpoint is a pickled PyTorch payload (`torch.load(weights_only=False)`) — only load files you trust.
+Single-turn, 128-token context; v3 uses a byte-level BPE (v1: word-level vocabulary). The checkpoint is a pickled PyTorch payload (`torch.load(weights_only=False)`) — only load files you trust.
 
 ### Option B — rebuild and retrain it (≈ 6-7 h on an 8-core laptop CPU)
 

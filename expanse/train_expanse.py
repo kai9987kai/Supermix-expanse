@@ -47,6 +47,33 @@ Checkpoints
     ``--save_every`` steps and when the wall budget or ``--stop_after`` ends
     the run; rerunning the same command resumes from it. The final model is
     ``checkpoints/supermix_expanse.pt`` + receipt json.
+
+v3 (V3_DESIGN.md B.3) -- the same trainer continues a *trained* model
+    input      a v1 (``supermix-expanse-v1``) or v2 (``supermix-expanse-v2``,
+               ``consolidation_v2.load_v2``) checkpoint, saved back with the
+               matching saver; the v2 native latent blocks train in the graft
+               group (plus their router-balance term, ``--v2_balance``, as in
+               train_consolidation_v2). The schema is peeked with ``mmap`` so
+               the file is read once.
+    tokenizer  whatever the checkpoint carries (``tokenizer_from_dict``: word or
+               byte-level BPE after ``retokenize_v3.py``); ``--seq`` defaults to
+               the checkpoint's ``max_position_embeddings``.
+    fresh      a sixth source: ``data/v3/fresh_{omni,code,math}.jsonl``
+               (make_v3_data.py) when present -- ``split == "heldout"`` rows are
+               never trained, the train rows get the usual hash dev split, and
+               ``--max_rows_per_source`` caps each builder family separately (one
+               cap over all three would throw most of them away).
+               ``data/v3/connectome_rows_v3.jsonl`` replaces the v1 connectome
+               rows when present (same held-out types, so dev is unchanged in
+               kind). ``--v3_data off`` reproduces the v1 corpus exactly.
+    kd_arch    needs Archimedes' vocabulary (its cached logits are indexed by
+               word ids): it is switched off, and logged, when the tokenizer is
+               not a word tokenizer extending Archimedes' vocabulary.
+    embeddings after retokenisation every row of the tied embedding / LM head is
+               new, so all of them get the row boost (not just ids >= vocab_base);
+               ``--freeze_trunk_steps N`` lets only those rows and the graft/v2
+               parameters move for the first N steps (the other trunk grads are
+               dropped -- set to None, so AdamW neither steps nor decays them).
 """
 
 from __future__ import annotations
@@ -74,7 +101,10 @@ from expanse_core import PATHS, text_utils  # noqa: E402
 
 FLY_AGENTS = ("agent1", "agent2", "agent3")
 FLY_REGIMES = ("FORAGE", "EVADE", "SCOUT", "PIONEER", "CONSOLIDATE", "MAP_BEACON")
-SOURCES = ("replay", "fly", "code", "bio", "connectome")
+SOURCES = ("replay", "fly", "code", "bio", "connectome", "fresh")
+V1_SOURCES = SOURCES[:5]  # the v1 corpus (train_consolidation_v2's domains)
+FRESH_FAMILIES = ("omni", "code", "math")
+V2_SCHEMA = "supermix-expanse-v2"
 PARTIAL_SCHEMA = "supermix-expanse-partial-v1"
 KD_CACHE_VERSION = 1
 O7_CACHE_VERSION = 1
@@ -152,15 +182,42 @@ def split_source(rows: List[Dict[str, Any]], frac: float, seed: int, dev_cap: in
     return _cap(train, train_cap, seed + 1), _cap(dev, dev_cap, seed + 2)
 
 
-def load_corpus(fly_core, *, fly_rows: int, seed: int, dev_frac: float = 0.05, dev_cap: int = 200,
-                max_rows_per_source: int = 0, data: Optional[Dict[str, Path]] = None) -> Dict[str, Dict[str, List[Dict[str, Any]]]]:
-    """{source: {"train": rows, "dev": rows, "heldout": rows}}. Deterministic in ``seed``.
+def corpus_files(data: Optional[Dict[str, Path]] = None, v3: Optional[bool] = None) -> Dict[str, Any]:
+    """Which files :func:`load_corpus` reads.
 
-    ``heldout`` (code/bio: ``split == "heldout"``) is never trained on nor used
-    as dev; eval_expanse generates on it. Connectome dev = its held-out types.
+    ``v3``: ``None`` = the v3 files (``<v3>/fresh_*.jsonl``,
+    ``<v3>/connectome_rows_v3.jsonl``; ``<v3>`` = ``data["v3"]`` or
+    ``data/v3``) wherever present; ``False`` = the v1 corpus only (what a v1/v2
+    run's split is rebuilt from); ``True`` = the v3 files, which must exist.
     """
     paths = dict(PATHS)
     paths.update(data or {})
+    v3_dir = Path(paths.get("v3") or PATHS["data"] / "v3")
+    fresh = [v3_dir / f"fresh_{f}.jsonl" for f in FRESH_FAMILIES]
+    conn_v3 = v3_dir / "connectome_rows_v3.jsonl"
+    if v3 is True:
+        absent = [str(p) for p in fresh + [conn_v3] if not p.exists()]
+        if absent:
+            raise FileNotFoundError(f"v3 data requested but missing: {absent} (run make_v3_data.py)")
+    use = v3 is not False
+    fresh = [p for p in fresh if use and p.exists()]
+    conn = conn_v3 if use and conn_v3.exists() else Path(paths["connectome_rows"])
+    return {"v3_dir": v3_dir, "fresh": fresh, "connectome": conn, "v3": bool(fresh) or conn == conn_v3}
+
+
+def load_corpus(fly_core, *, fly_rows: int, seed: int, dev_frac: float = 0.05, dev_cap: int = 200,
+                max_rows_per_source: int = 0, data: Optional[Dict[str, Path]] = None,
+                v3: Optional[bool] = None) -> Dict[str, Dict[str, List[Dict[str, Any]]]]:
+    """{source: {"train": rows, "dev": rows, "heldout": rows}}. Deterministic in ``seed``.
+
+    ``heldout`` (code/bio/fresh: ``split == "heldout"``) is never trained on nor
+    used as dev; eval_expanse generates on it. Connectome dev = its held-out
+    types. ``v3`` / ``data["v3"]``: see :func:`corpus_files`; every source key
+    is present (``fresh`` empty without v3 data).
+    """
+    paths = dict(PATHS)
+    paths.update(data or {})
+    files = corpus_files(data, v3)
     out: Dict[str, Dict[str, List[Dict[str, Any]]]] = {}
     tr, dv = split_source(ec.load_replay(paths["corpus"]), dev_frac, seed, dev_cap, max_rows_per_source)
     out["replay"] = {"train": tr, "dev": dv, "heldout": []}
@@ -170,11 +227,20 @@ def load_corpus(fly_core, *, fly_rows: int, seed: int, dev_frac: float = 0.05, d
         rows = [dict(r, source=src) for r in ec.read_jsonl(paths[key])]
         tr, dv = split_source([r for r in rows if r.get("split", "train") == "train"], dev_frac, seed, dev_cap, max_rows_per_source)
         out[src] = {"train": tr, "dev": dv, "heldout": [r for r in rows if r.get("split") == "heldout"]}
-    rows = [dict(r, source="connectome") for r in ec.read_jsonl(paths["connectome_rows"])]
+    rows = [dict(r, source="connectome") for r in ec.read_jsonl(files["connectome"])]
     held = [r for r in rows if r.get("split") == "heldout"]
     train = [r for r in rows if r.get("split", "train") == "train"]
     out["connectome"] = {"train": _cap(train, max_rows_per_source, seed + 1), "dev": _cap(held, dev_cap, seed + 2),
                          "heldout": held}
+    # fresh (v3): one source; the row cap applies per builder family
+    rows = []
+    for p in files["fresh"]:
+        fam = p.stem[len("fresh_"):]
+        rows += [dict(r, source="fresh", family=r.get("family", fam)) for r in ec.read_jsonl(p)]
+    tr, dv = split_source([r for r in rows if r.get("split", "train") == "train"], dev_frac, seed, dev_cap)
+    fams = list(dict.fromkeys(r["family"] for r in tr))
+    tr = [r for fam in fams for r in _cap([r for r in tr if r["family"] == fam], max_rows_per_source, seed + 1)]
+    out["fresh"] = {"train": tr, "dev": dv, "heldout": [r for r in rows if r.get("split") == "heldout"]}
     return out
 
 
@@ -311,8 +377,12 @@ def atomic_save(obj: Any, path: Path) -> None:
     os.replace(tmp, path)
 
 
-def data_fingerprint(meta_tr, meta_dv, seq: int, vocab: int) -> str:
+def data_fingerprint(meta_tr, meta_dv, seq: int, vocab: int, tok_tag: str = "") -> str:
+    """Identity of the packed data. ``tok_tag`` (:func:`tokenizer_tag`) is empty for a
+    word tokenizer, so pre-v3 partials keep their fingerprint."""
     h = hashlib.sha1(f"{seq}|{vocab}".encode())
+    if tok_tag:
+        h.update(f"|{tok_tag}".encode())
     for tag, rows in (("t", meta_tr), ("d", meta_dv)):
         for r in rows:
             h.update(tag.encode())
@@ -321,16 +391,143 @@ def data_fingerprint(meta_tr, meta_dv, seq: int, vocab: int) -> str:
 
 
 # ---------------------------------------------------------------------------
+# checkpoints + tokenizers (v1 / v2 schema, word / BPE)
+# ---------------------------------------------------------------------------
+def tokenizer_from_dict(d: Dict[str, Any]):
+    """``expanse_core.tokenizer_from_dict`` (word or BPE); a word-only fallback until it exists."""
+    fn = getattr(ec, "tokenizer_from_dict", None)
+    if fn is not None:
+        return fn(d)
+    if (d or {}).get("kind", "word") != "word":
+        raise RuntimeError(f"tokenizer kind {d.get('kind')!r} needs expanse_core.tokenizer_from_dict")
+    return text_utils.WordTokenizer.from_dict(d)
+
+
+def is_word_tokenizer(tok) -> bool:
+    return isinstance(tok, text_utils.WordTokenizer)
+
+
+def tokenizer_kind(tok) -> str:
+    return "word" if is_word_tokenizer(tok) else str(tok.to_dict().get("kind", type(tok).__name__))
+
+
+def tokenizer_tag(tok) -> str:
+    """'' for a word tokenizer, else ``kind:<sha1 of its dict>`` (two BPEs of one size differ)."""
+    if is_word_tokenizer(tok):
+        return ""
+    d = tok.to_dict()
+    blob = json.dumps(d, sort_keys=True, default=str).encode("utf-8")
+    return f"{d.get('kind', type(tok).__name__)}:{hashlib.sha1(blob).hexdigest()[:16]}"
+
+
+def peek_checkpoint(path, *keys: str) -> Dict[str, Any]:
+    """Top-level entries of a torch checkpoint without materialising its tensors (``mmap``)."""
+    try:
+        head = torch.load(path, map_location="cpu", weights_only=False, mmap=True)
+    except RuntimeError:  # legacy (non-zip) serialisation cannot be mapped
+        head = torch.load(path, map_location="cpu", weights_only=False)
+    out = {k: head.get(k) for k in keys}
+    del head
+    return out
+
+
+def checkpoint_schema(path) -> Optional[str]:
+    return peek_checkpoint(path, "schema")["schema"]
+
+
+def load_checkpoint(path):
+    """(model, tokenizer, payload, schema) for a v1 or v2 Expanse checkpoint."""
+    schema = checkpoint_schema(path)
+    if schema == V2_SCHEMA:
+        import consolidation_v2 as cv2
+        model, _, payload = cv2.load_v2(path)
+    else:
+        model, _, payload = ec.load_expanse(path)
+    return model, tokenizer_from_dict(payload["tokenizer"]), payload, schema
+
+
+def save_checkpoint(path, schema: Optional[str], model, tok, extra: Dict[str, Any], receipt: Dict[str, Any]) -> None:
+    """Save with the saver matching the input schema (v2 keeps its native stack)."""
+    if schema == V2_SCHEMA:
+        import consolidation_v2 as cv2
+        cv2.save_v2(path, model, tok, extra, receipt)
+    else:
+        ec.save_expanse(path, model, tok, extra, receipt)
+
+
+def arch_vocab_compatible(tok, arch_path) -> Tuple[bool, str]:
+    """Can cached Archimedes logits supervise this tokenizer? (a word vocabulary extending Archimedes')."""
+    if not is_word_tokenizer(tok):
+        return False, f"tokenizer is {type(tok).__name__}, not Archimedes' word tokenizer"
+    if not Path(arch_path).exists():
+        return True, "word tokenizer (Archimedes checkpoint absent: vocabulary prefix not checked)"
+    t_tok = text_utils.WordTokenizer.from_dict(peek_checkpoint(arch_path, "tokenizer")["tokenizer"])
+    if list(tok.tokens[:t_tok.vocab_size]) != list(t_tok.tokens):
+        return False, f"word vocabulary does not extend Archimedes' ({t_tok.vocab_size} tokens)"
+    return True, f"word vocabulary extends Archimedes' ({t_tok.vocab_size} tokens)"
+
+
+# ---------------------------------------------------------------------------
+# parameter groups
+# ---------------------------------------------------------------------------
+def split_params(model) -> Tuple[List[str], List[torch.nn.Parameter], List[torch.nn.Parameter]]:
+    """(frozen names, graft params, trunk params); see the module doc's parameter groups.
+
+    Frozen (``requires_grad`` off): the omni7 net and the omni v48/v38 encoders.
+    Graft: fly_core, the omni_core bridge, the omni7 bridge + heads, cns_full,
+    the v2 native latent blocks (``consolidation_v2.*``) and donor expert slots.
+    Everything else is trunk (incl. the tied embedding / LM head).
+    """
+    donor = model.donor_slots()
+    frozen: List[str] = []
+    graft: List[torch.nn.Parameter] = []
+    trunk: List[torch.nn.Parameter] = []
+    for name, p in model.named_parameters():
+        if name.startswith("omni7.net.") or (name.startswith("omni_core.") and not name.startswith(
+                ("omni_core.to_trunk", "omni_core.gate", "omni_core.bridge_norm"))):
+            p.requires_grad_(False)
+            frozen.append(name)
+            continue
+        is_graft = name.startswith(("fly_core.", "omni_core.", "omni7.", "cns_full.", "consolidation_v2."))
+        if not is_graft and ".mlp.experts." in name:
+            parts = name.split(".")
+            is_graft = int(parts[4]) in donor.get(int(parts[1]), [])
+        (graft if is_graft else trunk).append(p)
+    return frozen, graft, trunk
+
+
+def held_while_frozen(model, trunk_params: Sequence[torch.nn.Parameter]) -> List[torch.nn.Parameter]:
+    """Trunk tensors ``--freeze_trunk_steps`` holds: all but the tied embedding / LM head."""
+    tied = {id(model.embed_tokens.weight), id(model.lm_head.weight)}
+    return [p for p in trunk_params if id(p) not in tied]
+
+
+def drop_grads(params: Sequence[torch.nn.Parameter]) -> None:
+    """``grad = None``: AdamW skips the tensor entirely (no step, no decoupled decay, no moment update)."""
+    for p in params:
+        p.grad = None
+
+
+# ---------------------------------------------------------------------------
 # main
 # ---------------------------------------------------------------------------
 def main() -> int:
     ap = argparse.ArgumentParser(description="Stage 2: distil + fine-tune Supermix Expanse")
-    ap.add_argument("--inp", default=None, help="grafted checkpoint (default checkpoints/supermix_expanse_grafted.pt)")
+    ap.add_argument("--inp", default=None, help="grafted / v1 / v2 / v3-init checkpoint "
+                                                  "(default checkpoints/supermix_expanse_grafted.pt)")
     ap.add_argument("--out", default=None, help="final checkpoint (default checkpoints/supermix_expanse.pt)")
     ap.add_argument("--arch", default=str(PATHS["arch_final"]), help="frozen Archimedes teacher for kd_arch")
     ap.add_argument("--steps", type=int, default=600)
     ap.add_argument("--batch", type=int, default=8)
-    ap.add_argument("--seq", type=int, default=128)
+    ap.add_argument("--seq", type=int, default=None, help="default: the checkpoint's max_position_embeddings")
+    ap.add_argument("--v3_data", choices=("auto", "on", "off"), default="auto",
+                    help="auto: data/v3 files where present; off: the v1 corpus exactly; on: require them")
+    ap.add_argument("--v3_dir", default=str(PATHS["data"] / "v3"), help="where make_v3_data.py wrote its files")
+    ap.add_argument("--boost_all_embeddings", action="store_true",
+                    help="give every embedding row the graft lr (automatic right after retokenize_v3)")
+    ap.add_argument("--freeze_trunk_steps", type=int, default=0,
+                    help="first N steps: only the tied embedding/LM-head rows and graft/v2 params update")
+    ap.add_argument("--v2_balance", type=float, default=0.01, help="v2 native router balance weight (v2 inputs only)")
     ap.add_argument("--fly_rows", type=int, default=4000)
     ap.add_argument("--dev_frac", type=float, default=0.05)
     ap.add_argument("--dev_cap", type=int, default=200)
@@ -376,18 +573,37 @@ def main() -> int:
     t0 = time.time()
 
     # model --------------------------------------------------------------------
-    model, tok, payload = ec.load_expanse(args.inp)
+    model, tok, payload, schema = load_checkpoint(args.inp)
     receipt_in = dict(payload.get("expanse") or {})
     payload["state_dict"] = None
+    stack = getattr(model, "consolidation_v2", None)  # v2 native latent blocks (None for v1)
     vocab_base = int(model.vocab_base or (receipt_in.get("vocab") or {}).get("base") or tok.vocab_size)
-    log(f"loaded {args.inp}: {sum(p.numel() for p in model.parameters()):,} params, vocab {tok.vocab_size} (base {vocab_base})")
+    args.seq = int(args.seq or model.config.max_position_embeddings)
+    tok_kind = tokenizer_kind(tok)
+    # Boost every embedding row only on the first run after retokenize_v3 (all rows are then freshly
+    # re-initialised); a continuation of a trained v3 keeps the normal vocab_base rule.
+    retokenized = (str(receipt_in.get("stage", "")).startswith("v3-init") or args.boost_all_embeddings)
+    log(f"loaded {args.inp} ({schema}): {sum(p.numel() for p in model.parameters()):,} params, {tok_kind} vocab "
+        f"{tok.vocab_size} (base {vocab_base}), seq {args.seq}" + (", v2 native stack" if stack is not None else ""))
     fly_teacher = ec.FlyCore(int(model.config.hidden_size), config=model.fly_config)
     fly_teacher.load_state_dict(model.fly_core.state_dict())  # frozen copy of the grafted (= original) fly core
     fly_teacher.requires_grad_(False).eval()
+    kd_arch_note = None
+    if args.kd_arch > 0:
+        ok, why = arch_vocab_compatible(tok, args.arch)
+        if not ok:
+            log(f"kd_arch disabled: {why} -- Archimedes' logits index a different vocabulary")
+            kd_arch_note = {"requested": args.kd_arch, "disabled": why}
+            args.kd_arch = 0.0
 
     # data -----------------------------------------------------------------------
+    v3_mode = {"auto": None, "on": True, "off": False}[args.v3_data]
+    v3_paths = {"v3": Path(args.v3_dir)}
+    files = corpus_files(v3_paths, v3_mode)
     corpus = load_corpus(fly_teacher, fly_rows=args.fly_rows, seed=args.seed, dev_frac=args.dev_frac,
-                         dev_cap=args.dev_cap, max_rows_per_source=args.max_rows_per_source)
+                         dev_cap=args.dev_cap, max_rows_per_source=args.max_rows_per_source, data=v3_paths, v3=v3_mode)
+    log(f"corpus files: connectome {files['connectome'].name}, fresh {[p.name for p in files['fresh']] or 'none'}"
+        f" (v3 data {'on' if files['v3'] else 'off'})")
     counts = {s: {k: len(v) for k, v in d.items()} for s, d in corpus.items()}
     log("rows " + " ".join(f"{s}: train {c['train']} dev {c['dev']}" for s, c in counts.items()))
     missing = [s for s in ("code", "bio", "connectome") if counts[s]["train"] == 0]
@@ -404,7 +620,7 @@ def main() -> int:
     log(f"packed train {tuple(x_tr.shape)} dev {tuple(x_dv.shape)} dropped {d1}+{d2} over-length; unk rate {unk:.4f}")
     src_tr = [r["source"] for r in m_tr]
     src_dv = [r["source"] for r in m_dv]
-    fingerprint = data_fingerprint(m_tr, m_dv, args.seq, tok.vocab_size)
+    fingerprint = data_fingerprint(m_tr, m_dv, args.seq, tok.vocab_size, tokenizer_tag(tok))
 
     # prompt-constant features: omni v48/v38 and omni7 -----------------------------
     feats_tr = ec.arch.OmniCore.featurize([r["user"] for r in m_tr])
@@ -477,18 +693,7 @@ def main() -> int:
 
     # parameter groups ---------------------------------------------------------------
     donor = model.donor_slots()
-    frozen, graft_params, trunk_params = [], [], []
-    for name, p in model.named_parameters():
-        if name.startswith("omni7.net.") or (name.startswith("omni_core.") and not name.startswith(
-                ("omni_core.to_trunk", "omni_core.gate", "omni_core.bridge_norm"))):
-            p.requires_grad_(False)
-            frozen.append(name)
-            continue
-        is_graft = name.startswith(("fly_core.", "omni_core.", "omni7.", "cns_full."))
-        if not is_graft and ".mlp.experts." in name:
-            parts = name.split(".")
-            is_graft = int(parts[4]) in donor.get(int(parts[1]), [])
-        (graft_params if is_graft else trunk_params).append(p)
+    frozen, graft_params, trunk_params = split_params(model)
     n_trunk, n_graft = sum(p.numel() for p in trunk_params), sum(p.numel() for p in graft_params)
     log(f"trainable: trunk {n_trunk:,} graft {n_graft:,}; frozen {len(frozen)} tensors "
         f"({sum(p.numel() for n, p in model.named_parameters() if n in set(frozen)):,} params)")
@@ -497,12 +702,21 @@ def main() -> int:
         {"params": graft_params, "lr": args.lr_graft, "weight_decay": 0.0},
     ], betas=(0.9, 0.95))
     boost_targets = []
-    if tok.vocab_size > vocab_base:
+    if retokenized:  # every row was re-initialised by retokenize_v3
+        boost_targets.append((model.embed_tokens.weight, torch.arange(tok.vocab_size)))
+    elif tok.vocab_size > vocab_base:
         boost_targets.append((model.embed_tokens.weight, torch.arange(vocab_base, tok.vocab_size)))
     for li, slots in donor.items():
         boost_targets.append((model.layers[li].mlp.gate.weight, torch.tensor(slots)))
     boost = RowBoost(boost_targets, args.lr_graft / args.lr_trunk)
-    log(f"row boost x{boost.factor:.2f} on {boost.n_rows} rows (new embeddings + donor router rows)")
+    log(f"row boost x{boost.factor:.2f} on {boost.n_rows} rows ("
+        + ("all embedding rows (retokenised)" if retokenized else "new embeddings") + " + donor router rows)")
+    # --freeze_trunk_steps: trunk tensors other than the tied embedding / LM head sit still
+    held_early = held_while_frozen(model, trunk_params)
+    if args.freeze_trunk_steps > 0:
+        log(f"freeze_trunk_steps {args.freeze_trunk_steps}: until then only the tied embedding/LM head "
+            f"({model.embed_tokens.weight.shape[0]} rows) + graft/v2 params move; "
+            f"{len(held_early)} trunk tensors ({sum(p.numel() for p in held_early):,} params) held")
     warm = max(1, int(0.05 * args.steps))
 
     def lr_scale(step: int) -> float:
@@ -567,6 +781,8 @@ def main() -> int:
         if o7_n:
             rep.update({"omni7_intent_agree": o7_hit[0] / o7_n, "omni7_domain_agree": o7_hit[1] / o7_n})
         rep.update(model.gate_report())
+        if stack is not None:
+            rep.update(stack.report())
         log(f"[eval {tag}] " + " ".join(f"{k}={v:.4f}" if isinstance(v, float) else f"{k}={v}" for k, v in rep.items()))
         return rep
 
@@ -690,9 +906,18 @@ def main() -> int:
             loss = loss + args.fly_aux * (l_port + l_sense)
             losses["fly_port"] = float(l_port.detach())
             losses["fly_sense"] = float(l_sense.detach())
+        # v2: keep the native latent routers balanced (train_consolidation_v2's term; min 0 when balanced)
+        if stack is not None and args.v2_balance > 0:
+            l_bal = stack.aux_loss()
+            loss = loss + args.v2_balance * l_bal
+            losses["v2_balance"] = float(l_bal.detach())
 
         opt.zero_grad(set_to_none=True)
         loss.backward()
+        if step < args.freeze_trunk_steps:
+            drop_grads(held_early)
+        elif step == args.freeze_trunk_steps and args.freeze_trunk_steps > 0:
+            log(f"trunk unfrozen at step {step}")
         torch.nn.utils.clip_grad_norm_([p for grp in opt.param_groups for p in grp["params"]], 1.0)
         boost.snapshot()
         opt.step()
@@ -721,6 +946,7 @@ def main() -> int:
     history.append({"step": step, **final})
     model.eval()
     receipt = dict(receipt_in)
+    prior = receipt_in.get("training") or {}
     receipt.update({
         "stage": "trained" if step >= args.steps else "partially-trained",
         "training": {
@@ -728,8 +954,16 @@ def main() -> int:
             "lr_trunk": args.lr_trunk, "lr_graft": args.lr_graft, "kd_arch": args.kd_arch, "kd_T": args.kd_T,
             "kd_topk": args.kd_topk, "omni7_kd": args.omni7_kd, "fly_aux": args.fly_aux, "wake": args.wake,
             "seed": args.seed, "smoke": bool(args.smoke),
+            "init": {"path": str(args.inp), "schema": schema, "stage": receipt_in.get("stage"),
+                     "prior_training": {k: prior.get(k) for k in ("steps", "seq", "seed", "corpus_args")} if prior else None},
+            "tokenizer": {"kind": tok_kind, "vocab": tok.vocab_size, "retokenized": retokenized,
+                          "kd_arch": kd_arch_note or ("enabled" if args.kd_arch > 0 else "off (--kd_arch 0)")},
+            "freeze_trunk_steps": args.freeze_trunk_steps,
+            "v2_balance": args.v2_balance if stack is not None else None,
             "corpus_args": {"fly_rows": args.fly_rows, "dev_frac": args.dev_frac, "dev_cap": args.dev_cap,
-                            "max_rows_per_source": args.max_rows_per_source, "seed": args.seed},
+                            "max_rows_per_source": args.max_rows_per_source, "seed": args.seed,
+                            "v3_data": bool(files["v3"]), "v3_dir": files["v3_dir"].as_posix()},
+            "corpus_files": {"connectome": files["connectome"].as_posix(), "fresh": [p.as_posix() for p in files["fresh"]]},
             "rows": counts, "packed": {"train": int(x_tr.shape[0]), "dev": int(x_dv.shape[0]), "dropped": d1 + d2},
             "dev_keys": {s: sorted(ec.row_key(r["user"], r["assistant"]) for r, ss in zip(m_dv, src_dv) if ss == s)
                          for s in SOURCES},
@@ -745,7 +979,7 @@ def main() -> int:
     extra = dict(payload.get("extra") or {})
     extra.update({"note": "stage 2: distilled + fine-tuned" + (" (smoke)" if args.smoke else ""), "steps": step,
                   "best_dev_loss": final["dev_loss"]})
-    ec.save_expanse(out_path, model, tok, extra, receipt)
+    save_checkpoint(out_path, schema, model, tok, extra, receipt)
     out_path.with_suffix(".receipt.json").write_text(
         json.dumps(ec.jsonable({k: v for k, v in receipt.items() if k != "omni7_meta"}), indent=1), encoding="utf-8")
     if partial_path.exists():

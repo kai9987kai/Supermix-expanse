@@ -2,7 +2,7 @@
  "schema": "expanse-teacher-bio-v1",
  "teacher": {
   "name": "BioMedLM 2.7B (stanford-crfm/BioMedLM, Q8_0 GGUF)",
-  "gguf": "C:\\Users\\kai99\\Desktop\\supermix-expanse\\external\\teachers\\gguf\\biomedlm-q8_0.gguf"
+  "gguf": "C:\\Users\\kai99\\Desktop\\supermix-expanse\\Supermix-expanse\\external\\teachers\\gguf\\biomedlm-q8_0.gguf"
  },
  "judge": {
   "name": "Qwen2.5-Coder-7B-Instruct (Q4_K_M GGUF)",
@@ -12,12 +12,12 @@
  },
  "rows": {
   "heldout": 191,
-  "train": 1860
+  "train": 2968
  },
  "rows_by_task": {
   "train": {
-   "bio_pubmedqa": 442,
-   "bio_definition": 1418
+   "bio_pubmedqa": 480,
+   "bio_definition": 2488
   },
   "heldout": {
    "bio_pubmedqa": 47,
@@ -25,24 +25,24 @@
   }
  },
  "targets": {
-  "train": 1500,
+  "train": 3000,
   "heldout": 150
  },
  "candidates": {
-  "total": 2771,
+  "total": 4340,
   "by_kind_reason": {
-   "definition:ok": 1660,
-   "pubmedqa:ok": 489,
-   "pubmedqa:label_mismatch": 391,
-   "definition:vague": 105,
-   "definition:repetition": 44,
-   "definition:too_short": 26,
-   "pubmedqa:repetition": 22,
-   "definition:truncated": 11,
+   "definition:ok": 2832,
+   "pubmedqa:ok": 527,
+   "pubmedqa:label_mismatch": 426,
+   "definition:vague": 329,
+   "definition:repetition": 91,
+   "definition:too_short": 48,
+   "definition:truncated": 33,
+   "pubmedqa:repetition": 27,
    "pubmedqa:truncated": 8,
-   "pubmedqa:too_short": 6,
+   "pubmedqa:too_short": 7,
+   "definition:term_repeated": 5,
    "pubmedqa:no_decision": 4,
-   "definition:term_repeated": 2,
    "pubmedqa:no_because": 1,
    "definition:citation": 1,
    "definition:study_talk": 1
@@ -50,14 +50,14 @@
   "pending_judge": 0
  },
  "judge_verdicts": {
-  "yes": 1562,
-  "no": 98
+  "yes": 2632,
+  "no": 200
  },
- "judge_accept_rate": 0.941,
+ "judge_accept_rate": 0.9294,
  "pubmedqa_label_agreement": {
-  "parsed": 917,
-  "agree": 510,
-  "rate": 0.5562
+  "parsed": 996,
+  "agree": 550,
+  "rate": 0.5522
  },
  "runs": [
   {
@@ -150,6 +150,71 @@
     "gen_tokens_per_s": 3.556,
     "prompt_tokens_per_s": 13.182,
     "load_seconds": 17.86,
+    "model": "qwen2.5-coder-7b-instruct-q4_k_m.gguf",
+    "threads": 8,
+    "ctx": 2048,
+    "parallel": 4
+   }
+  },
+  {
+   "phase": "generate",
+   "calls": 1569,
+   "session_reasons": {
+    "definition:ok": 1172,
+    "pubmedqa:ok": 38,
+    "pubmedqa:label_mismatch": 35,
+    "definition:vague": 224,
+    "definition:truncated": 22,
+    "pubmedqa:repetition": 5,
+    "definition:too_short": 22,
+    "definition:repetition": 47,
+    "pubmedqa:too_short": 1,
+    "definition:term_repeated": 3
+   },
+   "seconds": 1488.5,
+   "speed": {
+    "requests": 1572,
+    "prompt_tokens": 32195,
+    "prompt_ms": 1169739.3,
+    "predicted_tokens": 29863,
+    "predicted_ms": 3699135.4,
+    "wall_s": 5030.29,
+    "gen_tokens_per_s": 8.073,
+    "prompt_tokens_per_s": 27.523,
+    "load_seconds": 10.07,
+    "model": "biomedlm-q8_0.gguf",
+    "threads": 8,
+    "ctx": 1024,
+    "parallel": 4
+   },
+   "queue_exhausted": false,
+   "terms_mined": 6779,
+   "terms_whole_word": 3634,
+   "term_tiers": {
+    "0": 1759,
+    "1": 1117,
+    "2": 758
+   },
+   "seed": 0
+  },
+  {
+   "phase": "judge",
+   "calls": 1172,
+   "verdicts": {
+    "yes": 1070,
+    "no": 102
+   },
+   "seconds": 1189.6,
+   "speed": {
+    "requests": 1172,
+    "prompt_tokens": 34676,
+    "prompt_ms": 2959635.4,
+    "predicted_tokens": 1172,
+    "predicted_ms": 1.2,
+    "wall_s": 4740.12,
+    "gen_tokens_per_s": 1000000.0,
+    "prompt_tokens_per_s": 11.716,
+    "load_seconds": 17.52,
     "model": "qwen2.5-coder-7b-instruct-q4_k_m.gguf",
     "threads": 8,
     "ctx": 2048,
