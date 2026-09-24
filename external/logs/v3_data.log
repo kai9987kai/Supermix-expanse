@@ -1,0 +1,56 @@
+[v3data] blocked prompts: replay 3711, eval heldout_problems 5185 {'2026': 2609, '260923': 2606}
+[v3data] omni: built 8782 rows (12.5s)
+[v3data] code: built 8001 rows (7.8s)
+[v3data] math: built 6000 rows (0.8s)
+[v3data] blocked problem keys: replay 3331, eval 4938; replay replies 3362
+[v3data] omni: kept 6528 (dropped {'replay_prompt': 600, 'eval_heldout_prompt': 67, 'replay_problem': 986, 'replay_reply': 23, 'eval_problem': 578, 'duplicate': 0}), heldout 217 -> C:\Users\kai99\Desktop\supermix-expanse\Supermix-expanse\expanse\data\v3\fresh_omni.jsonl
+[v3data] code: kept 8001 (dropped {'replay_prompt': 0, 'eval_heldout_prompt': 0, 'replay_problem': 0, 'replay_reply': 0, 'eval_problem': 0, 'duplicate': 0}), heldout 252 -> C:\Users\kai99\Desktop\supermix-expanse\Supermix-expanse\expanse\data\v3\fresh_code.jsonl
+[v3data] math: kept 4816 (dropped {'replay_prompt': 289, 'eval_heldout_prompt': 82, 'replay_problem': 271, 'replay_reply': 0, 'eval_problem': 156, 'duplicate': 386}), heldout 124 -> C:\Users\kai99\Desktop\supermix-expanse\Supermix-expanse\expanse\data\v3\fresh_math.jsonl
+[v3data] connectome: 13333 rows (12000 train / 1333 held out), held-out types {'v1': 1153, 'v3': 1153} equal=True (28s)
+[v3data] done in 89s -> C:\Users\kai99\Desktop\supermix-expanse\Supermix-expanse\expanse\data\v3
+{
+ "fresh": {
+  "built": 22783,
+  "kept": 19345,
+  "dropped": {
+   "replay_prompt": 889,
+   "eval_heldout_prompt": 149,
+   "replay_problem": 1257,
+   "replay_reply": 23,
+   "eval_problem": 734,
+   "duplicate": 386
+  },
+  "heldout": 593
+ },
+ "connectome": {
+  "rows": 13333,
+  "train_rows": 12000,
+  "heldout_rows": 1333,
+  "distinct_types": {
+   "train": 7456,
+   "heldout": 816,
+   "all": 8272
+  },
+  "dropped_failing_verification": {},
+  "output": "C:/Users/kai99/Desktop/supermix-expanse/Supermix-expanse/expanse/data/v3/connectome_rows_v3.jsonl",
+  "heldout_type_check": {
+   "pool_equal": true,
+   "pool_size": {
+    "v1": 1153,
+    "v3": 1153
+   },
+   "v1_heldout_types_in_v3_train_rows": 0,
+   "v1_heldout_rows": 667,
+   "v1_heldout_row_types_not_heldout_in_v3": 0,
+   "v1_heldout_prompts_in_v3_train": 0,
+   "equal": true,
+   "v1_report": "C:/Users/kai99/Desktop/supermix-expanse/Supermix-expanse/expanse/data/connectome_rows.report.json",
+   "v1_seed": 2026,
+   "v1_heldout_fraction": 0.1,
+   "seed": 2026,
+   "heldout_fraction": 0.1,
+   "npz_sha256_matches_v1": true
+  },
+  "seconds": 27.8
+ }
+}

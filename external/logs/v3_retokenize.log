@@ -1,0 +1,11 @@
+[retok] loaded checkpoints\supermix_expanse.pt (supermix-expanse-v1): vocab 10,951, context 128, 132,607,036 params in 6.1s
+[retok] tokenizer text: 44,355 train-split rows {'replay': 3554, 'fly': 3809, 'code': 4760, 'bio': 2402, 'connectome': 12000, 'fresh': 17830}; leak guard dropped 0
+[retok] before: '26 newtons for 7 seconds, what is the impulse' -> 'impulse = force x time, 20 x 7 = 140, 6 x 7 = 42, the impulse is 182 newton seconds, total'
+[retok] before: 'Implement add_all(items) in Python so that it returns the sum of the n' -> 'type power. def(_*(xs): return sum(n in in in(1)'
+[retok] BPE trained on 88,710 texts (44,355 rows): vocab 8,864 (asked 16,000) in 5.3s
+[retok] embedding rules special 6 copy 2893 old_tokenise 71 fragment 2601 mean_noise 3293 (rescaled to median old norm 2.3936)
+[retok] context 128 -> 128 (p99 new 108.0, cap 256); tokens/word old 1.5286 new 1.5254; old unk rate 0.00368
+[retok] saved checkpoints\supermix_expanse_v3_init.pt (596.4 MB)
+[retok] after: '26 newtons for 7 seconds, what is the impulse' -> 'impulse = force x time, 20 x 7 = 140, 6 x 7 = 42, the impulse is 182 newton seconds, total'
+[retok] after: 'Implement add_all(items) in Python so that it returns the sum of the n' -> "type()[(),(),(), '')),),),),),),),),)/(1A()[::-))[-()[::-1(),.)')()[()[()[::-']).)'])()[()["
+[retok] sanity passed (reload max|dlogit| 0.000e+00); receipt checkpoints\supermix_expanse_v3_init.receipt.json; 41s total

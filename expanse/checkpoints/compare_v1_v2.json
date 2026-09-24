@@ -1,0 +1,488 @@
+{
+ "args": {
+  "model": [
+   "v1=C:/Users/kai99/Desktop/supermix-expanse/expanse/checkpoints/supermix_expanse.pt",
+   "v2=C:/Users/kai99/Desktop/supermix-expanse/Supermix-expanse/expanse/checkpoints/supermix_expanse_v2.pt"
+  ],
+  "ref": "C:/Users/kai99/Desktop/supermix-expanse/expanse/checkpoints/supermix_expanse.pt",
+  "arch": "C:/Users/kai99/Desktop/supermix-expanse/external/base/supermix_archimedes.pt",
+  "gen_limit": 25,
+  "max_new_tokens": 64,
+  "seq": 128,
+  "batch": 8,
+  "no_gen": false,
+  "out": "C:/Users/kai99/Desktop/supermix-expanse/expanse/checkpoints/compare_v1_v2.json",
+  "threads": 6
+ },
+ "seed": 2026,
+ "items": {
+  "exact": 25,
+  "code": 25,
+  "bio": 25,
+  "pubmedqa": 25,
+  "connectome": 25
+ },
+ "dev_rows": {
+  "replay": 100,
+  "fly": 62,
+  "code": 79,
+  "bio": 76,
+  "connectome": 100
+ },
+ "models": {
+  "v1": {
+   "path": "C:/Users/kai99/Desktop/supermix-expanse/expanse/checkpoints/supermix_expanse.pt",
+   "schema": "supermix-expanse-v1",
+   "vocab": 10951,
+   "dev": {
+    "replay": {
+     "rows": 100,
+     "coverage": 1.0,
+     "nats_per_token_all": 0.41822783593138163,
+     "nats_per_char_all": 0.16561920651580167,
+     "nats_per_char_all_covered": 0.16561920651580167,
+     "nats_per_token_all_covered": 0.41822783593138163,
+     "rows_all_covered": 100
+    },
+    "fly": {
+     "rows": 62,
+     "coverage": 1.0,
+     "nats_per_token_all": 1.1982710282129931,
+     "nats_per_char_all": 0.39305060767550815,
+     "nats_per_char_all_covered": 0.39305060767550815,
+     "nats_per_token_all_covered": 1.1982710282129931,
+     "rows_all_covered": 62
+    },
+    "code": {
+     "rows": 79,
+     "coverage": 0.9746835443037974,
+     "nats_per_token_all": 4.036200680915585,
+     "nats_per_char_all": 1.2184078636067528,
+     "nats_per_char_all_covered": 1.2080616791623187,
+     "nats_per_token_all_covered": 4.005557136506591,
+     "rows_all_covered": 77
+    },
+    "bio": {
+     "rows": 76,
+     "coverage": 0.0,
+     "nats_per_token_all": 4.948824460226572,
+     "nats_per_char_all": 0.9897648920453144,
+     "nats_per_char_all_covered": null,
+     "nats_per_token_all_covered": null,
+     "rows_all_covered": 0
+    },
+    "connectome": {
+     "rows": 100,
+     "coverage": 0.99,
+     "nats_per_token_all": 0.6134940532306916,
+     "nats_per_char_all": 0.18204022509730686,
+     "nats_per_char_all_covered": 0.18100053760187157,
+     "nats_per_token_all_covered": 0.6080982973817264,
+     "rows_all_covered": 99
+    }
+   },
+   "gen": {
+    "exact": {
+     "accuracy": 0.2,
+     "correct": 5,
+     "checked": 25,
+     "per_task": {
+      "multiplication": [
+       1,
+       2
+      ],
+      "electrical_power": [
+       0,
+       1
+      ],
+      "algebra_one_step": [
+       0,
+       3
+      ],
+      "power": [
+       0,
+       1
+      ],
+      "work": [
+       1,
+       2
+      ],
+      "subtraction": [
+       0,
+       2
+      ],
+      "addition": [
+       2,
+       2
+      ],
+      "final_velocity": [
+       0,
+       1
+      ],
+      "average": [
+       0,
+       2
+      ],
+      "kinetic_energy": [
+       0,
+       2
+      ],
+      "ohms_current": [
+       0,
+       2
+      ],
+      "voltage": [
+       1,
+       1
+      ],
+      "two_step": [
+       0,
+       1
+      ],
+      "division": [
+       0,
+       1
+      ],
+      "percent": [
+       0,
+       1
+      ],
+      "spring_energy": [
+       0,
+       1
+      ]
+     }
+    },
+    "code": {
+     "pass_rate": 0.0,
+     "passed": 0,
+     "items": 25,
+     "reasons": {
+      "no_def": 25
+     }
+    },
+    "bio": {
+     "token_f1": 0.2849709463257771,
+     "items": 25,
+     "pubmedqa_accuracy": 0.0,
+     "pubmedqa_items": 25,
+     "pubmedqa_majority_baseline": 0.64,
+     "pubmedqa_answers": {
+      "none": 25
+     }
+    },
+    "connectome": {
+     "exact_match": 0.16,
+     "token_f1": 0.6738434912661917,
+     "items": 25,
+     "answer_hit": 0.2
+    },
+    "seconds": 306.1
+   },
+   "seconds": 393.3
+  },
+  "v2": {
+   "path": "C:/Users/kai99/Desktop/supermix-expanse/Supermix-expanse/expanse/checkpoints/supermix_expanse_v2.pt",
+   "schema": "supermix-expanse-v2",
+   "vocab": 10951,
+   "dev": {
+    "replay": {
+     "rows": 100,
+     "coverage": 1.0,
+     "nats_per_token_all": 0.33229762408979163,
+     "nats_per_char_all": 0.13159064055666292,
+     "nats_per_char_all_covered": 0.13159064055666292,
+     "nats_per_token_all_covered": 0.33229762408979163,
+     "rows_all_covered": 100
+    },
+    "fly": {
+     "rows": 62,
+     "coverage": 1.0,
+     "nats_per_token_all": 1.1233749301752187,
+     "nats_per_char_all": 0.36848358055629865,
+     "nats_per_char_all_covered": 0.36848358055629865,
+     "nats_per_token_all_covered": 1.1233749301752187,
+     "rows_all_covered": 62
+    },
+    "code": {
+     "rows": 79,
+     "coverage": 0.9746835443037974,
+     "nats_per_token_all": 3.946769812817419,
+     "nats_per_char_all": 1.191411368250316,
+     "nats_per_char_all_covered": 1.180925700699296,
+     "nats_per_token_all_covered": 3.9155826641236744,
+     "rows_all_covered": 77
+    },
+    "bio": {
+     "rows": 76,
+     "coverage": 0.0,
+     "nats_per_token_all": 4.835008145087187,
+     "nats_per_char_all": 0.9670016290174374,
+     "nats_per_char_all_covered": null,
+     "nats_per_token_all_covered": null,
+     "rows_all_covered": 0
+    },
+    "connectome": {
+     "rows": 100,
+     "coverage": 0.99,
+     "nats_per_token_all": 0.5950637249538272,
+     "nats_per_char_all": 0.17657144982480058,
+     "nats_per_char_all_covered": 0.17556161995656186,
+     "nats_per_token_all_covered": 0.5898254424856421,
+     "rows_all_covered": 99
+    }
+   },
+   "gen": {
+    "exact": {
+     "accuracy": 0.28,
+     "correct": 7,
+     "checked": 25,
+     "per_task": {
+      "multiplication": [
+       1,
+       2
+      ],
+      "electrical_power": [
+       1,
+       1
+      ],
+      "algebra_one_step": [
+       1,
+       3
+      ],
+      "power": [
+       0,
+       1
+      ],
+      "work": [
+       1,
+       2
+      ],
+      "subtraction": [
+       0,
+       2
+      ],
+      "addition": [
+       2,
+       2
+      ],
+      "final_velocity": [
+       0,
+       1
+      ],
+      "average": [
+       0,
+       2
+      ],
+      "kinetic_energy": [
+       0,
+       2
+      ],
+      "ohms_current": [
+       0,
+       2
+      ],
+      "voltage": [
+       1,
+       1
+      ],
+      "two_step": [
+       0,
+       1
+      ],
+      "division": [
+       0,
+       1
+      ],
+      "percent": [
+       0,
+       1
+      ],
+      "spring_energy": [
+       0,
+       1
+      ]
+     }
+    },
+    "code": {
+     "pass_rate": 0.0,
+     "passed": 0,
+     "items": 25,
+     "reasons": {
+      "no_def": 25
+     }
+    },
+    "bio": {
+     "token_f1": 0.3424544144058871,
+     "items": 25,
+     "pubmedqa_accuracy": 0.0,
+     "pubmedqa_items": 25,
+     "pubmedqa_majority_baseline": 0.64,
+     "pubmedqa_answers": {
+      "none": 25
+     }
+    },
+    "connectome": {
+     "exact_match": 0.16,
+     "token_f1": 0.6738434912661917,
+     "items": 25,
+     "answer_hit": 0.2
+    },
+    "seconds": 324.0
+   },
+   "seconds": 413.6
+  },
+  "v2_gates0": {
+   "path": "C:/Users/kai99/Desktop/supermix-expanse/Supermix-expanse/expanse/checkpoints/supermix_expanse_v2.pt",
+   "schema": "supermix-expanse-v2",
+   "vocab": 10951,
+   "dev": {
+    "replay": {
+     "rows": 100,
+     "coverage": 1.0,
+     "nats_per_token_all": 0.3343791004753259,
+     "nats_per_char_all": 0.13241491010004675,
+     "nats_per_char_all_covered": 0.13241491010004675,
+     "nats_per_token_all_covered": 0.3343791004753259,
+     "rows_all_covered": 100
+    },
+    "fly": {
+     "rows": 62,
+     "coverage": 1.0,
+     "nats_per_token_all": 1.123799038372831,
+     "nats_per_char_all": 0.36862269431342604,
+     "nats_per_char_all_covered": 0.36862269431342604,
+     "nats_per_token_all_covered": 1.123799038372831,
+     "rows_all_covered": 62
+    },
+    "code": {
+     "rows": 79,
+     "coverage": 0.9746835443037974,
+     "nats_per_token_all": 3.9474016206454388,
+     "nats_per_char_all": 1.1916020920737345,
+     "nats_per_char_all_covered": 1.1811031553163942,
+     "nats_per_token_all_covered": 3.9161710484919436,
+     "rows_all_covered": 77
+    },
+    "bio": {
+     "rows": 76,
+     "coverage": 0.0,
+     "nats_per_token_all": 4.836098544842066,
+     "nats_per_char_all": 0.9672197089684134,
+     "nats_per_char_all_covered": null,
+     "nats_per_token_all_covered": null,
+     "rows_all_covered": 0
+    },
+    "connectome": {
+     "rows": 100,
+     "coverage": 0.99,
+     "nats_per_token_all": 0.5954243266530583,
+     "nats_per_char_all": 0.17667845007061034,
+     "nats_per_char_all_covered": 0.17566824286164565,
+     "nats_per_token_all_covered": 0.5901836580351779,
+     "rows_all_covered": 99
+    }
+   },
+   "gen": {
+    "exact": {
+     "accuracy": 0.28,
+     "correct": 7,
+     "checked": 25,
+     "per_task": {
+      "multiplication": [
+       1,
+       2
+      ],
+      "electrical_power": [
+       1,
+       1
+      ],
+      "algebra_one_step": [
+       1,
+       3
+      ],
+      "power": [
+       0,
+       1
+      ],
+      "work": [
+       1,
+       2
+      ],
+      "subtraction": [
+       0,
+       2
+      ],
+      "addition": [
+       2,
+       2
+      ],
+      "final_velocity": [
+       0,
+       1
+      ],
+      "average": [
+       0,
+       2
+      ],
+      "kinetic_energy": [
+       0,
+       2
+      ],
+      "ohms_current": [
+       0,
+       2
+      ],
+      "voltage": [
+       1,
+       1
+      ],
+      "two_step": [
+       0,
+       1
+      ],
+      "division": [
+       0,
+       1
+      ],
+      "percent": [
+       0,
+       1
+      ],
+      "spring_energy": [
+       0,
+       1
+      ]
+     }
+    },
+    "code": {
+     "pass_rate": 0.0,
+     "passed": 0,
+     "items": 25,
+     "reasons": {
+      "no_def": 25
+     }
+    },
+    "bio": {
+     "token_f1": 0.3415020334535061,
+     "items": 25,
+     "pubmedqa_accuracy": 0.0,
+     "pubmedqa_items": 25,
+     "pubmedqa_majority_baseline": 0.64,
+     "pubmedqa_answers": {
+      "none": 25
+     }
+    },
+    "connectome": {
+     "exact_match": 0.16,
+     "token_f1": 0.6738434912661917,
+     "items": 25,
+     "answer_hit": 0.2
+    },
+    "seconds": 482.8
+   },
+   "seconds": 568.9
+  }
+ },
+ "seconds": 1385.2
+}

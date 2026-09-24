@@ -1,0 +1,185 @@
+08:39:18 [bio] BioMedLM up in 10s (8 threads)
+08:39:27 [bio] terms mined 6779 (whole-word in corpus 3634, tiers {0: 1759, 1: 1117, 2: 758})  pubmedqa 1000  queue 4634  processed 2771  rows {'heldout': 191, 'train': 1860}  pending {}  accept_rate 0.94
+08:40:08 [bio] calls 10 pos 2772 rows {'heldout': 191, 'train': 1861} pending {'train': 6} gen 3.405 tok/s prompt 41.871 tok/s 41s
+08:40:36 [bio] calls 20 pos 2782 rows {'heldout': 191, 'train': 1863} pending {'train': 9} gen 4.079 tok/s prompt 38.104 tok/s 68s
+08:41:13 [bio] calls 30 pos 2792 rows {'heldout': 191, 'train': 1866} pending {'train': 14} gen 3.838 tok/s prompt 43.811 tok/s 106s
+08:41:34 [bio] calls 40 pos 2802 rows {'heldout': 191, 'train': 1867} pending {'train': 19} gen 4.26 tok/s prompt 40.127 tok/s 127s
+08:41:56 [bio] calls 50 pos 2812 rows {'heldout': 191, 'train': 1869} pending {'train': 24} gen 4.485 tok/s prompt 37.32 tok/s 148s
+08:42:30 [bio] calls 60 pos 2822 rows {'heldout': 191, 'train': 1870} pending {'train': 29} gen 4.479 tok/s prompt 37.527 tok/s 183s
+08:42:58 [bio] calls 70 pos 2832 rows {'heldout': 191, 'train': 1872} pending {'train': 36} gen 4.458 tok/s prompt 37.219 tok/s 211s
+08:43:23 [bio] calls 80 pos 2842 rows {'heldout': 191, 'train': 1874} pending {'train': 42} gen 4.551 tok/s prompt 35.719 tok/s 236s
+08:43:51 [bio] calls 90 pos 2852 rows {'heldout': 191, 'train': 1875} pending {'train': 45} gen 4.725 tok/s prompt 35.221 tok/s 264s
+08:44:13 [bio] calls 100 pos 2862 rows {'heldout': 191, 'train': 1878} pending {'train': 51} gen 4.824 tok/s prompt 34.346 tok/s 286s
+08:44:37 [bio] calls 110 pos 2872 rows {'heldout': 191, 'train': 1879} pending {'train': 53} gen 4.827 tok/s prompt 35.199 tok/s 310s
+08:45:10 [bio] calls 120 pos 2882 rows {'heldout': 191, 'train': 1880} pending {'train': 59} gen 4.773 tok/s prompt 35.86 tok/s 343s
+08:45:31 [bio] calls 130 pos 2892 rows {'heldout': 191, 'train': 1883} pending {'train': 65} gen 4.845 tok/s prompt 35.635 tok/s 363s
+08:45:49 [bio] calls 140 pos 2902 rows {'heldout': 191, 'train': 1883} pending {'train': 70} gen 4.957 tok/s prompt 34.869 tok/s 382s
+08:46:16 [bio] calls 150 pos 2912 rows {'heldout': 191, 'train': 1887} pending {'train': 74} gen 5.064 tok/s prompt 34.576 tok/s 409s
+08:46:39 [bio] calls 160 pos 2922 rows {'heldout': 191, 'train': 1887} pending {'train': 80} gen 5.103 tok/s prompt 34.083 tok/s 432s
+08:46:57 [bio] calls 170 pos 2932 rows {'heldout': 191, 'train': 1889} pending {'train': 87} gen 5.185 tok/s prompt 33.929 tok/s 449s
+08:47:25 [bio] calls 180 pos 2942 rows {'heldout': 191, 'train': 1890} pending {'train': 91} gen 5.258 tok/s prompt 33.37 tok/s 478s
+08:47:46 [bio] calls 190 pos 2952 rows {'heldout': 191, 'train': 1891} pending {'train': 98} gen 5.311 tok/s prompt 33.046 tok/s 499s
+08:48:12 [bio] calls 200 pos 2962 rows {'heldout': 191, 'train': 1893} pending {'train': 103} gen 5.317 tok/s prompt 33.671 tok/s 524s
+08:48:44 [bio] calls 210 pos 2972 rows {'heldout': 191, 'train': 1895} pending {'train': 109} gen 5.311 tok/s prompt 33.641 tok/s 557s
+08:49:03 [bio] calls 220 pos 2982 rows {'heldout': 191, 'train': 1896} pending {'train': 116} gen 5.341 tok/s prompt 33.623 tok/s 576s
+08:49:30 [bio] calls 230 pos 2993 rows {'heldout': 191, 'train': 1898} pending {'train': 121} gen 5.361 tok/s prompt 33.62 tok/s 602s
+08:49:50 [bio] calls 240 pos 3003 rows {'heldout': 191, 'train': 1898} pending {'train': 129} gen 5.316 tok/s prompt 34.157 tok/s 623s
+08:49:57 [bio] calls 250 pos 3013 rows {'heldout': 191, 'train': 1898} pending {'train': 133} gen 5.362 tok/s prompt 34.081 tok/s 629s
+08:50:05 [bio] calls 260 pos 3023 rows {'heldout': 191, 'train': 1898} pending {'train': 141} gen 5.443 tok/s prompt 34.034 tok/s 638s
+08:50:11 [bio] calls 270 pos 3033 rows {'heldout': 191, 'train': 1898} pending {'train': 148} gen 5.494 tok/s prompt 33.971 tok/s 644s
+08:50:16 [bio] calls 280 pos 3043 rows {'heldout': 191, 'train': 1898} pending {'train': 156} gen 5.536 tok/s prompt 33.914 tok/s 648s
+08:50:22 [bio] calls 290 pos 3053 rows {'heldout': 191, 'train': 1898} pending {'train': 164} gen 5.586 tok/s prompt 33.822 tok/s 655s
+08:50:28 [bio] calls 300 pos 3063 rows {'heldout': 191, 'train': 1898} pending {'train': 172} gen 5.658 tok/s prompt 33.721 tok/s 661s
+08:50:34 [bio] calls 310 pos 3073 rows {'heldout': 191, 'train': 1898} pending {'train': 178} gen 5.714 tok/s prompt 33.669 tok/s 667s
+08:50:43 [bio] calls 320 pos 3083 rows {'heldout': 191, 'train': 1898} pending {'train': 185} gen 5.774 tok/s prompt 33.614 tok/s 675s
+08:50:49 [bio] calls 330 pos 3093 rows {'heldout': 191, 'train': 1898} pending {'train': 191} gen 5.833 tok/s prompt 33.525 tok/s 682s
+08:50:54 [bio] calls 340 pos 3103 rows {'heldout': 191, 'train': 1898} pending {'train': 200} gen 5.863 tok/s prompt 33.458 tok/s 687s
+08:51:01 [bio] calls 350 pos 3113 rows {'heldout': 191, 'train': 1898} pending {'train': 207} gen 5.909 tok/s prompt 33.4 tok/s 694s
+08:51:09 [bio] calls 360 pos 3123 rows {'heldout': 191, 'train': 1898} pending {'train': 214} gen 5.959 tok/s prompt 33.335 tok/s 702s
+08:51:15 [bio] calls 370 pos 3133 rows {'heldout': 191, 'train': 1898} pending {'train': 223} gen 5.993 tok/s prompt 33.265 tok/s 708s
+08:51:23 [bio] calls 380 pos 3143 rows {'heldout': 191, 'train': 1898} pending {'train': 230} gen 6.027 tok/s prompt 33.217 tok/s 716s
+08:51:29 [bio] calls 390 pos 3153 rows {'heldout': 191, 'train': 1898} pending {'train': 238} gen 6.058 tok/s prompt 33.151 tok/s 722s
+08:51:34 [bio] calls 400 pos 3163 rows {'heldout': 191, 'train': 1898} pending {'train': 244} gen 6.089 tok/s prompt 33.072 tok/s 727s
+08:51:43 [bio] calls 410 pos 3173 rows {'heldout': 191, 'train': 1898} pending {'train': 252} gen 6.125 tok/s prompt 33.012 tok/s 736s
+08:51:48 [bio] calls 420 pos 3183 rows {'heldout': 191, 'train': 1898} pending {'train': 261} gen 6.144 tok/s prompt 32.949 tok/s 741s
+08:51:53 [bio] calls 430 pos 3193 rows {'heldout': 191, 'train': 1898} pending {'train': 271} gen 6.175 tok/s prompt 32.895 tok/s 746s
+08:51:58 [bio] calls 440 pos 3203 rows {'heldout': 191, 'train': 1898} pending {'train': 279} gen 6.211 tok/s prompt 32.836 tok/s 751s
+08:52:03 [bio] calls 450 pos 3213 rows {'heldout': 191, 'train': 1898} pending {'train': 287} gen 6.247 tok/s prompt 32.782 tok/s 756s
+08:52:13 [bio] calls 460 pos 3223 rows {'heldout': 191, 'train': 1898} pending {'train': 295} gen 6.31 tok/s prompt 32.699 tok/s 766s
+08:52:17 [bio] calls 470 pos 3233 rows {'heldout': 191, 'train': 1898} pending {'train': 303} gen 6.343 tok/s prompt 32.655 tok/s 770s
+08:52:22 [bio] calls 480 pos 3243 rows {'heldout': 191, 'train': 1898} pending {'train': 311} gen 6.374 tok/s prompt 32.611 tok/s 775s
+08:52:27 [bio] calls 490 pos 3253 rows {'heldout': 191, 'train': 1898} pending {'train': 320} gen 6.396 tok/s prompt 32.561 tok/s 779s
+08:52:33 [bio] calls 500 pos 3263 rows {'heldout': 191, 'train': 1898} pending {'train': 328} gen 6.436 tok/s prompt 32.489 tok/s 786s
+08:52:37 [bio] calls 510 pos 3273 rows {'heldout': 191, 'train': 1898} pending {'train': 335} gen 6.464 tok/s prompt 32.463 tok/s 790s
+08:52:42 [bio] calls 520 pos 3283 rows {'heldout': 191, 'train': 1898} pending {'train': 342} gen 6.481 tok/s prompt 32.41 tok/s 795s
+08:52:50 [bio] calls 530 pos 3293 rows {'heldout': 191, 'train': 1898} pending {'train': 352} gen 6.513 tok/s prompt 32.341 tok/s 802s
+08:52:55 [bio] calls 540 pos 3303 rows {'heldout': 191, 'train': 1898} pending {'train': 360} gen 6.544 tok/s prompt 32.289 tok/s 808s
+08:53:01 [bio] calls 550 pos 3313 rows {'heldout': 191, 'train': 1898} pending {'train': 370} gen 6.574 tok/s prompt 32.244 tok/s 814s
+08:53:07 [bio] calls 560 pos 3323 rows {'heldout': 191, 'train': 1898} pending {'train': 378} gen 6.603 tok/s prompt 32.185 tok/s 819s
+08:53:15 [bio] calls 570 pos 3333 rows {'heldout': 191, 'train': 1898} pending {'train': 387} gen 6.635 tok/s prompt 32.094 tok/s 828s
+08:53:20 [bio] calls 580 pos 3343 rows {'heldout': 191, 'train': 1898} pending {'train': 396} gen 6.652 tok/s prompt 32.052 tok/s 833s
+08:53:26 [bio] calls 590 pos 3353 rows {'heldout': 191, 'train': 1898} pending {'train': 405} gen 6.674 tok/s prompt 31.996 tok/s 839s
+08:53:33 [bio] calls 600 pos 3363 rows {'heldout': 191, 'train': 1898} pending {'train': 414} gen 6.7 tok/s prompt 31.935 tok/s 846s
+08:53:41 [bio] calls 610 pos 3373 rows {'heldout': 191, 'train': 1898} pending {'train': 422} gen 6.73 tok/s prompt 31.878 tok/s 854s
+08:53:47 [bio] calls 620 pos 3383 rows {'heldout': 191, 'train': 1898} pending {'train': 429} gen 6.754 tok/s prompt 31.828 tok/s 860s
+08:53:52 [bio] calls 630 pos 3393 rows {'heldout': 191, 'train': 1898} pending {'train': 439} gen 6.778 tok/s prompt 31.751 tok/s 865s
+08:53:58 [bio] calls 640 pos 3403 rows {'heldout': 191, 'train': 1898} pending {'train': 448} gen 6.791 tok/s prompt 31.696 tok/s 871s
+08:54:03 [bio] calls 650 pos 3414 rows {'heldout': 191, 'train': 1898} pending {'train': 454} gen 6.816 tok/s prompt 31.644 tok/s 876s
+08:54:10 [bio] calls 660 pos 3424 rows {'heldout': 191, 'train': 1898} pending {'train': 461} gen 6.841 tok/s prompt 31.576 tok/s 883s
+08:54:17 [bio] calls 670 pos 3434 rows {'heldout': 191, 'train': 1898} pending {'train': 469} gen 6.878 tok/s prompt 31.52 tok/s 890s
+08:54:22 [bio] calls 680 pos 3444 rows {'heldout': 191, 'train': 1898} pending {'train': 476} gen 6.898 tok/s prompt 31.476 tok/s 894s
+08:54:27 [bio] calls 690 pos 3454 rows {'heldout': 191, 'train': 1898} pending {'train': 483} gen 6.92 tok/s prompt 31.432 tok/s 900s
+08:54:36 [bio] calls 700 pos 3464 rows {'heldout': 191, 'train': 1898} pending {'train': 488} gen 6.927 tok/s prompt 31.34 tok/s 909s
+08:54:45 [bio] calls 710 pos 3474 rows {'heldout': 191, 'train': 1898} pending {'train': 495} gen 6.932 tok/s prompt 31.216 tok/s 918s
+08:54:51 [bio] calls 720 pos 3484 rows {'heldout': 191, 'train': 1898} pending {'train': 503} gen 6.951 tok/s prompt 31.16 tok/s 924s
+08:54:58 [bio] calls 730 pos 3494 rows {'heldout': 191, 'train': 1898} pending {'train': 512} gen 6.964 tok/s prompt 31.089 tok/s 931s
+08:55:05 [bio] calls 740 pos 3504 rows {'heldout': 191, 'train': 1898} pending {'train': 516} gen 6.991 tok/s prompt 31.004 tok/s 938s
+08:55:11 [bio] calls 750 pos 3514 rows {'heldout': 191, 'train': 1898} pending {'train': 524} gen 7.018 tok/s prompt 30.954 tok/s 944s
+08:55:16 [bio] calls 760 pos 3524 rows {'heldout': 191, 'train': 1898} pending {'train': 534} gen 7.035 tok/s prompt 30.893 tok/s 949s
+08:55:23 [bio] calls 770 pos 3534 rows {'heldout': 191, 'train': 1898} pending {'train': 541} gen 7.05 tok/s prompt 30.86 tok/s 956s
+08:55:29 [bio] calls 780 pos 3544 rows {'heldout': 191, 'train': 1898} pending {'train': 547} gen 7.067 tok/s prompt 30.801 tok/s 962s
+08:55:38 [bio] calls 790 pos 3554 rows {'heldout': 191, 'train': 1898} pending {'train': 553} gen 7.09 tok/s prompt 30.727 tok/s 971s
+08:55:43 [bio] calls 800 pos 3564 rows {'heldout': 191, 'train': 1898} pending {'train': 560} gen 7.109 tok/s prompt 30.685 tok/s 976s
+08:55:48 [bio] calls 810 pos 3574 rows {'heldout': 191, 'train': 1898} pending {'train': 568} gen 7.127 tok/s prompt 30.644 tok/s 981s
+08:55:55 [bio] calls 820 pos 3584 rows {'heldout': 191, 'train': 1898} pending {'train': 578} gen 7.14 tok/s prompt 30.606 tok/s 988s
+08:56:06 [bio] calls 830 pos 3594 rows {'heldout': 191, 'train': 1898} pending {'train': 586} gen 7.164 tok/s prompt 30.55 tok/s 999s
+08:56:12 [bio] calls 840 pos 3604 rows {'heldout': 191, 'train': 1898} pending {'train': 593} gen 7.185 tok/s prompt 30.501 tok/s 1005s
+08:56:19 [bio] calls 850 pos 3614 rows {'heldout': 191, 'train': 1898} pending {'train': 601} gen 7.2 tok/s prompt 30.452 tok/s 1011s
+08:56:23 [bio] calls 860 pos 3624 rows {'heldout': 191, 'train': 1898} pending {'train': 610} gen 7.211 tok/s prompt 30.422 tok/s 1016s
+08:56:31 [bio] calls 870 pos 3634 rows {'heldout': 191, 'train': 1898} pending {'train': 617} gen 7.222 tok/s prompt 30.341 tok/s 1024s
+08:56:40 [bio] calls 880 pos 3644 rows {'heldout': 191, 'train': 1898} pending {'train': 626} gen 7.236 tok/s prompt 30.286 tok/s 1033s
+08:56:47 [bio] calls 890 pos 3654 rows {'heldout': 191, 'train': 1898} pending {'train': 635} gen 7.245 tok/s prompt 30.25 tok/s 1040s
+08:56:53 [bio] calls 900 pos 3664 rows {'heldout': 191, 'train': 1898} pending {'train': 640} gen 7.262 tok/s prompt 30.198 tok/s 1046s
+08:56:59 [bio] calls 910 pos 3674 rows {'heldout': 191, 'train': 1898} pending {'train': 647} gen 7.271 tok/s prompt 30.162 tok/s 1052s
+08:57:04 [bio] calls 920 pos 3684 rows {'heldout': 191, 'train': 1898} pending {'train': 657} gen 7.282 tok/s prompt 30.131 tok/s 1057s
+08:57:10 [bio] calls 930 pos 3694 rows {'heldout': 191, 'train': 1898} pending {'train': 664} gen 7.293 tok/s prompt 30.076 tok/s 1062s
+08:57:22 [bio] calls 940 pos 3704 rows {'heldout': 191, 'train': 1898} pending {'train': 671} gen 7.324 tok/s prompt 30.001 tok/s 1075s
+08:57:26 [bio] calls 950 pos 3714 rows {'heldout': 191, 'train': 1898} pending {'train': 679} gen 7.334 tok/s prompt 29.977 tok/s 1079s
+08:57:32 [bio] calls 960 pos 3724 rows {'heldout': 191, 'train': 1898} pending {'train': 687} gen 7.34 tok/s prompt 29.932 tok/s 1085s
+08:57:38 [bio] calls 970 pos 3734 rows {'heldout': 191, 'train': 1898} pending {'train': 697} gen 7.366 tok/s prompt 29.871 tok/s 1091s
+08:57:41 [bio] calls 980 pos 3744 rows {'heldout': 191, 'train': 1898} pending {'train': 705} gen 7.381 tok/s prompt 29.842 tok/s 1094s
+08:57:47 [bio] calls 990 pos 3754 rows {'heldout': 191, 'train': 1898} pending {'train': 715} gen 7.394 tok/s prompt 29.801 tok/s 1099s
+08:57:52 [bio] calls 1000 pos 3764 rows {'heldout': 191, 'train': 1898} pending {'train': 725} gen 7.409 tok/s prompt 29.75 tok/s 1105s
+08:57:58 [bio] calls 1010 pos 3775 rows {'heldout': 191, 'train': 1898} pending {'train': 734} gen 7.429 tok/s prompt 29.708 tok/s 1111s
+08:58:04 [bio] calls 1020 pos 3786 rows {'heldout': 191, 'train': 1898} pending {'train': 744} gen 7.439 tok/s prompt 29.668 tok/s 1117s
+08:58:12 [bio] calls 1030 pos 3796 rows {'heldout': 191, 'train': 1898} pending {'train': 750} gen 7.458 tok/s prompt 29.633 tok/s 1125s
+08:58:16 [bio] calls 1040 pos 3806 rows {'heldout': 191, 'train': 1898} pending {'train': 757} gen 7.467 tok/s prompt 29.616 tok/s 1129s
+08:58:22 [bio] calls 1050 pos 3816 rows {'heldout': 191, 'train': 1898} pending {'train': 765} gen 7.485 tok/s prompt 29.584 tok/s 1135s
+08:58:29 [bio] calls 1060 pos 3826 rows {'heldout': 191, 'train': 1898} pending {'train': 772} gen 7.499 tok/s prompt 29.546 tok/s 1142s
+08:58:33 [bio] calls 1070 pos 3836 rows {'heldout': 191, 'train': 1898} pending {'train': 782} gen 7.516 tok/s prompt 29.504 tok/s 1146s
+08:58:39 [bio] calls 1080 pos 3846 rows {'heldout': 191, 'train': 1898} pending {'train': 788} gen 7.525 tok/s prompt 29.476 tok/s 1152s
+08:58:46 [bio] calls 1090 pos 3856 rows {'heldout': 191, 'train': 1898} pending {'train': 795} gen 7.538 tok/s prompt 29.423 tok/s 1159s
+08:58:54 [bio] calls 1100 pos 3866 rows {'heldout': 191, 'train': 1898} pending {'train': 802} gen 7.556 tok/s prompt 29.385 tok/s 1167s
+08:59:01 [bio] calls 1110 pos 3876 rows {'heldout': 191, 'train': 1898} pending {'train': 809} gen 7.576 tok/s prompt 29.343 tok/s 1174s
+08:59:07 [bio] calls 1120 pos 3886 rows {'heldout': 191, 'train': 1898} pending {'train': 817} gen 7.586 tok/s prompt 29.305 tok/s 1180s
+08:59:12 [bio] calls 1130 pos 3896 rows {'heldout': 191, 'train': 1898} pending {'train': 826} gen 7.594 tok/s prompt 29.248 tok/s 1185s
+08:59:20 [bio] calls 1140 pos 3906 rows {'heldout': 191, 'train': 1898} pending {'train': 833} gen 7.613 tok/s prompt 29.21 tok/s 1193s
+08:59:30 [bio] calls 1150 pos 3916 rows {'heldout': 191, 'train': 1898} pending {'train': 840} gen 7.624 tok/s prompt 29.153 tok/s 1203s
+08:59:37 [bio] calls 1160 pos 3926 rows {'heldout': 191, 'train': 1898} pending {'train': 847} gen 7.637 tok/s prompt 29.129 tok/s 1210s
+08:59:45 [bio] calls 1170 pos 3936 rows {'heldout': 191, 'train': 1898} pending {'train': 853} gen 7.656 tok/s prompt 29.086 tok/s 1218s
+08:59:50 [bio] calls 1180 pos 3946 rows {'heldout': 191, 'train': 1898} pending {'train': 858} gen 7.673 tok/s prompt 29.047 tok/s 1223s
+08:59:58 [bio] calls 1190 pos 3956 rows {'heldout': 191, 'train': 1898} pending {'train': 866} gen 7.689 tok/s prompt 29.001 tok/s 1230s
+09:00:03 [bio] calls 1200 pos 3966 rows {'heldout': 191, 'train': 1898} pending {'train': 875} gen 7.703 tok/s prompt 28.956 tok/s 1236s
+09:00:10 [bio] calls 1210 pos 3976 rows {'heldout': 191, 'train': 1898} pending {'train': 880} gen 7.716 tok/s prompt 28.912 tok/s 1243s
+09:00:17 [bio] calls 1220 pos 3986 rows {'heldout': 191, 'train': 1898} pending {'train': 887} gen 7.734 tok/s prompt 28.862 tok/s 1250s
+09:00:22 [bio] calls 1230 pos 3996 rows {'heldout': 191, 'train': 1898} pending {'train': 897} gen 7.748 tok/s prompt 28.841 tok/s 1255s
+09:00:27 [bio] calls 1240 pos 4006 rows {'heldout': 191, 'train': 1898} pending {'train': 907} gen 7.755 tok/s prompt 28.78 tok/s 1260s
+09:00:31 [bio] calls 1250 pos 4016 rows {'heldout': 191, 'train': 1898} pending {'train': 915} gen 7.764 tok/s prompt 28.739 tok/s 1264s
+09:00:38 [bio] calls 1260 pos 4026 rows {'heldout': 191, 'train': 1898} pending {'train': 921} gen 7.784 tok/s prompt 28.707 tok/s 1271s
+09:00:45 [bio] calls 1270 pos 4036 rows {'heldout': 191, 'train': 1898} pending {'train': 931} gen 7.794 tok/s prompt 28.664 tok/s 1278s
+09:00:51 [bio] calls 1280 pos 4046 rows {'heldout': 191, 'train': 1898} pending {'train': 940} gen 7.81 tok/s prompt 28.624 tok/s 1284s
+09:01:00 [bio] calls 1290 pos 4056 rows {'heldout': 191, 'train': 1898} pending {'train': 947} gen 7.823 tok/s prompt 28.568 tok/s 1293s
+09:01:08 [bio] calls 1300 pos 4066 rows {'heldout': 191, 'train': 1898} pending {'train': 956} gen 7.834 tok/s prompt 28.538 tok/s 1301s
+09:01:12 [bio] calls 1310 pos 4076 rows {'heldout': 191, 'train': 1898} pending {'train': 966} gen 7.843 tok/s prompt 28.504 tok/s 1305s
+09:01:20 [bio] calls 1320 pos 4086 rows {'heldout': 191, 'train': 1898} pending {'train': 974} gen 7.849 tok/s prompt 28.467 tok/s 1313s
+09:01:29 [bio] calls 1330 pos 4096 rows {'heldout': 191, 'train': 1898} pending {'train': 981} gen 7.865 tok/s prompt 28.401 tok/s 1322s
+09:01:34 [bio] calls 1340 pos 4106 rows {'heldout': 191, 'train': 1898} pending {'train': 988} gen 7.876 tok/s prompt 28.368 tok/s 1326s
+09:01:40 [bio] calls 1350 pos 4116 rows {'heldout': 191, 'train': 1898} pending {'train': 996} gen 7.884 tok/s prompt 28.341 tok/s 1333s
+09:01:49 [bio] calls 1360 pos 4126 rows {'heldout': 191, 'train': 1898} pending {'train': 1004} gen 7.887 tok/s prompt 28.295 tok/s 1342s
+09:01:54 [bio] calls 1370 pos 4136 rows {'heldout': 191, 'train': 1898} pending {'train': 1012} gen 7.902 tok/s prompt 28.263 tok/s 1347s
+09:02:03 [bio] calls 1380 pos 4146 rows {'heldout': 191, 'train': 1898} pending {'train': 1021} gen 7.915 tok/s prompt 28.235 tok/s 1356s
+09:02:09 [bio] calls 1390 pos 4156 rows {'heldout': 191, 'train': 1898} pending {'train': 1029} gen 7.927 tok/s prompt 28.197 tok/s 1362s
+09:02:17 [bio] calls 1400 pos 4166 rows {'heldout': 191, 'train': 1898} pending {'train': 1035} gen 7.936 tok/s prompt 28.151 tok/s 1370s
+09:02:21 [bio] calls 1410 pos 4176 rows {'heldout': 191, 'train': 1898} pending {'train': 1044} gen 7.949 tok/s prompt 28.128 tok/s 1374s
+09:02:28 [bio] calls 1420 pos 4186 rows {'heldout': 191, 'train': 1898} pending {'train': 1053} gen 7.966 tok/s prompt 28.098 tok/s 1381s
+09:02:33 [bio] calls 1430 pos 4196 rows {'heldout': 191, 'train': 1898} pending {'train': 1062} gen 7.977 tok/s prompt 28.05 tok/s 1386s
+09:02:40 [bio] calls 1440 pos 4206 rows {'heldout': 191, 'train': 1898} pending {'train': 1070} gen 7.988 tok/s prompt 28.01 tok/s 1393s
+09:02:45 [bio] calls 1450 pos 4216 rows {'heldout': 191, 'train': 1898} pending {'train': 1077} gen 8.0 tok/s prompt 27.956 tok/s 1398s
+09:02:52 [bio] calls 1460 pos 4226 rows {'heldout': 191, 'train': 1898} pending {'train': 1084} gen 8.012 tok/s prompt 27.917 tok/s 1405s
+09:02:56 [bio] calls 1470 pos 4236 rows {'heldout': 191, 'train': 1898} pending {'train': 1093} gen 8.024 tok/s prompt 27.899 tok/s 1409s
+09:03:02 [bio] calls 1480 pos 4246 rows {'heldout': 191, 'train': 1898} pending {'train': 1101} gen 8.038 tok/s prompt 27.854 tok/s 1415s
+09:03:11 [bio] calls 1490 pos 4256 rows {'heldout': 191, 'train': 1898} pending {'train': 1110} gen 8.048 tok/s prompt 27.825 tok/s 1424s
+09:03:18 [bio] calls 1500 pos 4266 rows {'heldout': 191, 'train': 1898} pending {'train': 1116} gen 8.067 tok/s prompt 27.79 tok/s 1431s
+09:03:34 [bio] calls 1510 pos 4276 rows {'heldout': 191, 'train': 1898} pending {'train': 1125} gen 8.024 tok/s prompt 27.743 tok/s 1447s
+09:03:39 [bio] calls 1520 pos 4286 rows {'heldout': 191, 'train': 1898} pending {'train': 1135} gen 8.022 tok/s prompt 27.667 tok/s 1452s
+09:03:46 [bio] calls 1530 pos 4296 rows {'heldout': 191, 'train': 1898} pending {'train': 1142} gen 8.034 tok/s prompt 27.643 tok/s 1459s
+09:03:51 [bio] calls 1540 pos 4306 rows {'heldout': 191, 'train': 1898} pending {'train': 1152} gen 8.04 tok/s prompt 27.627 tok/s 1464s
+09:03:59 [bio] calls 1550 pos 4316 rows {'heldout': 191, 'train': 1898} pending {'train': 1158} gen 8.053 tok/s prompt 27.594 tok/s 1472s
+09:04:07 [bio] calls 1560 pos 4326 rows {'heldout': 191, 'train': 1898} pending {'train': 1167} gen 8.059 tok/s prompt 27.56 tok/s 1480s
+{
+ "rows": {
+  "heldout": 191,
+  "train": 1898
+ },
+ "candidates": {
+  "total": 4340,
+  "by_kind_reason": {
+   "definition:ok": 2832,
+   "pubmedqa:ok": 527,
+   "pubmedqa:label_mismatch": 426,
+   "definition:vague": 329,
+   "definition:repetition": 91,
+   "definition:too_short": 48,
+   "definition:truncated": 33,
+   "pubmedqa:repetition": 27,
+   "pubmedqa:truncated": 8,
+   "pubmedqa:too_short": 7,
+   "definition:term_repeated": 5,
+   "pubmedqa:no_decision": 4,
+   "pubmedqa:no_because": 1,
+   "definition:citation": 1,
+   "definition:study_talk": 1
+  },
+  "pending_judge": 1172
+ }
+}

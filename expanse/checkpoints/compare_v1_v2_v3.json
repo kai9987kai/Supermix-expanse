@@ -1,0 +1,650 @@
+{
+ "args": {
+  "model": [
+   "v1=checkpoints/supermix_expanse.pt",
+   "v2=checkpoints/supermix_expanse_v2.pt",
+   "v3=checkpoints/supermix_expanse_v3.pt"
+  ],
+  "ref": "C:\\Users\\kai99\\Desktop\\supermix-expanse\\Supermix-expanse\\expanse\\checkpoints\\supermix_expanse.pt",
+  "arch": "C:\\Users\\kai99\\Desktop\\supermix-expanse\\Supermix-expanse\\external\\base\\supermix_archimedes.pt",
+  "gen_limit": 25,
+  "max_new_tokens": 64,
+  "seq": 128,
+  "batch": 8,
+  "no_gen": false,
+  "out": "checkpoints/compare_v1_v2_v3.json",
+  "threads": 8
+ },
+ "seed": 2026,
+ "items": {
+  "exact": 25,
+  "code": 25,
+  "bio": 25,
+  "pubmedqa": 25,
+  "connectome": 25
+ },
+ "dev_rows": {
+  "replay": 100,
+  "fly": 62,
+  "code": 33,
+  "bio": 59,
+  "connectome": 100,
+  "fresh": 0
+ },
+ "corpus_v3": false,
+ "models": {
+  "v1": {
+   "path": "checkpoints/supermix_expanse.pt",
+   "schema": "supermix-expanse-v1",
+   "vocab": 10951,
+   "seq": 128,
+   "tokenizer": "word",
+   "dev": {
+    "replay": {
+     "rows": 100,
+     "coverage": 1.0,
+     "nats_per_token_all": 0.41822783593138163,
+     "nats_per_char_all": 0.16561920651580167,
+     "nats_per_char_all_covered": 0.16561920651580167,
+     "nats_per_token_all_covered": 0.41822783593138163,
+     "rows_all_covered": 100
+    },
+    "fly": {
+     "rows": 62,
+     "coverage": 1.0,
+     "nats_per_token_all": 1.1982710282129931,
+     "nats_per_char_all": 0.39305060767550815,
+     "nats_per_char_all_covered": 0.39305060767550815,
+     "nats_per_token_all_covered": 1.1982710282129931,
+     "rows_all_covered": 62
+    },
+    "code": {
+     "rows": 33,
+     "coverage": 0.9393939393939394,
+     "nats_per_token_all": 3.9056957578530067,
+     "nats_per_char_all": 1.175418343408137,
+     "nats_per_char_all_covered": 1.1454910269365624,
+     "nats_per_token_all_covered": 3.816063948973416,
+     "rows_all_covered": 31
+    },
+    "bio": {
+     "rows": 59,
+     "coverage": 0.0,
+     "nats_per_token_all": 4.971388687233894,
+     "nats_per_char_all": 0.9957709272157996,
+     "nats_per_char_all_covered": null,
+     "nats_per_token_all_covered": null,
+     "rows_all_covered": 0
+    },
+    "connectome": {
+     "rows": 100,
+     "coverage": 0.99,
+     "nats_per_token_all": 0.6134940532306916,
+     "nats_per_char_all": 0.18204022509730686,
+     "nats_per_char_all_covered": 0.18100053760187157,
+     "nats_per_token_all_covered": 0.6080982973817264,
+     "rows_all_covered": 99
+    }
+   },
+   "gen": {
+    "exact": {
+     "accuracy": 0.2,
+     "correct": 5,
+     "checked": 25,
+     "per_task": {
+      "multiplication": [
+       1,
+       2
+      ],
+      "electrical_power": [
+       0,
+       1
+      ],
+      "algebra_one_step": [
+       0,
+       3
+      ],
+      "power": [
+       0,
+       1
+      ],
+      "work": [
+       1,
+       2
+      ],
+      "subtraction": [
+       0,
+       2
+      ],
+      "addition": [
+       2,
+       2
+      ],
+      "final_velocity": [
+       0,
+       1
+      ],
+      "average": [
+       0,
+       2
+      ],
+      "kinetic_energy": [
+       0,
+       2
+      ],
+      "ohms_current": [
+       0,
+       2
+      ],
+      "voltage": [
+       1,
+       1
+      ],
+      "two_step": [
+       0,
+       1
+      ],
+      "division": [
+       0,
+       1
+      ],
+      "percent": [
+       0,
+       1
+      ],
+      "spring_energy": [
+       0,
+       1
+      ]
+     }
+    },
+    "code": {
+     "pass_rate": 0.0,
+     "passed": 0,
+     "items": 25,
+     "reasons": {
+      "no_def": 25
+     }
+    },
+    "bio": {
+     "token_f1": 0.2849709463257771,
+     "items": 25,
+     "pubmedqa_accuracy": 0.0,
+     "pubmedqa_items": 25,
+     "pubmedqa_majority_baseline": 0.64,
+     "pubmedqa_answers": {
+      "none": 25
+     }
+    },
+    "connectome": {
+     "exact_match": 0.16,
+     "token_f1": 0.6738434912661917,
+     "items": 25,
+     "answer_hit": 0.2
+    },
+    "seconds": 299.0
+   },
+   "seconds": 356.7
+  },
+  "v2": {
+   "path": "checkpoints/supermix_expanse_v2.pt",
+   "schema": "supermix-expanse-v2",
+   "vocab": 10951,
+   "seq": 128,
+   "tokenizer": "word",
+   "dev": {
+    "replay": {
+     "rows": 100,
+     "coverage": 1.0,
+     "nats_per_token_all": 0.33229762408979163,
+     "nats_per_char_all": 0.13159064055666292,
+     "nats_per_char_all_covered": 0.13159064055666292,
+     "nats_per_token_all_covered": 0.33229762408979163,
+     "rows_all_covered": 100
+    },
+    "fly": {
+     "rows": 62,
+     "coverage": 1.0,
+     "nats_per_token_all": 1.1233749301752187,
+     "nats_per_char_all": 0.36848358055629865,
+     "nats_per_char_all_covered": 0.36848358055629865,
+     "nats_per_token_all_covered": 1.1233749301752187,
+     "rows_all_covered": 62
+    },
+    "code": {
+     "rows": 33,
+     "coverage": 0.9393939393939394,
+     "nats_per_token_all": 3.8149923904185044,
+     "nats_per_char_all": 1.1481211834393816,
+     "nats_per_char_all_covered": 1.11781305438476,
+     "nats_per_token_all_covered": 3.723858151850696,
+     "rows_all_covered": 31
+    },
+    "bio": {
+     "rows": 59,
+     "coverage": 0.0,
+     "nats_per_token_all": 4.859835952715887,
+     "nats_per_char_all": 0.9734268747039331,
+     "nats_per_char_all_covered": null,
+     "nats_per_token_all_covered": null,
+     "rows_all_covered": 0
+    },
+    "connectome": {
+     "rows": 100,
+     "coverage": 0.99,
+     "nats_per_token_all": 0.5950637249538272,
+     "nats_per_char_all": 0.17657144982480058,
+     "nats_per_char_all_covered": 0.17556161995656186,
+     "nats_per_token_all_covered": 0.5898254424856421,
+     "rows_all_covered": 99
+    }
+   },
+   "gen": {
+    "exact": {
+     "accuracy": 0.28,
+     "correct": 7,
+     "checked": 25,
+     "per_task": {
+      "multiplication": [
+       1,
+       2
+      ],
+      "electrical_power": [
+       1,
+       1
+      ],
+      "algebra_one_step": [
+       1,
+       3
+      ],
+      "power": [
+       0,
+       1
+      ],
+      "work": [
+       1,
+       2
+      ],
+      "subtraction": [
+       0,
+       2
+      ],
+      "addition": [
+       2,
+       2
+      ],
+      "final_velocity": [
+       0,
+       1
+      ],
+      "average": [
+       0,
+       2
+      ],
+      "kinetic_energy": [
+       0,
+       2
+      ],
+      "ohms_current": [
+       0,
+       2
+      ],
+      "voltage": [
+       1,
+       1
+      ],
+      "two_step": [
+       0,
+       1
+      ],
+      "division": [
+       0,
+       1
+      ],
+      "percent": [
+       0,
+       1
+      ],
+      "spring_energy": [
+       0,
+       1
+      ]
+     }
+    },
+    "code": {
+     "pass_rate": 0.0,
+     "passed": 0,
+     "items": 25,
+     "reasons": {
+      "no_def": 25
+     }
+    },
+    "bio": {
+     "token_f1": 0.3424544144058871,
+     "items": 25,
+     "pubmedqa_accuracy": 0.0,
+     "pubmedqa_items": 25,
+     "pubmedqa_majority_baseline": 0.64,
+     "pubmedqa_answers": {
+      "none": 25
+     }
+    },
+    "connectome": {
+     "exact_match": 0.16,
+     "token_f1": 0.6738434912661917,
+     "items": 25,
+     "answer_hit": 0.2
+    },
+    "seconds": 362.3
+   },
+   "seconds": 434.1
+  },
+  "v2_gates0": {
+   "path": "checkpoints/supermix_expanse_v2.pt",
+   "schema": "supermix-expanse-v2",
+   "vocab": 10951,
+   "seq": 128,
+   "tokenizer": "word",
+   "dev": {
+    "replay": {
+     "rows": 100,
+     "coverage": 1.0,
+     "nats_per_token_all": 0.3343791004753259,
+     "nats_per_char_all": 0.13241491010004675,
+     "nats_per_char_all_covered": 0.13241491010004675,
+     "nats_per_token_all_covered": 0.3343791004753259,
+     "rows_all_covered": 100
+    },
+    "fly": {
+     "rows": 62,
+     "coverage": 1.0,
+     "nats_per_token_all": 1.123799038372831,
+     "nats_per_char_all": 0.36862269431342604,
+     "nats_per_char_all_covered": 0.36862269431342604,
+     "nats_per_token_all_covered": 1.123799038372831,
+     "rows_all_covered": 62
+    },
+    "code": {
+     "rows": 33,
+     "coverage": 0.9393939393939394,
+     "nats_per_token_all": 3.816072943836209,
+     "nats_per_char_all": 1.148446375770517,
+     "nats_per_char_all_covered": 1.1181152751188324,
+     "nats_per_token_all_covered": 3.7248649634457287,
+     "rows_all_covered": 31
+    },
+    "bio": {
+     "rows": 59,
+     "coverage": 0.0,
+     "nats_per_token_all": 4.8608822934294595,
+     "nats_per_char_all": 0.9736364571220637,
+     "nats_per_char_all_covered": null,
+     "nats_per_token_all_covered": null,
+     "rows_all_covered": 0
+    },
+    "connectome": {
+     "rows": 100,
+     "coverage": 0.99,
+     "nats_per_token_all": 0.5954243266530583,
+     "nats_per_char_all": 0.17667845007061034,
+     "nats_per_char_all_covered": 0.17566824286164565,
+     "nats_per_token_all_covered": 0.5901836580351779,
+     "rows_all_covered": 99
+    }
+   },
+   "gen": {
+    "exact": {
+     "accuracy": 0.28,
+     "correct": 7,
+     "checked": 25,
+     "per_task": {
+      "multiplication": [
+       1,
+       2
+      ],
+      "electrical_power": [
+       1,
+       1
+      ],
+      "algebra_one_step": [
+       1,
+       3
+      ],
+      "power": [
+       0,
+       1
+      ],
+      "work": [
+       1,
+       2
+      ],
+      "subtraction": [
+       0,
+       2
+      ],
+      "addition": [
+       2,
+       2
+      ],
+      "final_velocity": [
+       0,
+       1
+      ],
+      "average": [
+       0,
+       2
+      ],
+      "kinetic_energy": [
+       0,
+       2
+      ],
+      "ohms_current": [
+       0,
+       2
+      ],
+      "voltage": [
+       1,
+       1
+      ],
+      "two_step": [
+       0,
+       1
+      ],
+      "division": [
+       0,
+       1
+      ],
+      "percent": [
+       0,
+       1
+      ],
+      "spring_energy": [
+       0,
+       1
+      ]
+     }
+    },
+    "code": {
+     "pass_rate": 0.0,
+     "passed": 0,
+     "items": 25,
+     "reasons": {
+      "no_def": 25
+     }
+    },
+    "bio": {
+     "token_f1": 0.3415020334535061,
+     "items": 25,
+     "pubmedqa_accuracy": 0.0,
+     "pubmedqa_items": 25,
+     "pubmedqa_majority_baseline": 0.64,
+     "pubmedqa_answers": {
+      "none": 25
+     }
+    },
+    "connectome": {
+     "exact_match": 0.16,
+     "token_f1": 0.6738434912661917,
+     "items": 25,
+     "answer_hit": 0.2
+    },
+    "seconds": 353.9
+   },
+   "seconds": 430.7
+  },
+  "v3": {
+   "path": "checkpoints/supermix_expanse_v3.pt",
+   "schema": "supermix-expanse-v1",
+   "vocab": 8864,
+   "seq": 128,
+   "tokenizer": "bpe",
+   "dev": {
+    "replay": {
+     "rows": 100,
+     "coverage": 1.0,
+     "nats_per_token_all": 0.08413497862950868,
+     "nats_per_char_all": 0.0332978645581336,
+     "nats_per_char_all_covered": 0.0332978645581336,
+     "nats_per_token_all_covered": 0.08413497862950868,
+     "rows_all_covered": 100
+    },
+    "fly": {
+     "rows": 62,
+     "coverage": 1.0,
+     "nats_per_token_all": 0.9562059794092447,
+     "nats_per_char_all": 0.3136496939513361,
+     "nats_per_char_all_covered": 0.3136496939513361,
+     "nats_per_token_all_covered": 0.9562059794092447,
+     "rows_all_covered": 62
+    },
+    "code": {
+     "rows": 33,
+     "coverage": 1.0,
+     "nats_per_token_all": 1.8431958253228398,
+     "nats_per_char_all": 0.5146943023764456,
+     "nats_per_char_all_covered": 0.47328241945992056,
+     "nats_per_token_all_covered": 1.6907195864983324,
+     "rows_all_covered": 31
+    },
+    "bio": {
+     "rows": 59,
+     "coverage": 1.0,
+     "nats_per_token_all": 5.827564955519411,
+     "nats_per_char_all": 1.3696473295119773,
+     "nats_per_char_all_covered": null,
+     "nats_per_token_all_covered": null,
+     "rows_all_covered": 0
+    },
+    "connectome": {
+     "rows": 100,
+     "coverage": 1.0,
+     "nats_per_token_all": 0.4254125775809904,
+     "nats_per_char_all": 0.12623138068617673,
+     "nats_per_char_all_covered": 0.12411658923228927,
+     "nats_per_token_all_covered": 0.4169881901400596,
+     "rows_all_covered": 99
+    }
+   },
+   "gen": {
+    "exact": {
+     "accuracy": 0.32,
+     "correct": 8,
+     "checked": 25,
+     "per_task": {
+      "multiplication": [
+       2,
+       2
+      ],
+      "electrical_power": [
+       1,
+       1
+      ],
+      "algebra_one_step": [
+       0,
+       3
+      ],
+      "power": [
+       0,
+       1
+      ],
+      "work": [
+       1,
+       2
+      ],
+      "subtraction": [
+       0,
+       2
+      ],
+      "addition": [
+       2,
+       2
+      ],
+      "final_velocity": [
+       1,
+       1
+      ],
+      "average": [
+       0,
+       2
+      ],
+      "kinetic_energy": [
+       0,
+       2
+      ],
+      "ohms_current": [
+       0,
+       2
+      ],
+      "voltage": [
+       1,
+       1
+      ],
+      "two_step": [
+       0,
+       1
+      ],
+      "division": [
+       0,
+       1
+      ],
+      "percent": [
+       0,
+       1
+      ],
+      "spring_energy": [
+       0,
+       1
+      ]
+     }
+    },
+    "code": {
+     "pass_rate": 0.0,
+     "passed": 0,
+     "items": 25,
+     "reasons": {
+      "no_def": 25
+     }
+    },
+    "bio": {
+     "token_f1": 0.22027179560091764,
+     "items": 25,
+     "pubmedqa_accuracy": 0.0,
+     "pubmedqa_items": 25,
+     "pubmedqa_majority_baseline": 0.64,
+     "pubmedqa_answers": {
+      "none": 25
+     }
+    },
+    "connectome": {
+     "exact_match": 0.36,
+     "token_f1": 0.8135585550352284,
+     "items": 25,
+     "answer_hit": 0.28
+    },
+    "seconds": 354.1
+   },
+   "seconds": 419.0
+  }
+ },
+ "seconds": 1653.7
+}

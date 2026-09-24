@@ -1,0 +1,87 @@
+09:04:37 [judge] coder up in 18s; 1172 pending
+09:05:02 [judge] 20/1172 {'yes': 19, 'no': 1} prompt 11.335 tok/s 25s
+09:05:21 [judge] 40/1172 {'yes': 38, 'no': 2} prompt 11.351 tok/s 44s
+09:05:41 [judge] 60/1172 {'yes': 56, 'no': 4} prompt 11.444 tok/s 64s
+09:06:01 [judge] 80/1172 {'yes': 76, 'no': 4} prompt 11.677 tok/s 84s
+09:06:22 [judge] 100/1172 {'yes': 93, 'no': 7} prompt 11.623 tok/s 105s
+09:06:41 [judge] 120/1172 {'yes': 111, 'no': 9} prompt 11.668 tok/s 124s
+09:07:02 [judge] 140/1172 {'yes': 130, 'no': 10} prompt 11.692 tok/s 145s
+09:07:22 [judge] 160/1172 {'yes': 148, 'no': 12} prompt 11.704 tok/s 165s
+09:07:43 [judge] 180/1172 {'yes': 168, 'no': 12} prompt 11.761 tok/s 186s
+09:08:03 [judge] 200/1172 {'yes': 187, 'no': 13} prompt 11.741 tok/s 206s
+09:08:22 [judge] 220/1172 {'yes': 203, 'no': 17} prompt 11.743 tok/s 225s
+09:08:42 [judge] 240/1172 {'yes': 223, 'no': 17} prompt 11.739 tok/s 245s
+09:09:01 [judge] 260/1172 {'yes': 241, 'no': 19} prompt 11.763 tok/s 264s
+09:09:20 [judge] 280/1172 {'yes': 257, 'no': 23} prompt 11.782 tok/s 283s
+09:09:40 [judge] 300/1172 {'yes': 277, 'no': 23} prompt 11.788 tok/s 303s
+09:09:59 [judge] 320/1172 {'yes': 295, 'no': 25} prompt 11.765 tok/s 322s
+09:10:18 [judge] 340/1172 {'yes': 314, 'no': 26} prompt 11.785 tok/s 341s
+09:10:38 [judge] 360/1172 {'yes': 333, 'no': 27} prompt 11.791 tok/s 361s
+09:10:58 [judge] 380/1172 {'yes': 351, 'no': 29} prompt 11.82 tok/s 381s
+09:11:18 [judge] 400/1172 {'yes': 371, 'no': 29} prompt 11.818 tok/s 401s
+09:11:38 [judge] 420/1172 {'yes': 389, 'no': 31} prompt 11.804 tok/s 421s
+09:11:58 [judge] 440/1172 {'yes': 404, 'no': 36} prompt 11.8 tok/s 441s
+09:12:17 [judge] 460/1172 {'yes': 424, 'no': 36} prompt 11.803 tok/s 460s
+09:12:38 [judge] 480/1172 {'yes': 442, 'no': 38} prompt 11.802 tok/s 481s
+09:12:57 [judge] 500/1172 {'yes': 460, 'no': 40} prompt 11.819 tok/s 500s
+09:13:16 [judge] 520/1172 {'yes': 480, 'no': 40} prompt 11.833 tok/s 519s
+09:13:35 [judge] 540/1172 {'yes': 497, 'no': 43} prompt 11.849 tok/s 538s
+09:13:57 [judge] 560/1172 {'yes': 516, 'no': 44} prompt 11.825 tok/s 560s
+09:14:18 [judge] 580/1172 {'yes': 535, 'no': 45} prompt 11.816 tok/s 580s
+09:14:37 [judge] 600/1172 {'yes': 555, 'no': 45} prompt 11.838 tok/s 600s
+09:14:58 [judge] 620/1172 {'yes': 574, 'no': 46} prompt 11.833 tok/s 621s
+09:15:19 [judge] 640/1172 {'yes': 592, 'no': 48} prompt 11.842 tok/s 642s
+09:15:39 [judge] 660/1172 {'yes': 611, 'no': 49} prompt 11.835 tok/s 662s
+09:16:00 [judge] 680/1172 {'yes': 626, 'no': 54} prompt 11.829 tok/s 683s
+09:16:24 [judge] 700/1172 {'yes': 646, 'no': 54} prompt 11.78 tok/s 707s
+09:16:43 [judge] 720/1172 {'yes': 664, 'no': 56} prompt 11.779 tok/s 726s
+09:17:02 [judge] 740/1172 {'yes': 681, 'no': 59} prompt 11.77 tok/s 745s
+09:17:21 [judge] 760/1172 {'yes': 701, 'no': 59} prompt 11.794 tok/s 764s
+09:17:42 [judge] 780/1172 {'yes': 720, 'no': 60} prompt 11.782 tok/s 785s
+09:18:04 [judge] 800/1172 {'yes': 738, 'no': 62} prompt 11.779 tok/s 806s
+09:18:25 [judge] 820/1172 {'yes': 755, 'no': 65} prompt 11.757 tok/s 828s
+09:18:47 [judge] 840/1172 {'yes': 774, 'no': 66} prompt 11.762 tok/s 849s
+09:19:08 [judge] 860/1172 {'yes': 789, 'no': 71} prompt 11.752 tok/s 871s
+09:19:28 [judge] 880/1172 {'yes': 807, 'no': 73} prompt 11.748 tok/s 891s
+09:19:48 [judge] 900/1172 {'yes': 824, 'no': 76} prompt 11.749 tok/s 910s
+09:20:06 [judge] 920/1172 {'yes': 842, 'no': 78} prompt 11.745 tok/s 929s
+09:20:26 [judge] 940/1172 {'yes': 861, 'no': 79} prompt 11.742 tok/s 949s
+09:20:48 [judge] 960/1172 {'yes': 879, 'no': 81} prompt 11.726 tok/s 971s
+09:21:07 [judge] 980/1172 {'yes': 896, 'no': 84} prompt 11.734 tok/s 990s
+09:21:28 [judge] 1000/1172 {'yes': 915, 'no': 85} prompt 11.737 tok/s 1010s
+09:21:50 [judge] 1020/1172 {'yes': 933, 'no': 87} prompt 11.745 tok/s 1032s
+09:22:11 [judge] 1040/1172 {'yes': 953, 'no': 87} prompt 11.736 tok/s 1054s
+09:22:31 [judge] 1060/1172 {'yes': 971, 'no': 89} prompt 11.736 tok/s 1074s
+09:22:50 [judge] 1080/1172 {'yes': 991, 'no': 89} prompt 11.739 tok/s 1093s
+09:23:11 [judge] 1100/1172 {'yes': 1009, 'no': 91} prompt 11.741 tok/s 1114s
+09:23:34 [judge] 1120/1172 {'yes': 1026, 'no': 94} prompt 11.726 tok/s 1137s
+09:23:55 [judge] 1140/1172 {'yes': 1043, 'no': 97} prompt 11.715 tok/s 1158s
+09:24:14 [judge] 1160/1172 {'yes': 1060, 'no': 100} prompt 11.717 tok/s 1177s
+09:24:27 [judge] done {'yes': 1070, 'no': 102} rows {'heldout': 191, 'train': 2968}
+{
+ "rows": {
+  "heldout": 191,
+  "train": 2968
+ },
+ "candidates": {
+  "total": 4340,
+  "by_kind_reason": {
+   "definition:ok": 2832,
+   "pubmedqa:ok": 527,
+   "pubmedqa:label_mismatch": 426,
+   "definition:vague": 329,
+   "definition:repetition": 91,
+   "definition:too_short": 48,
+   "definition:truncated": 33,
+   "pubmedqa:repetition": 27,
+   "pubmedqa:truncated": 8,
+   "pubmedqa:too_short": 7,
+   "definition:term_repeated": 5,
+   "pubmedqa:no_decision": 4,
+   "pubmedqa:no_because": 1,
+   "definition:citation": 1,
+   "definition:study_talk": 1
+  },
+  "pending_judge": 0
+ }
+}
